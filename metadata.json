@@ -1,0 +1,6 @@
+{
+  "name": "Məkan",
+  "description": "Tam işlək, real istifadəyə hazır müştəri idarəetmə və GPS naviqasiya sistemi.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

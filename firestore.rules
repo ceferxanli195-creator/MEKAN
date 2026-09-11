@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Test connection endpoint
+    match /test/{testId} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // Customers collection
+    match /customers/{customerId} {
+      allow read, write: if true;
+    }
+
+    // Orders collection
+    match /orders/{orderId} {
+      allow read, write: if true;
+    }
+
+    // Deliveries collection
+    match /deliveries/{deliveryId} {
+      allow read, write: if true;
+    }
+
+    // Notifications collection
+    match /notifications/{notificationId} {
+      allow read, write: if true;
+    }
+
+    // Locations / GPS updates collection
+    match /locations/{locationId} {
+      allow read, write: if true;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    // Drivers collection
+    match /drivers/{driverId} {
+      allow read, write: if true;
+    }
+
+    // Logs collection
+    match /logs/{logId} {
+      allow read, write: if true;
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
