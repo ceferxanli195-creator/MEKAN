@@ -181,6 +181,32 @@ export const api = {
   getDrivers: () =>
     request<{ drivers: Driver[] }>('/api/drivers'),
 
+  getLiveDrivers: () =>
+    request<{ drivers: Driver[] }>('/api/drivers/live'),
+
+  updateDriverLocation: (data: {
+    latitude: number;
+    longitude: number;
+    speed?: number | null;
+    heading?: number | null;
+    accuracy?: number | null;
+    batteryLevel?: number | null;
+    address?: string;
+    driverId?: string;
+  }) =>
+    request<{ success: boolean; driver: any }>('/api/driver/location', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  getDriverTrajectory: (driverId: string) =>
+    request<{
+      driver: Driver;
+      currentLocation: any;
+      trajectory: any[];
+      stops: any[];
+    }>(`/api/drivers/${driverId}/trajectory`),
+
   createDriver: (driverData: any) =>
     request<{ driver: Driver }>('/api/drivers', {
       method: 'POST',
@@ -390,6 +416,17 @@ export const api = {
     request<{ order: Order; message: string }>(`/api/orders/${id}/deliver`, {
       method: 'POST',
       body: JSON.stringify(data || {}),
+    }),
+
+  updateOrder: (id: string, data: Partial<Order>) =>
+    request<{ order: Order; message: string }>(`/api/orders/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data),
+    }),
+
+  deleteOrder: (id: string) =>
+    request<{ success: boolean; message: string }>(`/api/orders/${id}`, {
+      method: 'DELETE',
     }),
 
   getOrderDashboardStats: () =>

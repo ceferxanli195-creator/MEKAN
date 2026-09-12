@@ -1,0 +1,90 @@
+[
+  {
+    "role": "ADMIN",
+    "lastLogin": "2026-09-11T16:04:59.310Z",
+    "lastActivity": "2026-09-11T16:05:28.622Z",
+    "passwordHash": "b951d1ccc105f4af7ffcd76080eed79650396565c90009134704ef113ca07c36",
+    "createdAt": "2026-09-12T12:01:42.905Z",
+    "permissions": {
+      "view_drivers": true,
+      "use_gps": true,
+      "restore_data": true,
+      "view_customers": true,
+      "view_map": true,
+      "create_customer": true,
+      "backup_data": true,
+      "delete_customer": true,
+      "edit_customer": true
+    },
+    "loginId": "admin",
+    "id": "usr_admin_master",
+    "status": "active",
+    "name": "Sistem Admini",
+    "updatedAt": "2026-09-12T12:01:42.905Z"
+  },
+  {
+    "status": "active",
+    "passwordHash": "7fdaea41fa4d546511e882d6b7f29542188ab95336d49d6c596c812df4769719",
+    "loginId": "vusal",
+    "id": "usr_1789036141222_r5meu",
+    "role": "USER",
+    "createdAt": "2026-09-10T10:29:01.222Z",
+    "name": "Vüsal",
+    "permissions": {
+      "view_map": true,
+      "use_gps": true,
+      "view_customers": true,
+      "restore_data": false,
+      "create_customer": true,
+      "view_drivers": true,
+      "edit_customer": true,
+      "delete_customer": true,
+      "backup_data": false
+    },
+    "updatedAt": "2026-09-11T06:59:29.105Z"
+  },
+  {
+    "phone": "",
+    "createdAt": "2026-09-10T11:08:20.110Z",
+    "id": "usr_1789038500110_oamj9",
+    "name": "İlqar",
+    "status": "active",
+    "passwordHash": "7fdaea41fa4d546511e882d6b7f29542188ab95336d49d6c596c812df4769719",
+    "role": "USER",
+    "updatedAt": "2026-09-11T06:59:27.568Z",
+    "loginId": "ilqar",
+    "permissions": {
+      "delete_customer": true,
+      "edit_customer": true,
+      "restore_data": false,
+      "view_customers": true,
+      "create_customer": true,
+      "use_gps": true,
+      "view_drivers": true,
+      "backup_data": false,
+      "view_map": true
+    }
+  },
+  {
+    "loginId": "ccc",
+    "permissions": {
+      "create_customer": false,
+      "delete_customer": false,
+      "edit_customer": false,
+      "view_map": true,
+      "use_gps": true,
+      "view_drivers": true,
+      "restore_data": false,
+      "backup_data": false,
+      "view_customers": true
+    },
+    "updatedAt": "2026-09-11T06:59:21.194Z",
+    "role": "DRIVER",
+    "passwordHash": "b1b49897d3ffb3b52ebc4982ec303e738672527ad73c4124cd66f15309898c44",
+    "status": "active",
+    "id": "usr_1789039439449_tp4xm",
+    "name": "C",
+    "createdAt": "2026-09-10T11:23:59.449Z",
+    "phone": ""
+  }
+]

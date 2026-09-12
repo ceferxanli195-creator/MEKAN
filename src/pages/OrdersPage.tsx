@@ -19,6 +19,8 @@ import { OrderCard } from '../components/OrderCard';
 import { LiveOrderTrackingModal } from '../components/LiveOrderTrackingModal';
 import { OrderHistoryModal } from '../components/OrderHistoryModal';
 import { DeliverOrderModal } from '../components/DeliverOrderModal';
+import { EditOrderModal } from '../components/EditOrderModal';
+import { ConfirmModal } from '../components/ConfirmModal';
 import { NavTab } from '../components/Sidebar';
 
 interface OrdersPageProps {
@@ -44,6 +46,10 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ onNavigate }) => {
   const [trackingOrder, setTrackingOrder] = useState<Order | null>(null);
   const [historyOrder, setHistoryOrder] = useState<Order | null>(null);
   const [deliverOrder, setDeliverOrder] = useState<Order | null>(null);
+  const [editingOrder, setEditingOrder] = useState<Order | null>(null);
+  const [deletingOrder, setDeletingOrder] = useState<Order | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [actionToast, setActionToast] = useState<{ type: 'success' | 'error'; message: string } | null>(null);
 
   const fetchOrders = async (silent = false) => {
     if (!silent) setIsLoading(true);
@@ -112,6 +118,23 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ onNavigate }) => {
     setOrders((prev) => prev.map((o) => (o.id === updated.id ? updated : o)));
     if (trackingOrder?.id === updated.id) {
       setTrackingOrder(updated);
+    }
+  };
+
+  const handleDeleteOrder = async () => {
+    if (!deletingOrder) return;
+    setIsDeleting(true);
+    try {
+      const res = await api.deleteOrder(deletingOrder.id);
+      setOrders((prev) => prev.filter((o) => o.id !== deletingOrder.id));
+      setActionToast({ type: 'success', message: res.message || 'Sifariş uğurla silindi.' });
+      setDeletingOrder(null);
+      setTimeout(() => setActionToast(null), 4000);
+    } catch (err: any) {
+      setActionToast({ type: 'error', message: err.message || 'Sifariş silinərkən xəta baş verdi.' });
+      setTimeout(() => setActionToast(null), 4000);
+    } finally {
+      setIsDeleting(false);
     }
   };
 
@@ -225,6 +248,34 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ onNavigate }) => {
         </div>
       </div>
 
+      {/* Toast notification for actions */}
+      {actionToast && (
+        <div
+          id="orders-action-toast"
+          className={`p-4 rounded-2xl text-xs flex items-center justify-between gap-3 border shadow-sm transition-all ${
+            actionToast.type === 'success'
+              ? 'bg-emerald-50 dark:bg-emerald-950/50 border-emerald-200 dark:border-emerald-800 text-emerald-800 dark:text-emerald-200'
+              : 'bg-rose-50 dark:bg-rose-950/50 border-rose-200 dark:border-rose-800 text-rose-800 dark:text-rose-200'
+          }`}
+        >
+          <div className="flex items-center gap-2">
+            {actionToast.type === 'success' ? (
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 dark:text-emerald-400 shrink-0" />
+            ) : (
+              <AlertCircle className="w-4 h-4 text-rose-600 dark:text-rose-400 shrink-0" />
+            )}
+            <span className="font-semibold">{actionToast.message}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setActionToast(null)}
+            className="text-slate-400 hover:text-slate-600 text-xs px-2 py-0.5"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       {/* Error state */}
       {error && (
         <div className="p-4 bg-rose-50 dark:bg-rose-950/40 border border-rose-200 dark:border-rose-800 text-rose-700 dark:text-rose-300 rounded-2xl text-xs flex items-center gap-2">
@@ -276,6 +327,8 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ onNavigate }) => {
               onViewLiveTracking={(ord) => setTrackingOrder(ord)}
               onViewHistory={(ord) => setHistoryOrder(ord)}
               onOpenDeliverModal={(ord) => setDeliverOrder(ord)}
+              onEdit={(ord) => setEditingOrder(ord)}
+              onDelete={(ord) => setDeletingOrder(ord)}
             />
           ))}
         </div>
@@ -308,6 +361,34 @@ export const OrdersPage: React.FC<OrdersPageProps> = ({ onNavigate }) => {
           handleOrderUpdated(updated);
           fetchOrders(true);
         }}
+      />
+
+      {/* Admin Edit Order Modal */}
+      <EditOrderModal
+        isOpen={!!editingOrder}
+        order={editingOrder}
+        onClose={() => setEditingOrder(null)}
+        onSaved={(updated) => {
+          handleOrderUpdated(updated);
+          setActionToast({
+            type: 'success',
+            message: `Sifariş #${updated.orderNumber} uğurla redaktə edildi və yadda saxlanıldı.`,
+          });
+          setTimeout(() => setActionToast(null), 4000);
+        }}
+      />
+
+      {/* Admin Delete Order Confirmation Modal */}
+      <ConfirmModal
+        isOpen={!!deletingOrder}
+        title="Sifarişi Sil"
+        message={`Sifariş #${deletingOrder?.orderNumber} (${deletingOrder?.customerName}) sistemdən tamamilə silinsin? Bu əməliyyat geri qaytarıla bilməz.`}
+        confirmText="Bəli, Sifarişi Sil"
+        cancelText="İmtina"
+        isDanger={true}
+        isLoading={isDeleting}
+        onConfirm={handleDeleteOrder}
+        onCancel={() => setDeletingOrder(null)}
       />
     </div>
   );

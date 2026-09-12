@@ -1061,7 +1061,7 @@ router.delete('/users/:id', authMiddleware, requireRole('ADMIN'), (req: AuthRequ
 });
 
 // -------------------------------------------------------------
-// 6. DRIVERS MANAGEMENT
+// 6. DRIVERS MANAGEMENT & LIVE FLEET TRACKING
 // -------------------------------------------------------------
 
 router.get('/drivers', authMiddleware, (req: AuthRequest, res) => {
@@ -1072,12 +1072,81 @@ router.get('/drivers', authMiddleware, (req: AuthRequest, res) => {
       name: d.name,
       phone: d.phone,
       status: d.status,
+      isLive: d.isLive,
+      lastSeen: d.lastSeen,
+      currentLocation: d.currentLocation,
       createdAt: d.createdAt,
       updatedAt: d.updatedAt,
     }));
     return res.json({ drivers });
   } catch (err: any) {
     return res.status(500).json({ error: 'Sürücülər yüklənmədi.' });
+  }
+});
+
+// Live Fleet Drivers with Speed, Active Orders & Locations
+router.get('/drivers/live', authMiddleware, (req: AuthRequest, res) => {
+  try {
+    const drivers = db.getLiveDrivers({
+      id: req.user!.id,
+      role: req.user!.role,
+    });
+    return res.json({ drivers });
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Canlı sürücülər yüklənmədi.' });
+  }
+});
+
+// Driver Broadcast Location & Speed (Called from Mobile PWA / Web / App)
+router.post('/driver/location', authMiddleware, (req: AuthRequest, res) => {
+  try {
+    const { latitude, longitude, speed, heading, accuracy, batteryLevel, address, driverId } = req.body;
+    if (typeof latitude !== 'number' || typeof longitude !== 'number') {
+      return res.status(400).json({ error: 'Düzgün koordinatlar (latitude, longitude) tələb olunur.' });
+    }
+
+    let targetDriverId = req.user!.id;
+    if (req.user!.role === 'ADMIN' && driverId) {
+      targetDriverId = driverId;
+    } else if (req.user!.role !== 'DRIVER' && req.user!.role !== 'ADMIN') {
+      return res.status(403).json({ error: 'Yalnız sürücülər və ya admin canlı məkan yayımlaya bilər.' });
+    }
+
+    const updated = db.updateDriverLocation(targetDriverId, {
+      latitude,
+      longitude,
+      speed: typeof speed === 'number' ? speed : undefined,
+      heading: typeof heading === 'number' ? heading : undefined,
+      accuracy: typeof accuracy === 'number' ? accuracy : undefined,
+      batteryLevel: typeof batteryLevel === 'number' ? batteryLevel : undefined,
+      address: typeof address === 'string' ? address : undefined,
+    });
+
+    return res.json({
+      success: true,
+      driver: {
+        id: updated.id,
+        name: updated.name,
+        currentLocation: updated.currentLocation,
+        isLive: updated.isLive,
+        lastSeen: updated.lastSeen,
+      },
+    });
+  } catch (err: any) {
+    return res.status(400).json({ error: err.message || 'Məkan yenilənmədi.' });
+  }
+});
+
+// Get Driver Trajectory & Stops History
+router.get('/drivers/:id/trajectory', authMiddleware, (req: AuthRequest, res) => {
+  try {
+    const data = db.getDriverTrajectoryAndStops(req.params.id);
+    if (!data.driver) {
+      return res.status(404).json({ error: 'Sürücü tapılmadı.' });
+    }
+    return res.json(data);
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Traektoriya məlumatı yüklənə bilmədi.' });
   }
 });
 
@@ -1868,5 +1937,78 @@ router.post('/orders/:id/deliver', authMiddleware, (req: AuthRequest, res) => {
     return res.json({ order: updated, message: 'Sifariş uğurla təhvil verildi və çatdırılma tarixçəsinə əlavə edildi.' });
   } catch (err: any) {
     return res.status(400).json({ error: err.message || 'Təhvil vermə zamanı xəta baş verdi.' });
+  }
+});
+
+// Update Order (Admin only - Redaktə etmək)
+router.put('/orders/:id', authMiddleware, (req: AuthRequest, res) => {
+  try {
+    const currentUser = req.user!;
+    if (currentUser.role !== 'ADMIN') {
+      return res.status(403).json({ error: 'Yalnız Admin sifarişləri redaktə edə bilər.' });
+    }
+
+    const order = db.getOrderById(req.params.id);
+    if (!order) {
+      return res.status(404).json({ error: 'Sifariş tapılmadı.' });
+    }
+
+    const {
+      customerName,
+      customerPhone,
+      customerAddress,
+      customerLatitude,
+      customerLongitude,
+      notes,
+      status,
+      dispatchType,
+      executorType,
+      executorId,
+      executorName,
+    } = req.body;
+
+    const updated = db.updateOrder(
+      order.id,
+      {
+        customerName,
+        customerPhone,
+        customerAddress,
+        customerLatitude,
+        customerLongitude,
+        notes,
+        status,
+        dispatchType,
+        executorType,
+        executorId,
+        executorName,
+      },
+      { id: currentUser.id, name: currentUser.name, role: currentUser.role }
+    );
+
+    return res.json({ order: updated, message: `Sifariş #${updated.orderNumber} uğurla redaktə edildi.` });
+  } catch (err: any) {
+    return res.status(400).json({ error: err.message || 'Sifariş redaktə edilərkən xəta baş verdi.' });
+  }
+});
+
+// Delete Order (Admin only - Silmək)
+router.delete('/orders/:id', authMiddleware, (req: AuthRequest, res) => {
+  try {
+    const currentUser = req.user!;
+    if (currentUser.role !== 'ADMIN') {
+      return res.status(403).json({ error: 'Yalnız Admin sifarişləri silə bilər.' });
+    }
+
+    const order = db.getOrderById(req.params.id);
+    if (!order) {
+      return res.status(404).json({ error: 'Sifariş tapılmadı.' });
+    }
+
+    const orderNumber = order.orderNumber;
+    db.deleteOrder(order.id, { id: currentUser.id, name: currentUser.name, role: currentUser.role });
+
+    return res.json({ success: true, message: `Sifariş #${orderNumber} uğurla silindi.` });
+  } catch (err: any) {
+    return res.status(400).json({ error: err.message || 'Sifariş silinərkən xəta baş verdi.' });
   }
 });

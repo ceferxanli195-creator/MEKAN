@@ -1,7 +1,25 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { UserRecord, CustomerRecord, DriverRecord, AuditLogRecord, UserPermissions, DeliveryRecord, NotificationRecord, DeliveryStatus, UserRole, OrderRecord, OrderStatus, ExecutorType, OrderHistoryEvent } from './types';
+import {
+  UserRecord,
+  CustomerRecord,
+  DriverRecord,
+  AuditLogRecord,
+  UserPermissions,
+  DeliveryRecord,
+  NotificationRecord,
+  DeliveryStatus,
+  UserRole,
+  OrderRecord,
+  OrderStatus,
+  ExecutorType,
+  OrderHistoryEvent,
+  DriverStop,
+  DriverCurrentLocation,
+  DriverActiveOrderInfo,
+  TrajectoryPoint,
+} from './types';
 import {
   syncCustomerToFirestore,
   deleteCustomerFromFirestore,
@@ -101,6 +119,32 @@ export function getBakuDateTime(date: Date = new Date()): { dateStr: string; tim
   };
 }
 
+export function calculateDistanceMeters(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371e3; // Earth radius in meters
+  const φ1 = (lat1 * Math.PI) / 180;
+  const φ2 = (lat2 * Math.PI) / 180;
+  const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+  const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+
+  const a =
+    Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+    Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+  return R * c;
+}
+
+export function calculateBearing(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const y = Math.sin((lon2 - lon1) * (Math.PI / 180)) * Math.cos(lat2 * (Math.PI / 180));
+  const x =
+    Math.cos(lat1 * (Math.PI / 180)) * Math.sin(lat2 * (Math.PI / 180)) -
+    Math.sin(lat1 * (Math.PI / 180)) *
+      Math.cos(lat2 * (Math.PI / 180)) *
+      Math.cos((lon2 - lon1) * (Math.PI / 180));
+  const θ = Math.atan2(y, x);
+  return ((θ * 180) / Math.PI + 360) % 360;
+}
+
 const DEFAULT_PERMISSIONS: UserPermissions = {
   view_customers: true,
   create_customer: true,
@@ -125,6 +169,7 @@ class Database {
   constructor() {
     this.reload();
     this.ensureInitialAdmin();
+    this.ensureInitialDrivers();
     this.initFirestoreSync();
   }
 
@@ -154,6 +199,7 @@ class Database {
           idMap.set(d.id, d);
         }
         this.drivers = Array.from(idMap.values());
+        this.ensureInitialDrivers();
         this.saveDrivers();
       }
       if (cloudData.deliveries && cloudData.deliveries.length > 0) {
@@ -250,7 +296,7 @@ class Database {
         id: 'usr_admin_master',
         loginId: 'admin',
         name: 'Sistem Admini',
-        passwordHash: hashPassword('admin123'),
+        passwordHash: hashPassword('010193'),
         role: 'ADMIN',
         status: 'active',
         permissions: { ...DEFAULT_PERMISSIONS },
@@ -276,18 +322,88 @@ class Database {
         admin.permissions = { ...DEFAULT_PERMISSIONS };
         changed = true;
       }
-      // If password hash is plain text or invalid, ensure standard hash
-      if (!admin.passwordHash || admin.passwordHash === 'admin123' || !verifyPassword('admin123', admin.passwordHash)) {
-        // Only reset if admin123 is expected
-        admin.passwordHash = hashPassword('admin123');
+      // Ensure password is set to 010193
+      if (!admin.passwordHash || !verifyPassword('010193', admin.passwordHash)) {
+        admin.passwordHash = hashPassword('010193');
         changed = true;
       }
       if (changed) {
         admin.updatedAt = now;
         this.saveUsers();
         syncUserToFirestore(admin);
-        console.log('Master admin account verified and synced.');
+        console.log('Master admin account verified and synced with updated credentials.');
       }
+    }
+  }
+
+  private ensureInitialDrivers() {
+    const now = new Date();
+    const nowIso = now.toISOString();
+    const { dateStr, timeStr } = getBakuDateTime(now);
+
+    let drv = this.drivers[0];
+    if (!drv) {
+      drv = {
+        id: 'drv_sample_1',
+        loginId: '1',
+        passwordHash: hashPassword('1'),
+        name: 'Elmir Sürücü',
+        phone: '994501234567',
+        status: 'active',
+        createdAt: nowIso,
+        updatedAt: nowIso,
+      };
+      this.drivers.push(drv);
+    }
+
+    // Ensure sample live location in Baku center so the map is instantly active and verifiable
+    if (!drv.currentLocation || !drv.currentLocation.latitude) {
+      drv.isLive = true;
+      drv.lastSeen = nowIso;
+      drv.currentLocation = {
+        latitude: 40.4093,
+        longitude: 49.8671,
+        speed: 48,
+        heading: 80,
+        accuracy: 6,
+        batteryLevel: 92,
+        updatedAt: nowIso,
+        isMoving: true,
+        address: 'Nizami küçəsi, Bakı',
+      };
+      drv.trajectory = [
+        { latitude: 40.3950, longitude: 49.8450, speed: 42, heading: 60, timestamp: new Date(Date.now() - 3600000).toISOString() },
+        { latitude: 40.4000, longitude: 49.8520, speed: 50, heading: 65, timestamp: new Date(Date.now() - 2400000).toISOString() },
+        { latitude: 40.4050, longitude: 49.8600, speed: 48, heading: 70, timestamp: new Date(Date.now() - 1200000).toISOString() },
+        { latitude: 40.4093, longitude: 49.8671, speed: 48, heading: 80, timestamp: nowIso },
+      ];
+      drv.stops = [
+        {
+          id: 'stop_1',
+          latitude: 40.4000,
+          longitude: 49.8520,
+          address: '28 May m/st yaxınlığı',
+          startTime: new Date(Date.now() - 2700000).toISOString(),
+          startTimeStr: `${dateStr} 11:15`,
+          endTime: new Date(Date.now() - 2400000).toISOString(),
+          endTimeStr: '11:20',
+          durationMinutes: 5,
+          isCurrent: false,
+        },
+        {
+          id: 'stop_2',
+          latitude: 40.4050,
+          longitude: 49.8600,
+          address: 'Nərimanov, Təbriz küç.',
+          startTime: new Date(Date.now() - 1800000).toISOString(),
+          startTimeStr: `${dateStr} 11:30`,
+          endTime: new Date(Date.now() - 1200000).toISOString(),
+          endTimeStr: '11:40',
+          durationMinutes: 10,
+          isCurrent: false,
+        },
+      ];
+      this.saveDrivers();
     }
   }
 
@@ -674,6 +790,313 @@ class Database {
     this.drivers.splice(index, 1);
     this.saveDrivers();
     deleteDriverFromFirestore(id);
+  }
+
+  // --- Live Driver Tracking, Speed, Route & Stops ---
+  public updateDriverLocation(
+    driverId: string,
+    coords: {
+      latitude: number;
+      longitude: number;
+      speed?: number | null;
+      heading?: number | null;
+      accuracy?: number | null;
+      batteryLevel?: number | null;
+      address?: string;
+    }
+  ): DriverRecord {
+    let driver = this.drivers.find(d => d.id === driverId);
+    if (!driver) {
+      const u = this.users.find(u => u.id === driverId && u.role === 'DRIVER');
+      if (u) {
+        driver = {
+          id: u.id,
+          loginId: u.loginId,
+          passwordHash: u.passwordHash,
+          name: u.name,
+          phone: u.phone || '',
+          status: u.status,
+          createdAt: u.createdAt,
+          updatedAt: u.updatedAt,
+        };
+        this.drivers.push(driver);
+      }
+    }
+    if (!driver) throw new Error('Sürücü tapılmadı.');
+
+    const now = new Date();
+    const nowIso = now.toISOString();
+    const { dateStr, timeStr } = getBakuDateTime(now);
+
+    let speedKmH = 0;
+    if (coords.speed !== undefined && coords.speed !== null && !isNaN(coords.speed) && coords.speed > 0) {
+      speedKmH = coords.speed;
+    }
+    speedKmH = Math.max(0, Math.round(speedKmH));
+    const isMoving = speedKmH >= 3;
+
+    // Calculate heading direction
+    let heading = coords.heading ?? null;
+    if (driver.currentLocation && (!heading || heading === 0)) {
+      const dist = calculateDistanceMeters(
+        driver.currentLocation.latitude,
+        driver.currentLocation.longitude,
+        coords.latitude,
+        coords.longitude
+      );
+      if (dist > 3) {
+        heading = Math.round(
+          calculateBearing(
+            driver.currentLocation.latitude,
+            driver.currentLocation.longitude,
+            coords.latitude,
+            coords.longitude
+          )
+        );
+      } else {
+        heading = driver.currentLocation.heading ?? 0;
+      }
+    }
+
+    driver.isLive = true;
+    driver.lastSeen = nowIso;
+    driver.currentLocation = {
+      latitude: coords.latitude,
+      longitude: coords.longitude,
+      speed: speedKmH,
+      heading: heading ?? null,
+      accuracy: coords.accuracy ?? null,
+      batteryLevel: coords.batteryLevel ?? null,
+      updatedAt: nowIso,
+      isMoving,
+      address: coords.address || undefined,
+    };
+
+    if (!driver.trajectory) {
+      driver.trajectory = [];
+    }
+
+    const lastPoint = driver.trajectory[driver.trajectory.length - 1];
+    const distFromLast = lastPoint
+      ? calculateDistanceMeters(lastPoint.latitude, lastPoint.longitude, coords.latitude, coords.longitude)
+      : 999;
+
+    if (!lastPoint || distFromLast >= 6 || (lastPoint && (now.getTime() - new Date(lastPoint.timestamp).getTime()) > 15000)) {
+      driver.trajectory.push({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        speed: speedKmH,
+        accuracy: coords.accuracy ?? null,
+        heading: heading ?? null,
+        timestamp: nowIso,
+      });
+      if (driver.trajectory.length > 4000) {
+        driver.trajectory = driver.trajectory.slice(-4000);
+      }
+    }
+
+    // Stop Detection ("harda nə qədər dayanıb")
+    if (!driver.stops) {
+      driver.stops = [];
+    }
+
+    const activeStop = driver.stops.find(s => s.isCurrent);
+
+    if (!isMoving) {
+      if (activeStop) {
+        const distFromStop = calculateDistanceMeters(
+          activeStop.latitude,
+          activeStop.longitude,
+          coords.latitude,
+          coords.longitude
+        );
+        if (distFromStop <= 60) {
+          const startMs = new Date(activeStop.startTime).getTime();
+          activeStop.durationMinutes = Math.max(1, Math.round((now.getTime() - startMs) / 60000));
+          activeStop.endTime = nowIso;
+          activeStop.endTimeStr = timeStr;
+        } else {
+          activeStop.isCurrent = false;
+          activeStop.endTime = nowIso;
+          activeStop.endTimeStr = timeStr;
+          driver.stops.push({
+            id: `stop_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+            latitude: coords.latitude,
+            longitude: coords.longitude,
+            address: coords.address,
+            startTime: nowIso,
+            startTimeStr: `${dateStr} ${timeStr}`,
+            endTime: nowIso,
+            endTimeStr: timeStr,
+            durationMinutes: 1,
+            isCurrent: true,
+          });
+        }
+      } else {
+        driver.stops.push({
+          id: `stop_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+          latitude: coords.latitude,
+          longitude: coords.longitude,
+          address: coords.address,
+          startTime: nowIso,
+          startTimeStr: `${dateStr} ${timeStr}`,
+          endTime: nowIso,
+          endTimeStr: timeStr,
+          durationMinutes: 1,
+          isCurrent: true,
+        });
+      }
+    } else {
+      if (activeStop) {
+        const distFromStop = calculateDistanceMeters(
+          activeStop.latitude,
+          activeStop.longitude,
+          coords.latitude,
+          coords.longitude
+        );
+        if (distFromStop > 50) {
+          activeStop.isCurrent = false;
+          activeStop.endTime = nowIso;
+          activeStop.endTimeStr = timeStr;
+          const startMs = new Date(activeStop.startTime).getTime();
+          activeStop.durationMinutes = Math.max(1, Math.round((now.getTime() - startMs) / 60000));
+        }
+      }
+    }
+
+    // Auto-sync in-transit orders carried by this driver
+    const inTransitOrders = this.orders.filter(
+      o => (o.status === 'in_transit' || o.status === 'assigned') && (o.driverId === driver.id || o.executorId === driver.id)
+    );
+
+    let ordersUpdated = false;
+    for (const order of inTransitOrders) {
+      order.currentLocation = {
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        speed: speedKmH,
+        accuracy: coords.accuracy ?? null,
+        heading: heading ?? null,
+        updatedAt: nowIso,
+      };
+      if (!order.trajectory) order.trajectory = [];
+      order.trajectory.push({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        speed: speedKmH,
+        accuracy: coords.accuracy ?? null,
+        heading: heading ?? null,
+        timestamp: nowIso,
+      });
+      if (order.trajectory.length > 2500) {
+        order.trajectory = order.trajectory.slice(-2500);
+      }
+      order.updatedAt = nowIso;
+      syncOrderToFirestore(order);
+      ordersUpdated = true;
+    }
+    if (ordersUpdated) {
+      this.saveOrders();
+    }
+
+    const idx = this.drivers.findIndex(d => d.id === driver.id);
+    if (idx >= 0) {
+      this.drivers[idx] = driver;
+    } else {
+      this.drivers.push(driver);
+    }
+    this.saveDrivers();
+    syncDriverToFirestore(driver);
+
+    return driver;
+  }
+
+  public getLiveDrivers(requester: { id: string; role: string }): DriverRecord[] {
+    const allDrivers = this.getDrivers();
+    const now = Date.now();
+
+    // Active orders in transit or assigned
+    const activeOrders = this.orders.filter(
+      o => o.status === 'in_transit' || o.status === 'assigned'
+    );
+
+    const enriched = allDrivers.map(drv => {
+      const lastUpdateMs = drv.currentLocation?.updatedAt
+        ? new Date(drv.currentLocation.updatedAt).getTime()
+        : 0;
+      const isRecentlyActive = (now - lastUpdateMs) < 600000; // 10 minutes
+
+      const carryingOrders: DriverActiveOrderInfo[] = activeOrders
+        .filter(o => o.driverId === drv.id || o.executorId === drv.id)
+        .map(o => {
+          let distKm: number | undefined = undefined;
+          if (drv.currentLocation && o.customerLatitude && o.customerLongitude) {
+            distKm = Math.round(
+              (calculateDistanceMeters(
+                drv.currentLocation.latitude,
+                drv.currentLocation.longitude,
+                o.customerLatitude,
+                o.customerLongitude
+              ) / 1000) * 10
+            ) / 10;
+          }
+          return {
+            orderId: o.id,
+            orderNumber: o.orderNumber,
+            customerId: o.customerId,
+            customerName: o.customerName,
+            customerPhone: o.customerPhone,
+            customerAddress: o.customerAddress,
+            customerLatitude: o.customerLatitude,
+            customerLongitude: o.customerLongitude,
+            ownerId: o.ownerId,
+            ownerName: o.ownerName,
+            creatorId: o.creatorId,
+            creatorName: o.creatorName,
+            status: o.status,
+            destinationDistanceKm: distKm,
+          };
+        });
+
+      return {
+        ...drv,
+        isLive: Boolean(drv.isLive && isRecentlyActive),
+        activeOrders: carryingOrders,
+      };
+    });
+
+    if (requester.role === 'ADMIN') {
+      return enriched;
+    }
+
+    if (requester.role === 'DRIVER') {
+      return enriched.filter(d => d.id === requester.id);
+    }
+
+    // USER sees ONLY drivers carrying their goods
+    return enriched.filter(d =>
+      d.activeOrders && d.activeOrders.some(
+        ao => ao.creatorId === requester.id || ao.ownerId === requester.id
+      )
+    );
+  }
+
+  public getDriverTrajectoryAndStops(driverId: string): {
+    driver: DriverRecord | null;
+    currentLocation: DriverCurrentLocation | null;
+    trajectory: TrajectoryPoint[];
+    stops: DriverStop[];
+  } {
+    const driver = this.getDriverById(driverId);
+    if (!driver) {
+      return { driver: null, currentLocation: null, trajectory: [], stops: [] };
+    }
+    return {
+      driver,
+      currentLocation: driver.currentLocation || null,
+      trajectory: driver.trajectory || [],
+      stops: driver.stops || [],
+    };
   }
 
   // --- Audit Logs & Business Operations ---
@@ -1637,6 +2060,172 @@ class Database {
     }
 
     return order;
+  }
+
+  public updateOrder(
+    orderId: string,
+    updates: {
+      customerName?: string;
+      customerPhone?: string;
+      customerAddress?: string;
+      customerLatitude?: number;
+      customerLongitude?: number;
+      notes?: string;
+      status?: OrderStatus;
+      dispatchType?: ExecutorType | null;
+      executorType?: ExecutorType | null;
+      executorId?: string | null;
+      executorName?: string | null;
+    },
+    actor: { id: string; name: string; role: UserRole }
+  ): OrderRecord {
+    const order = this.getOrderById(orderId);
+    if (!order) throw new Error('Sifariş tapılmadı.');
+
+    const now = new Date();
+    const nowIso = now.toISOString();
+    const { dateStr, timeStr } = getBakuDateTime(now);
+    const oldStatus = order.status;
+    const changeNotes: string[] = [];
+
+    if (updates.customerName !== undefined && updates.customerName.trim() !== order.customerName) {
+      changeNotes.push(`Müştəri: ${order.customerName} -> ${updates.customerName.trim()}`);
+      order.customerName = updates.customerName.trim();
+    }
+    if (updates.customerPhone !== undefined && updates.customerPhone.trim() !== order.customerPhone) {
+      changeNotes.push(`Telefon: ${order.customerPhone} -> ${updates.customerPhone.trim()}`);
+      order.customerPhone = normalizePhone(updates.customerPhone.trim());
+    }
+    if (updates.customerAddress !== undefined && updates.customerAddress.trim() !== order.customerAddress) {
+      changeNotes.push(`Ünvan: ${order.customerAddress} -> ${updates.customerAddress.trim()}`);
+      order.customerAddress = updates.customerAddress.trim();
+    }
+    if (updates.customerLatitude !== undefined && !isNaN(Number(updates.customerLatitude))) {
+      order.customerLatitude = Number(updates.customerLatitude);
+    }
+    if (updates.customerLongitude !== undefined && !isNaN(Number(updates.customerLongitude))) {
+      order.customerLongitude = Number(updates.customerLongitude);
+    }
+    if (updates.notes !== undefined) {
+      order.notes = updates.notes;
+    }
+
+    if (updates.dispatchType !== undefined) {
+      order.dispatchType = updates.dispatchType;
+    }
+
+    // Assign / update executor
+    if (updates.executorId !== undefined) {
+      if (!updates.executorId) {
+        order.executorId = null;
+        order.executorName = null;
+        order.executorType = null;
+        order.driverId = null;
+        order.driverName = null;
+        changeNotes.push('İcraçı təyinatı silindi');
+      } else {
+        const execType = updates.executorType || 'DRIVER';
+        let execName = updates.executorName || '';
+        if (!execName) {
+          if (execType === 'DRIVER') {
+            const drv = this.getDriverById(updates.executorId);
+            execName = drv?.name || 'Sürücü';
+          } else {
+            const usr = this.getUserById(updates.executorId);
+            execName = usr?.name || 'İstifadəçi';
+          }
+        }
+        order.executorId = updates.executorId;
+        order.executorType = execType;
+        order.executorName = execName;
+        if (execType === 'DRIVER') {
+          order.driverId = updates.executorId;
+          order.driverName = execName;
+        } else {
+          order.driverId = null;
+          order.driverName = null;
+        }
+        changeNotes.push(`İcraçı: ${execName} (${execType === 'DRIVER' ? 'Sürücü' : 'User'})`);
+      }
+    }
+
+    // Status change
+    if (updates.status !== undefined && updates.status !== order.status) {
+      changeNotes.push(`Status: ${oldStatus} -> ${updates.status}`);
+      order.status = updates.status;
+      if (updates.status === 'delivered' && !order.deliveredAt) {
+        order.deliveredAt = nowIso;
+        order.deliveredBy = actor.id;
+        order.deliveredByName = actor.name;
+      }
+      if (updates.status === 'in_transit' && !order.departedAt) {
+        order.departedAt = nowIso;
+      }
+      if (updates.status === 'assigned' && !order.claimedAt) {
+        order.claimedAt = nowIso;
+      }
+    }
+
+    order.updatedAt = nowIso;
+
+    order.history.push({
+      step: 'EDITED',
+      title: 'Sifariş redaktə edildi',
+      actorId: actor.id,
+      actorName: actor.name,
+      actorRole: actor.role,
+      timestamp: nowIso,
+      dateStr,
+      timeStr,
+      details: changeNotes.length > 0
+        ? `Dəyişikliklər: ${changeNotes.join('; ')}`
+        : `${actor.name} tərəfindən redaktə edildi.`,
+    });
+
+    this.saveOrders();
+    syncOrderToFirestore(order);
+
+    this.addLog({
+      userId: actor.id,
+      userName: actor.name,
+      role: actor.role,
+      action: 'Sifariş redaktə edildi',
+      actionType: 'ORDER_UPDATED',
+      entityType: 'DELIVERY',
+      entityId: order.id,
+      customerId: order.customerId,
+      customerName: order.customerName,
+      details: `Admin ${actor.name} #${order.orderNumber} nömrəli sifarişi redaktə etdi. ${changeNotes.join(', ')}`,
+      newData: order,
+    });
+
+    return order;
+  }
+
+  public deleteOrder(orderId: string, actor: { id: string; name: string; role: UserRole }): boolean {
+    const idx = this.orders.findIndex(o => o.id === orderId);
+    if (idx === -1) throw new Error('Sifariş tapılmadı.');
+
+    const deleted = this.orders[idx];
+    this.orders.splice(idx, 1);
+    this.saveOrders();
+    deleteOrderFromFirestore(orderId);
+
+    this.addLog({
+      userId: actor.id,
+      userName: actor.name,
+      role: actor.role,
+      action: 'Sifariş silindi',
+      actionType: 'ORDER_DELETED',
+      entityType: 'DELIVERY',
+      entityId: deleted.id,
+      customerId: deleted.customerId,
+      customerName: deleted.customerName,
+      details: `Admin ${actor.name} #${deleted.orderNumber} nömrəli sifarişi sistemdən sildi.`,
+      oldData: deleted,
+    });
+
+    return true;
   }
 
   // Dashboard Stats matching Requirement 21 for User, Driver, Admin

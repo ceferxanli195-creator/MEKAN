@@ -23,6 +23,7 @@ import { useAuth } from '../context/AuthContext';
 import { api } from '../api';
 import { Customer, Delivery, OrderDashboardStats } from '../types';
 import { NavTab } from './Sidebar';
+import { DriverGpsTransmitter } from './DriverGpsTransmitter';
 
 interface DriverDashboardProps {
   onNavigate: (tab: NavTab) => void;
@@ -148,6 +149,9 @@ export const DriverDashboard: React.FC<DriverDashboardProps> = ({ onNavigate }) 
           </button>
         </div>
       </div>
+
+      {/* Live GPS Broadcaster (Automatic / Manual location transmission) */}
+      <DriverGpsTransmitter driverId={user?.id} driverName={user?.name} />
 
       {/* New Open Orders Driver Alert */}
       {orderStats && orderStats.openOrdersCount > 0 && (

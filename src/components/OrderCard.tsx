@@ -13,6 +13,8 @@ import {
   AlertCircle,
   History,
   Send,
+  Pencil,
+  Trash2,
 } from 'lucide-react';
 import { Order, ExecutorType } from '../types';
 import { useAuth } from '../context/AuthContext';
@@ -24,6 +26,8 @@ interface OrderCardProps {
   onViewLiveTracking: (order: Order) => void;
   onViewHistory: (order: Order) => void;
   onOpenDeliverModal: (order: Order) => void;
+  onEdit?: (order: Order) => void;
+  onDelete?: (order: Order) => void;
 }
 
 export const OrderCard: React.FC<OrderCardProps> = ({
@@ -32,6 +36,8 @@ export const OrderCard: React.FC<OrderCardProps> = ({
   onViewLiveTracking,
   onViewHistory,
   onOpenDeliverModal,
+  onEdit,
+  onDelete,
 }) => {
   const { user } = useAuth();
   const [isProcessing, setIsProcessing] = useState(false);
@@ -206,8 +212,30 @@ export const OrderCard: React.FC<OrderCardProps> = ({
             </p>
           </div>
 
-          <div className="shrink-0">
+          <div className="flex items-center gap-1.5 shrink-0">
             {getStatusBadge()}
+            {isAdmin && (
+              <div className="flex items-center gap-1 ml-1">
+                <button
+                  id={`quick-edit-order-btn-${order.id}`}
+                  type="button"
+                  onClick={() => onEdit?.(order)}
+                  title="Sifarişi Redaktə Et"
+                  className="p-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-amber-100 dark:hover:bg-amber-950/60 text-slate-500 hover:text-amber-600 dark:text-slate-400 dark:hover:text-amber-400 border border-slate-200 dark:border-slate-700 transition-colors"
+                >
+                  <Pencil className="w-3.5 h-3.5" />
+                </button>
+                <button
+                  id={`quick-delete-order-btn-${order.id}`}
+                  type="button"
+                  onClick={() => onDelete?.(order)}
+                  title="Sifarişi Sil"
+                  className="p-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-rose-100 dark:hover:bg-rose-950/60 text-slate-500 hover:text-rose-600 dark:text-slate-400 dark:hover:text-rose-400 border border-slate-200 dark:border-slate-700 transition-colors"
+                >
+                  <Trash2 className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
 
@@ -376,6 +404,7 @@ export const OrderCard: React.FC<OrderCardProps> = ({
 
         {/* History Button (Requirement 16) */}
         <button
+          id={`order-history-btn-${order.id}`}
           type="button"
           onClick={() => onViewHistory(order)}
           className="py-2 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-300 text-xs font-semibold flex items-center gap-1 transition-colors"
@@ -384,6 +413,32 @@ export const OrderCard: React.FC<OrderCardProps> = ({
           <History className="w-3.5 h-3.5 text-slate-500" />
           <span>Tarixçə</span>
         </button>
+
+        {/* Admin Explicit Action Buttons */}
+        {isAdmin && (
+          <>
+            <button
+              id={`order-edit-btn-${order.id}`}
+              type="button"
+              onClick={() => onEdit?.(order)}
+              className="py-2 px-3 rounded-xl bg-amber-50 dark:bg-amber-950/40 hover:bg-amber-100 dark:hover:bg-amber-900/60 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800 text-xs font-semibold flex items-center gap-1 transition-colors"
+              title="Sifarişi Redaktə Et"
+            >
+              <Pencil className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
+              <span>Redaktə</span>
+            </button>
+            <button
+              id={`order-delete-btn-${order.id}`}
+              type="button"
+              onClick={() => onDelete?.(order)}
+              className="py-2 px-3 rounded-xl bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 dark:hover:bg-rose-900/60 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 text-xs font-semibold flex items-center gap-1 transition-colors"
+              title="Sifarişi Sil"
+            >
+              <Trash2 className="w-3.5 h-3.5 text-rose-600 dark:text-rose-400" />
+              <span>Sil</span>
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

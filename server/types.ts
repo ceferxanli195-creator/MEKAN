@@ -63,7 +63,7 @@ export type OrderStatus = 'new' | 'pending_driver' | 'assigned' | 'in_transit' |
 export type ExecutorType = 'USER' | 'DRIVER';
 
 export interface OrderHistoryEvent {
-  step: 'CREATED' | 'DISPATCH_SELECTED' | 'CLAIMED' | 'DEPARTED' | 'LOCATION_UPDATE' | 'DELIVERED';
+  step: 'CREATED' | 'DISPATCH_SELECTED' | 'CLAIMED' | 'DEPARTED' | 'LOCATION_UPDATE' | 'DELIVERED' | 'EDITED';
   title: string;
   actorId: string;
   actorName: string;
@@ -181,6 +181,48 @@ export interface NotificationRecord {
   createdAt: string;
 }
 
+export interface DriverStop {
+  id: string;
+  latitude: number;
+  longitude: number;
+  address?: string;
+  startTime: string;
+  startTimeStr: string;
+  endTime?: string | null;
+  endTimeStr?: string | null;
+  durationMinutes: number;
+  isCurrent: boolean;
+}
+
+export interface DriverCurrentLocation {
+  latitude: number;
+  longitude: number;
+  speed: number; // km/h
+  heading?: number | null;
+  accuracy?: number | null;
+  batteryLevel?: number | null;
+  updatedAt: string;
+  isMoving: boolean;
+  address?: string;
+}
+
+export interface DriverActiveOrderInfo {
+  orderId: string;
+  orderNumber: number;
+  customerId: string;
+  customerName: string;
+  customerPhone: string;
+  customerAddress: string;
+  customerLatitude: number;
+  customerLongitude: number;
+  ownerId: string;
+  ownerName: string;
+  creatorId: string;
+  creatorName: string;
+  status: OrderStatus;
+  destinationDistanceKm?: number;
+}
+
 export interface DriverRecord {
   id: string;
   loginId: string;
@@ -188,6 +230,12 @@ export interface DriverRecord {
   name: string;
   phone: string;
   status: 'active' | 'inactive';
+  isLive?: boolean;
+  lastSeen?: string;
+  currentLocation?: DriverCurrentLocation | null;
+  trajectory?: TrajectoryPoint[];
+  stops?: DriverStop[];
+  activeOrders?: DriverActiveOrderInfo[];
   createdAt: string;
   updatedAt: string;
 }
