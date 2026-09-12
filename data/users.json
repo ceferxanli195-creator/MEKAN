@@ -1,90 +1,90 @@
 [
   {
-    "role": "ADMIN",
     "lastLogin": "2026-09-11T16:04:59.310Z",
-    "lastActivity": "2026-09-11T16:05:28.622Z",
-    "passwordHash": "b951d1ccc105f4af7ffcd76080eed79650396565c90009134704ef113ca07c36",
+    "updatedAt": "2026-09-12T12:06:03.707Z",
     "createdAt": "2026-09-12T12:01:42.905Z",
-    "permissions": {
-      "view_drivers": true,
-      "use_gps": true,
-      "restore_data": true,
-      "view_customers": true,
-      "view_map": true,
-      "create_customer": true,
-      "backup_data": true,
-      "delete_customer": true,
-      "edit_customer": true
-    },
-    "loginId": "admin",
-    "id": "usr_admin_master",
     "status": "active",
+    "lastActivity": "2026-09-11T16:05:28.622Z",
     "name": "Sistem Admini",
-    "updatedAt": "2026-09-12T12:01:42.905Z"
+    "permissions": {
+      "edit_customer": true,
+      "use_gps": true,
+      "backup_data": true,
+      "restore_data": true,
+      "delete_customer": true,
+      "create_customer": true,
+      "view_map": true,
+      "view_customers": true,
+      "view_drivers": true
+    },
+    "role": "ADMIN",
+    "loginId": "admin",
+    "passwordHash": "b951d1ccc105f4af7ffcd76080eed79650396565c90009134704ef113ca07c36",
+    "id": "usr_admin_master"
   },
   {
-    "status": "active",
-    "passwordHash": "7fdaea41fa4d546511e882d6b7f29542188ab95336d49d6c596c812df4769719",
     "loginId": "vusal",
-    "id": "usr_1789036141222_r5meu",
     "role": "USER",
-    "createdAt": "2026-09-10T10:29:01.222Z",
+    "id": "usr_1789036141222_r5meu",
     "name": "Vüsal",
+    "passwordHash": "7fdaea41fa4d546511e882d6b7f29542188ab95336d49d6c596c812df4769719",
+    "status": "active",
     "permissions": {
+      "view_drivers": true,
+      "backup_data": false,
       "view_map": true,
+      "create_customer": true,
+      "delete_customer": true,
+      "restore_data": false,
       "use_gps": true,
       "view_customers": true,
-      "restore_data": false,
-      "create_customer": true,
-      "view_drivers": true,
-      "edit_customer": true,
-      "delete_customer": true,
-      "backup_data": false
+      "edit_customer": true
     },
-    "updatedAt": "2026-09-11T06:59:29.105Z"
+    "updatedAt": "2026-09-11T06:59:29.105Z",
+    "createdAt": "2026-09-10T10:29:01.222Z"
   },
   {
     "phone": "",
-    "createdAt": "2026-09-10T11:08:20.110Z",
-    "id": "usr_1789038500110_oamj9",
-    "name": "İlqar",
-    "status": "active",
     "passwordHash": "7fdaea41fa4d546511e882d6b7f29542188ab95336d49d6c596c812df4769719",
-    "role": "USER",
-    "updatedAt": "2026-09-11T06:59:27.568Z",
-    "loginId": "ilqar",
     "permissions": {
-      "delete_customer": true,
-      "edit_customer": true,
-      "restore_data": false,
-      "view_customers": true,
-      "create_customer": true,
       "use_gps": true,
+      "edit_customer": true,
       "view_drivers": true,
+      "view_customers": true,
+      "view_map": true,
+      "restore_data": false,
       "backup_data": false,
-      "view_map": true
-    }
+      "delete_customer": true,
+      "create_customer": true
+    },
+    "updatedAt": "2026-09-11T06:59:27.568Z",
+    "status": "active",
+    "id": "usr_1789038500110_oamj9",
+    "createdAt": "2026-09-10T11:08:20.110Z",
+    "loginId": "ilqar",
+    "name": "İlqar",
+    "role": "USER"
   },
   {
-    "loginId": "ccc",
-    "permissions": {
-      "create_customer": false,
-      "delete_customer": false,
-      "edit_customer": false,
-      "view_map": true,
-      "use_gps": true,
-      "view_drivers": true,
-      "restore_data": false,
-      "backup_data": false,
-      "view_customers": true
-    },
-    "updatedAt": "2026-09-11T06:59:21.194Z",
-    "role": "DRIVER",
     "passwordHash": "b1b49897d3ffb3b52ebc4982ec303e738672527ad73c4124cd66f15309898c44",
-    "status": "active",
-    "id": "usr_1789039439449_tp4xm",
     "name": "C",
+    "role": "DRIVER",
+    "loginId": "ccc",
+    "updatedAt": "2026-09-11T06:59:21.194Z",
     "createdAt": "2026-09-10T11:23:59.449Z",
-    "phone": ""
+    "permissions": {
+      "view_map": true,
+      "view_drivers": true,
+      "edit_customer": false,
+      "use_gps": true,
+      "delete_customer": false,
+      "create_customer": false,
+      "backup_data": false,
+      "view_customers": true,
+      "restore_data": false
+    },
+    "id": "usr_1789039439449_tp4xm",
+    "phone": "",
+    "status": "active"
   }
 ]

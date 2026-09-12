@@ -1,6 +1,7 @@
 import { User, Customer, Driver, AuditLog, DashboardStats, Delivery, NotificationItem, Order, ExecutorType } from './types';
 
 const TOKEN_KEY = 'mustari_gps_auth_token';
+const USER_KEY = 'mustari_gps_auth_user';
 
 export function getStoredToken(): string | null {
   return localStorage.getItem(TOKEN_KEY);
@@ -11,6 +12,23 @@ export function setStoredToken(token: string | null) {
     localStorage.setItem(TOKEN_KEY, token);
   } else {
     localStorage.removeItem(TOKEN_KEY);
+  }
+}
+
+export function getStoredUser(): User | null {
+  try {
+    const raw = localStorage.getItem(USER_KEY);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function setStoredUser(user: User | null) {
+  if (user) {
+    localStorage.setItem(USER_KEY, JSON.stringify(user));
+  } else {
+    localStorage.removeItem(USER_KEY);
   }
 }
 
@@ -47,9 +65,10 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
   }
 
   if (response.status === 401) {
-    // Only clear token and dispatch unauthorized event if NOT the login request itself
-    if (!path.includes('/auth/login')) {
+    // Only clear session and trigger unauthorized if specifically verifying current session (/auth/me)
+    if (path.includes('/auth/me')) {
       setStoredToken(null);
+      setStoredUser(null);
       window.dispatchEvent(new Event('auth:unauthorized'));
     }
     const message = (data && data.error) ? data.error : 'İstifadəçi ID və ya Şifrə yanlışdır.';
@@ -66,16 +85,25 @@ async function request<T>(path: string, options: RequestInit = {}): Promise<T> {
 
 export const api = {
   // Auth
-  login: (loginId: string, password: string) =>
-    request<{ token: string; user: User }>('/api/auth/login', {
+  login: async (loginId: string, password: string) => {
+    const res = await request<{ token: string; user: User }>('/api/auth/login', {
       method: 'POST',
       body: JSON.stringify({ loginId, password }),
-    }),
+    });
+    setStoredToken(res.token);
+    setStoredUser(res.user);
+    return res;
+  },
 
-  logout: () =>
-    request<{ success: boolean }>('/api/auth/logout', {
-      method: 'POST',
-    }),
+  logout: async () => {
+    try {
+      await request<{ success: boolean }>('/api/auth/logout', {
+        method: 'POST',
+      });
+    } catch {}
+    setStoredToken(null);
+    setStoredUser(null);
+  },
 
   getCurrentUser: () =>
     request<{ user: User }>('/api/auth/me'),

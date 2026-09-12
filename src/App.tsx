@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Compass } from 'lucide-react';
 import { useAuth } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
+import { BackgroundGpsBanner } from './components/BackgroundGpsBanner';
 import { Sidebar, NavTab } from './components/Sidebar';
 import { MobileBottomNav } from './components/MobileBottomNav';
 import { CustomerFormModal } from './components/CustomerFormModal';
@@ -70,6 +71,9 @@ export default function App() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors">
       {/* Top Navbar */}
       <Navbar onNavigateHome={() => setCurrentTab('dashboard')} />
+
+      {/* Persistent Background GPS Live Banner for Drivers */}
+      <BackgroundGpsBanner />
 
       {/* Main Layout Area */}
       <div className="flex-1 flex w-full max-w-7xl mx-auto">

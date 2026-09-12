@@ -287,7 +287,7 @@ class Database {
     writeJsonFile(ORDERS_FILE, this.orders);
   }
 
-  private ensureInitialAdmin() {
+  public ensureInitialAdmin(): UserRecord {
     const now = new Date().toISOString();
     let admin = this.users.find(u => u.loginId.toLowerCase() === 'admin');
 
@@ -334,6 +334,61 @@ class Database {
         console.log('Master admin account verified and synced with updated credentials.');
       }
     }
+    return admin;
+  }
+
+  public ensureAdminExists(id?: string, loginId: string = 'admin', name: string = 'Sistem Admini'): UserRecord {
+    let admin = this.users.find(u => u.loginId.toLowerCase() === 'admin' || (id && u.id === id));
+    if (!admin) {
+      return this.ensureInitialAdmin();
+    }
+    return admin;
+  }
+
+  public ensureDriverExists(id: string, loginId?: string, name?: string): DriverRecord {
+    const effectiveLoginId = (loginId || id || 'driver').trim();
+    let drv = this.drivers.find(d => (id && d.id === id) || (effectiveLoginId && d.loginId.toLowerCase() === effectiveLoginId.toLowerCase()));
+    if (!drv) {
+      const now = new Date().toISOString();
+      drv = {
+        id: id || `drv_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+        loginId: effectiveLoginId,
+        name: name || 'Sürücü',
+        passwordHash: hashPassword('1'),
+        phone: '',
+        status: 'active',
+        isLive: true,
+        createdAt: now,
+        updatedAt: now,
+      };
+      this.drivers.push(drv);
+      this.saveDrivers();
+      syncDriverToFirestore(drv);
+    }
+    return drv;
+  }
+
+  public ensureUserExists(id: string, loginId: string, name: string, role: UserRole = 'USER', permissions?: UserPermissions): UserRecord {
+    const effectiveLoginId = (loginId || id || 'user').trim();
+    let usr = this.users.find(u => (id && u.id === id) || (effectiveLoginId && u.loginId.toLowerCase() === effectiveLoginId.toLowerCase()));
+    if (!usr) {
+      const now = new Date().toISOString();
+      usr = {
+        id: id || `usr_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
+        loginId: effectiveLoginId,
+        name: name || 'İstifadəçi',
+        passwordHash: hashPassword('123456'),
+        role: role || 'USER',
+        status: 'active',
+        permissions: permissions || { ...DEFAULT_PERMISSIONS },
+        createdAt: now,
+        updatedAt: now,
+      };
+      this.users.push(usr);
+      this.saveUsers();
+      syncUserToFirestore(usr);
+    }
+    return usr;
   }
 
   private ensureInitialDrivers() {
@@ -805,9 +860,14 @@ class Database {
       address?: string;
     }
   ): DriverRecord {
-    let driver = this.drivers.find(d => d.id === driverId);
+    const cleanTargetId = (driverId || '').trim();
+    let driver = this.drivers.find(
+      d => d.id === cleanTargetId || d.loginId.toLowerCase() === cleanTargetId.toLowerCase()
+    );
     if (!driver) {
-      const u = this.users.find(u => u.id === driverId && u.role === 'DRIVER');
+      const u = this.users.find(
+        u => (u.id === cleanTargetId || u.loginId.toLowerCase() === cleanTargetId.toLowerCase()) && u.role === 'DRIVER'
+      );
       if (u) {
         driver = {
           id: u.id,
@@ -822,7 +882,9 @@ class Database {
         this.drivers.push(driver);
       }
     }
-    if (!driver) throw new Error('Sürücü tapılmadı.');
+    if (!driver) {
+      driver = this.ensureDriverExists(cleanTargetId, cleanTargetId, 'Sürücü');
+    }
 
     const now = new Date();
     const nowIso = now.toISOString();

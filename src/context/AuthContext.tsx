@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, UserPermissions } from '../types';
-import { api, getStoredToken, setStoredToken } from '../api';
+import { api, getStoredToken, setStoredToken, getStoredUser, setStoredUser } from '../api';
 
 interface AuthContextType {
   user: User | null;
@@ -14,22 +14,27 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [user, setUser] = useState<User | null>(() => getStoredUser());
+  const [isLoading, setIsLoading] = useState<boolean>(() => !getStoredUser() && !!getStoredToken());
 
   const checkAuth = async () => {
     const token = getStoredToken();
     if (!token) {
       setUser(null);
+      setStoredUser(null);
       setIsLoading(false);
       return;
     }
     try {
       const res = await api.getCurrentUser();
       setUser(res.user);
-    } catch (err) {
-      setUser(null);
-      setStoredToken(null);
+      setStoredUser(res.user);
+    } catch (err: any) {
+      if (err.message && (err.message.includes('Token tapılmadı') || err.message.includes('Sessiyanın vaxtı bitib') || err.message.includes('etibarsızdır'))) {
+        setUser(null);
+        setStoredUser(null);
+        setStoredToken(null);
+      }
     } finally {
       setIsLoading(false);
     }
@@ -40,6 +45,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     const handleUnauthorized = () => {
       setUser(null);
+      setStoredUser(null);
     };
 
     window.addEventListener('auth:unauthorized', handleUnauthorized);
@@ -51,6 +57,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     try {
       const res = await api.login(loginId, pass);
       setStoredToken(res.token);
+      setStoredUser(res.user);
       setUser(res.user);
       return res.user;
     } finally {
@@ -65,6 +72,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       console.warn('Logout error ignored:', err);
     } finally {
       setStoredToken(null);
+      setStoredUser(null);
       setUser(null);
     }
   };

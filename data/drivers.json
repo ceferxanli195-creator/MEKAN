@@ -1,98 +1,148 @@
 [
   {
-    "id": "drv_1789131765650_ah4jv",
-    "createdAt": "2026-09-11T13:02:45.650Z",
-    "updatedAt": "2026-09-11T13:02:45.650Z",
     "loginId": "1",
-    "status": "active",
+    "id": "drv_1789131765650_ah4jv",
     "name": "1",
-    "phone": "1",
-    "passwordHash": "b1b49897d3ffb3b52ebc4982ec303e738672527ad73c4124cd66f15309898c44",
     "isLive": true,
-    "lastSeen": "2026-09-12T12:14:49.065Z",
-    "currentLocation": {
-      "latitude": 40.412,
-      "longitude": 49.872,
-      "speed": 58,
-      "heading": 82,
-      "accuracy": null,
-      "batteryLevel": null,
-      "updatedAt": "2026-09-12T12:14:49.065Z",
-      "isMoving": true
-    },
+    "lastSeen": "2026-09-12T12:46:08.354Z",
+    "status": "active",
+    "createdAt": "2026-09-11T13:02:45.650Z",
     "trajectory": [
       {
-        "latitude": 40.395,
+        "timestamp": "2026-09-12T11:14:34.489Z",
         "longitude": 49.845,
         "speed": 42,
-        "heading": 60,
-        "timestamp": "2026-09-12T11:14:34.489Z"
+        "latitude": 40.395,
+        "heading": 60
       },
       {
-        "latitude": 40.4,
+        "heading": 65,
         "longitude": 49.852,
         "speed": 50,
-        "heading": 65,
+        "latitude": 40.4,
         "timestamp": "2026-09-12T11:34:34.489Z"
       },
       {
         "latitude": 40.405,
-        "longitude": 49.86,
         "speed": 48,
-        "heading": 70,
-        "timestamp": "2026-09-12T11:54:34.489Z"
+        "timestamp": "2026-09-12T11:54:34.489Z",
+        "longitude": 49.86,
+        "heading": 70
       },
+      {
+        "longitude": 49.8671,
+        "timestamp": "2026-09-12T12:14:34.488Z",
+        "heading": 80,
+        "latitude": 40.4093,
+        "speed": 48
+      },
+      {
+        "heading": 82,
+        "speed": 58,
+        "timestamp": "2026-09-12T12:14:49.065Z",
+        "longitude": 49.872,
+        "accuracy": null,
+        "latitude": 40.412
+      },
+      {
+        "longitude": 49.8671,
+        "timestamp": "2026-09-12T12:46:05.361Z",
+        "heading": 70,
+        "latitude": 40.4093,
+        "speed": 45,
+        "accuracy": null
+      },
+      {
+        "speed": 55,
+        "heading": 75,
+        "longitude": 49.872,
+        "timestamp": "2026-09-12T12:46:08.354Z",
+        "latitude": 40.412,
+        "accuracy": null
+      }
+    ],
+    "passwordHash": "b1b49897d3ffb3b52ebc4982ec303e738672527ad73c4124cd66f15309898c44",
+    "phone": "1",
+    "currentLocation": {
+      "heading": 75,
+      "batteryLevel": null,
+      "latitude": 40.412,
+      "isMoving": true,
+      "longitude": 49.872,
+      "updatedAt": "2026-09-12T12:46:08.354Z",
+      "address": "Nizami küçəsi, Bakı",
+      "speed": 55,
+      "accuracy": null
+    },
+    "stops": [
+      {
+        "address": "28 May m/st yaxınlığı",
+        "endTimeStr": "11:20",
+        "durationMinutes": 5,
+        "isCurrent": false,
+        "startTime": "2026-09-12T11:29:34.489Z",
+        "endTime": "2026-09-12T11:34:34.489Z",
+        "longitude": 49.852,
+        "startTimeStr": "12.09.2026 11:15",
+        "id": "stop_1",
+        "latitude": 40.4
+      },
+      {
+        "latitude": 40.405,
+        "endTimeStr": "11:40",
+        "endTime": "2026-09-12T11:54:34.489Z",
+        "durationMinutes": 10,
+        "longitude": 49.86,
+        "address": "Nərimanov, Təbriz küç.",
+        "isCurrent": false,
+        "startTime": "2026-09-12T11:44:34.489Z",
+        "startTimeStr": "12.09.2026 11:30",
+        "id": "stop_2"
+      }
+    ],
+    "updatedAt": "2026-09-11T13:02:45.650Z"
+  },
+  {
+    "status": "active",
+    "phone": "",
+    "id": "usr_1789039439449_tp4xm",
+    "updatedAt": "2026-09-11T06:59:21.195Z",
+    "loginId": "ccc",
+    "name": "C",
+    "createdAt": "2026-09-10T11:23:59.449Z",
+    "passwordHash": "b1b49897d3ffb3b52ebc4982ec303e738672527ad73c4124cd66f15309898c44"
+  },
+  {
+    "id": "drv_sample_1",
+    "loginId": "drv_sample_1",
+    "name": "Sürücü",
+    "passwordHash": "b1b49897d3ffb3b52ebc4982ec303e738672527ad73c4124cd66f15309898c44",
+    "phone": "",
+    "status": "active",
+    "isLive": true,
+    "createdAt": "2026-09-12T12:49:30.935Z",
+    "updatedAt": "2026-09-12T12:49:30.935Z",
+    "lastSeen": "2026-09-12T12:49:30.942Z",
+    "currentLocation": {
+      "latitude": 40.4093,
+      "longitude": 49.8671,
+      "speed": 48,
+      "heading": 80,
+      "accuracy": 5,
+      "batteryLevel": null,
+      "updatedAt": "2026-09-12T12:49:30.942Z",
+      "isMoving": true
+    },
+    "trajectory": [
       {
         "latitude": 40.4093,
         "longitude": 49.8671,
         "speed": 48,
+        "accuracy": 5,
         "heading": 80,
-        "timestamp": "2026-09-12T12:14:34.488Z"
-      },
-      {
-        "latitude": 40.412,
-        "longitude": 49.872,
-        "speed": 58,
-        "accuracy": null,
-        "heading": 82,
-        "timestamp": "2026-09-12T12:14:49.065Z"
+        "timestamp": "2026-09-12T12:49:30.942Z"
       }
     ],
-    "stops": [
-      {
-        "id": "stop_1",
-        "latitude": 40.4,
-        "longitude": 49.852,
-        "address": "28 May m/st yaxınlığı",
-        "startTime": "2026-09-12T11:29:34.489Z",
-        "startTimeStr": "12.09.2026 11:15",
-        "endTime": "2026-09-12T11:34:34.489Z",
-        "endTimeStr": "11:20",
-        "durationMinutes": 5,
-        "isCurrent": false
-      },
-      {
-        "id": "stop_2",
-        "latitude": 40.405,
-        "longitude": 49.86,
-        "address": "Nərimanov, Təbriz küç.",
-        "startTime": "2026-09-12T11:44:34.489Z",
-        "startTimeStr": "12.09.2026 11:30",
-        "endTime": "2026-09-12T11:54:34.489Z",
-        "endTimeStr": "11:40",
-        "durationMinutes": 10,
-        "isCurrent": false
-      }
-    ]
-  },
-  {
-    "status": "active",
-    "name": "C",
-    "updatedAt": "2026-09-11T06:59:21.195Z",
-    "id": "usr_1789039439449_tp4xm",
-    "loginId": "ccc",
-    "createdAt": "2026-09-10T11:23:59.449Z",
-    "passwordHash": "b1b49897d3ffb3b52ebc4982ec303e738672527ad73c4124cd66f15309898c44",
-    "phone": ""
+    "stops": []
   }
 ]
