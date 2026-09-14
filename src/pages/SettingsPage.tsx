@@ -6,16 +6,31 @@ import {
   Download,
   Upload,
   Shield,
+  ShieldCheck,
+  ShieldAlert,
   CheckCircle2,
   AlertCircle,
   FileJson,
   RefreshCw,
+  Radio,
+  Eye,
+  EyeOff,
+  KeyRound,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../api';
+import { backgroundGps } from '../services/BackgroundGpsService';
 
 export const SettingsPage: React.FC = () => {
-  const { user, hasPermission } = useAuth();
+  const { user, refreshUser, hasPermission } = useAuth();
+
+  // Moderator (Admin) security panel state
+  const [isModeratorUnlocked, setIsModeratorUnlocked] = useState(false);
+  const [moderatorPin, setModeratorPin] = useState('');
+  const [showModeratorPin, setShowModeratorPin] = useState(false);
+  const [moderatorError, setModeratorError] = useState<string | null>(null);
+  const [moderatorSuccessMsg, setModeratorSuccessMsg] = useState<string | null>(null);
+  const [isTogglingTracking, setIsTogglingTracking] = useState(false);
 
   // Password change state
   const [currentPassword, setCurrentPassword] = useState('');
@@ -31,6 +46,45 @@ export const SettingsPage: React.FC = () => {
 
   const canBackup = user?.role === 'ADMIN' || hasPermission('backup_data');
   const canRestore = user?.role === 'ADMIN' || hasPermission('restore_data');
+
+  const handleUnlockModerator = (e: React.FormEvent) => {
+    e.preventDefault();
+    setModeratorError(null);
+    setModeratorSuccessMsg(null);
+
+    // Secret verification: Password "2017" or ADMIN role
+    if (moderatorPin.trim() === '2017' || user?.role === 'ADMIN') {
+      setIsModeratorUnlocked(true);
+      setModeratorPin('');
+      setModeratorError(null);
+    } else {
+      setModeratorError('Moderator şifrəsi yanlışdır. Giriş rədd edildi.');
+    }
+  };
+
+  const handleToggleLiveTracking = async () => {
+    if (!user) return;
+    setIsTogglingTracking(true);
+    setModeratorError(null);
+    setModeratorSuccessMsg(null);
+    const newStatus = !user.liveTrackingEnabled;
+
+    try {
+      await api.updateUserLiveTracking(user.id, newStatus, '2017');
+      await refreshUser();
+      if (newStatus) {
+        backgroundGps.startRealGps(user.id, 'user');
+        setModeratorSuccessMsg('Canlı GPS izləmə uğurla aktivləşdirildi. İstifadəçinin konumu xəritədə adminə ötürülür.');
+      } else {
+        backgroundGps.stop();
+        setModeratorSuccessMsg('Canlı GPS izləmə uğurla dayandırıldı.');
+      }
+    } catch (err: any) {
+      setModeratorError(err.message || 'Canlı izləmə parametrini dəyişmək mümkün olmadı.');
+    } finally {
+      setIsTogglingTracking(false);
+    }
+  };
 
   const handleChangePassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -151,6 +205,165 @@ export const SettingsPage: React.FC = () => {
             </span>
           </div>
         </div>
+      </div>
+
+      {/* Moderator (Admin) Control Section - Protected by Secret Password (2017) */}
+      <div className="bg-white dark:bg-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200/80 dark:border-slate-800 shadow-xs">
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <div className="flex items-center gap-2">
+            <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${
+              isModeratorUnlocked
+                ? 'bg-emerald-100 dark:bg-emerald-950/60 text-emerald-600 dark:text-emerald-400'
+                : 'bg-indigo-100 dark:bg-indigo-950/60 text-indigo-600 dark:text-indigo-400'
+            }`}>
+              {isModeratorUnlocked ? <ShieldCheck className="w-5 h-5" /> : <ShieldAlert className="w-5 h-5" />}
+            </div>
+            <div>
+              <h2 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <span>Moderator (Admin)</span>
+                {isModeratorUnlocked ? (
+                  <span className="px-2 py-0.5 bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300 rounded-full text-[10px] font-bold">
+                    Açıqdır 🔓
+                  </span>
+                ) : (
+                  <span className="px-2 py-0.5 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 rounded-full text-[10px] font-bold">
+                    Qorunur 🔒
+                  </span>
+                )}
+              </h2>
+              <p className="text-xs text-slate-500 dark:text-slate-400">
+                Sistem rəhbərliyi və təhlükəsizlik nəzarəti üçün xüsusi moderator paneli
+              </p>
+            </div>
+          </div>
+
+          {isModeratorUnlocked && (
+            <button
+              type="button"
+              onClick={() => {
+                setIsModeratorUnlocked(false);
+                setModeratorSuccessMsg(null);
+                setModeratorError(null);
+              }}
+              className="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-xl text-xs font-semibold transition-colors"
+            >
+              Paneli Kilidlə 🔒
+            </button>
+          )}
+        </div>
+
+        {moderatorError && (
+          <div className="p-3 bg-rose-50 dark:bg-rose-950/50 border border-rose-200 dark:border-rose-900 rounded-xl text-xs font-semibold text-rose-700 dark:text-rose-300 flex items-center gap-2 mb-4">
+            <AlertCircle className="w-4 h-4 shrink-0" />
+            <span>{moderatorError}</span>
+          </div>
+        )}
+
+        {moderatorSuccessMsg && (
+          <div className="p-3 bg-emerald-50 dark:bg-emerald-950/50 border border-emerald-200 dark:border-emerald-900 rounded-xl text-xs font-semibold text-emerald-700 dark:text-emerald-300 flex items-center gap-2 mb-4">
+            <CheckCircle2 className="w-4 h-4 shrink-0" />
+            <span>{moderatorSuccessMsg}</span>
+          </div>
+        )}
+
+        {!isModeratorUnlocked ? (
+          /* Locked Form */
+          <form onSubmit={handleUnlockModerator} className="space-y-3.5 max-w-md">
+            <p className="text-xs text-slate-600 dark:text-slate-400">
+              Bu bölmə yalnız sistem moderatoru və ya administrator tərəfindən idarə olunur. Canlı izləmə icazəsini tənzimləmək üçün təhlükəsizlik şifrəsini daxil edin.
+            </p>
+
+            <div>
+              <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">
+                Moderator Giriş Şifrəsi *
+              </label>
+              <div className="relative">
+                <input
+                  type={showModeratorPin ? 'text' : 'password'}
+                  required
+                  value={moderatorPin}
+                  onChange={(e) => setModeratorPin(e.target.value)}
+                  placeholder="Şifrə daxil edin"
+                  className="w-full px-3.5 py-2.5 pr-10 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-xl text-sm text-slate-900 dark:text-white focus:outline-hidden focus:ring-2 focus:ring-indigo-500"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowModeratorPin(!showModeratorPin)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200"
+                >
+                  {showModeratorPin ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                </button>
+              </div>
+            </div>
+
+            <button
+              type="submit"
+              className="px-5 py-2.5 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-bold rounded-xl flex items-center gap-2 transition-colors shadow-xs"
+            >
+              <KeyRound className="w-4 h-4" />
+              <span>Moderator Girişi</span>
+            </button>
+          </form>
+        ) : (
+          /* Unlocked Moderator Panel */
+          <div className="space-y-4">
+            <div className="p-4 rounded-xl border bg-slate-50 dark:bg-slate-800/60 border-slate-200 dark:border-slate-700 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex items-start gap-3">
+                <div className={`p-2.5 rounded-xl ${
+                  user?.liveTrackingEnabled
+                    ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400'
+                    : 'bg-slate-200 dark:bg-slate-700 text-slate-500 dark:text-slate-400'
+                }`}>
+                  <Radio className={`w-5 h-5 ${user?.liveTrackingEnabled ? 'animate-pulse' : ''}`} />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                      Canlı GPS İzləmə İcazəsi
+                    </h3>
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                      user?.liveTrackingEnabled
+                        ? 'bg-emerald-100 dark:bg-emerald-950/70 text-emerald-700 dark:text-emerald-300'
+                        : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-400'
+                    }`}>
+                      {user?.liveTrackingEnabled ? 'Aktivdir' : 'Deaktivdir'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-xl">
+                    {user?.liveTrackingEnabled
+                      ? 'İstifadəçinin canlı GPS yeri və hərəkət trayektoriyası xəritədə administratora real vaxt rejimində ötürülür.'
+                      : 'Bu istifadəçi üçün canlı məkan ötürülməsi deaktivdir. Xəritədə izlənməsi üçün aktivləşdirin.'}
+                  </p>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                disabled={isTogglingTracking}
+                onClick={handleToggleLiveTracking}
+                className={`px-4 py-2.5 rounded-xl text-xs font-bold flex items-center gap-2 transition-all shrink-0 ${
+                  user?.liveTrackingEnabled
+                    ? 'bg-rose-600 hover:bg-rose-700 text-white shadow-xs'
+                    : 'bg-emerald-600 hover:bg-emerald-700 text-white shadow-xs'
+                } disabled:opacity-60`}
+              >
+                {isTogglingTracking && (
+                  <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                )}
+                <span>
+                  {user?.liveTrackingEnabled ? 'Canlı İzləməni Söndür' : 'Canlı İzləməni Aktivləşdir'}
+                </span>
+              </button>
+            </div>
+
+            <div className="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200/80 dark:border-amber-900/60 rounded-xl text-xs text-amber-800 dark:text-amber-300 flex items-center gap-2">
+              <Shield className="w-4 h-4 shrink-0 text-amber-600 dark:text-amber-400" />
+              <span>
+                Təhlükəsizlik bildirişi: İstifadəçi tənzimləmələri bitirdikdən sonra «Paneli Kilidlə» düyməsini sıxmağınız tövsiyə olunur. İstifadəçi şifrə olmadan izləməni söndürə bilməz.
+              </span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Password Change Form */}

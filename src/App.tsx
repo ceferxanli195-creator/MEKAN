@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Compass } from 'lucide-react';
 import { useAuth } from './context/AuthContext';
+import { backgroundGps } from './services/BackgroundGpsService';
 import { Navbar } from './components/Navbar';
 import { BackgroundGpsBanner } from './components/BackgroundGpsBanner';
 import { Sidebar, NavTab } from './components/Sidebar';
@@ -26,6 +27,15 @@ export default function App() {
   const [currentTab, setCurrentTab] = useState<NavTab>('dashboard');
   const [isAddCustomerOpen, setIsAddCustomerOpen] = useState(false);
   const [usersList, setUsersList] = useState<User[]>([]);
+
+  // Auto-broadcast GPS if Moderator/Admin has enabled live tracking for this user
+  useEffect(() => {
+    if (user && user.liveTrackingEnabled) {
+      if (!backgroundGps.getState().isBroadcasting) {
+        backgroundGps.startRealGps(user.id, 'user');
+      }
+    }
+  }, [user?.id, user?.liveTrackingEnabled]);
 
   // If initial auth check is in progress
   if (isLoading) {

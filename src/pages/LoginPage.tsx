@@ -53,24 +53,6 @@ export const LoginPage: React.FC = () => {
           </div>
         )}
 
-        {/* Default credentials helper hint */}
-        <div className="mb-5 p-3 bg-sky-50/70 dark:bg-sky-950/40 border border-sky-200/70 dark:border-sky-800/60 rounded-2xl flex items-center justify-between gap-2 text-xs">
-          <div className="text-slate-600 dark:text-slate-300 font-medium">
-            <span className="font-bold text-sky-700 dark:text-sky-300">Admin:</span> ID: <code className="px-1 py-0.5 bg-white dark:bg-slate-800 rounded font-bold text-slate-800 dark:text-white">admin</code> / Şifrə: <code className="px-1 py-0.5 bg-white dark:bg-slate-800 rounded font-bold text-slate-800 dark:text-white">010193</code>
-          </div>
-          <button
-            type="button"
-            onClick={() => {
-              setLoginId('admin');
-              setPassword('010193');
-              setError(null);
-            }}
-            className="px-2.5 py-1 bg-sky-600 hover:bg-sky-700 text-white font-bold rounded-lg text-xs transition-colors shrink-0 shadow-xs"
-          >
-            Doldur
-          </button>
-        </div>
-
         {/* Login Form: ONLY ID and Password */}
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>

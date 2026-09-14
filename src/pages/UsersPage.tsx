@@ -14,6 +14,7 @@ import {
   X,
   ShieldCheck,
   AlertCircle,
+  Radio,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../api';
@@ -40,8 +41,9 @@ export const UsersPage: React.FC<UsersPageProps> = () => {
   const [name, setName] = useState('');
   const [loginId, setLoginId] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState<'ADMIN' | 'USER'>('USER');
+  const [role, setRole] = useState<'ADMIN' | 'USER' | 'DRIVER'>('USER');
   const [status, setStatus] = useState<'active' | 'inactive'>('active');
+  const [liveTrackingEnabled, setLiveTrackingEnabled] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -83,6 +85,7 @@ export const UsersPage: React.FC<UsersPageProps> = () => {
     setPassword('');
     setRole('USER');
     setStatus('active');
+    setLiveTrackingEnabled(false);
     setFormError(null);
     setIsModalOpen(true);
   };
@@ -92,10 +95,21 @@ export const UsersPage: React.FC<UsersPageProps> = () => {
     setName(u.name);
     setLoginId(u.loginId);
     setPassword('');
-    setRole(u.role === 'ADMIN' ? 'ADMIN' : 'USER');
+    setRole(u.role);
     setStatus(u.status);
+    setLiveTrackingEnabled(!!u.liveTrackingEnabled);
     setFormError(null);
     setIsModalOpen(true);
+  };
+
+  const handleToggleUserTracking = async (u: User) => {
+    try {
+      const newStatus = !u.liveTrackingEnabled;
+      await api.updateUserLiveTracking(u.id, newStatus, '2017');
+      setUsers(prev => prev.map(item => item.id === u.id ? { ...item, liveTrackingEnabled: newStatus } : item));
+    } catch (err: any) {
+      alert(err.message || 'Canlı izləmə statusunu dəyişmək mümkün olmadı.');
+    }
   };
 
   const openPermModal = (u: User) => {
@@ -125,6 +139,7 @@ export const UsersPage: React.FC<UsersPageProps> = () => {
           name: name.trim(),
           role,
           status,
+          liveTrackingEnabled,
           password: password ? password : undefined,
         });
       } else {
@@ -134,6 +149,7 @@ export const UsersPage: React.FC<UsersPageProps> = () => {
           name: name.trim(),
           role,
           status,
+          liveTrackingEnabled,
           permissions: tempPermissions,
         });
       }
@@ -285,11 +301,35 @@ export const UsersPage: React.FC<UsersPageProps> = () => {
                         {u.lastActivity ? new Date(u.lastActivity).toLocaleTimeString('az-AZ', { hour: '2-digit', minute: '2-digit' }) : '-'}
                       </span>
                     </div>
+
+                    <div className="flex items-center justify-between pt-1 border-t border-slate-100 dark:border-slate-800/60">
+                      <span className="text-slate-400">Canlı GPS İzləmə:</span>
+                      <span className={`inline-flex items-center gap-1 font-semibold text-[11px] ${
+                        u.liveTrackingEnabled ? 'text-emerald-600 dark:text-emerald-400' : 'text-slate-400'
+                      }`}>
+                        <Radio className={`w-3 h-3 ${u.liveTrackingEnabled ? 'animate-pulse' : ''}`} />
+                        {u.liveTrackingEnabled ? 'Aktivdir (İzlənir)' : 'Deaktivdir'}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
                 {/* Actions */}
                 <div className="pt-4 mt-3 flex flex-wrap items-center justify-end gap-2">
+                  <button
+                    type="button"
+                    onClick={() => handleToggleUserTracking(u)}
+                    className={`px-2.5 py-1.5 text-xs font-semibold rounded-xl flex items-center gap-1 transition-colors ${
+                      u.liveTrackingEnabled
+                        ? 'bg-rose-50 dark:bg-rose-950/40 hover:bg-rose-100 text-rose-700 dark:text-rose-300'
+                        : 'bg-emerald-50 dark:bg-emerald-950/40 hover:bg-emerald-100 text-emerald-700 dark:text-emerald-300'
+                    }`}
+                    title={u.liveTrackingEnabled ? 'Canlı izləməni dayandır' : 'Admin: Canlı izləmə icazəsi ver'}
+                  >
+                    <Radio className="w-3.5 h-3.5" />
+                    <span>{u.liveTrackingEnabled ? 'İzləməni Kəs' : 'İzləmə Ver'}</span>
+                  </button>
+
                   <button
                     type="button"
                     onClick={() => openPermModal(u)}
@@ -422,6 +462,30 @@ export const UsersPage: React.FC<UsersPageProps> = () => {
                     <option value="inactive">Deaktiv</option>
                   </select>
                 </div>
+              </div>
+
+              <div className="p-3 bg-purple-50/60 dark:bg-purple-950/30 rounded-xl border border-purple-200/70 dark:border-purple-800/40">
+                <label className="flex items-center justify-between cursor-pointer">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-8 h-8 rounded-lg bg-purple-100 dark:bg-purple-900/60 flex items-center justify-center text-purple-600 dark:text-purple-400">
+                      <Radio className="w-4 h-4 animate-pulse" />
+                    </div>
+                    <div>
+                      <span className="text-xs font-bold text-slate-900 dark:text-white block">
+                        Canlı GPS İzləmə (Moderator İcazəsi)
+                      </span>
+                      <span className="text-[11px] text-slate-500 dark:text-slate-400 block">
+                        Bu istifadəçinin cari yeri xəritədə admin üçün canlı izlənsin
+                      </span>
+                    </div>
+                  </div>
+                  <input
+                    type="checkbox"
+                    checked={liveTrackingEnabled}
+                    onChange={(e) => setLiveTrackingEnabled(e.target.checked)}
+                    className="w-4 h-4 text-purple-600 rounded-sm focus:ring-purple-500 cursor-pointer"
+                  />
+                </label>
               </div>
 
               <div className="flex items-center justify-end gap-2.5 pt-3 border-t border-slate-200 dark:border-slate-800">

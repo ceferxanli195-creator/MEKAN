@@ -165,6 +165,8 @@ class Database {
   private deliveries: DeliveryRecord[] = [];
   private notifications: NotificationRecord[] = [];
   private orders: OrderRecord[] = [];
+  private lastCloudSyncDriver: Map<string, number> = new Map();
+  private lastCloudSyncOrder: Map<string, number> = new Map();
 
   constructor() {
     this.reload();
@@ -226,24 +228,7 @@ class Database {
         this.notifications = Array.from(idMap.values());
         this.saveNotifications();
       }
-      for (const u of this.users) {
-        syncUserToFirestore(u);
-      }
-      for (const c of this.customers) {
-        syncCustomerToFirestore(c);
-      }
-      for (const d of this.drivers) {
-        syncDriverToFirestore(d);
-      }
-      for (const del of this.deliveries) {
-        syncDeliveryToFirestore(del);
-      }
-      for (const ord of this.orders) {
-        syncOrderToFirestore(ord);
-      }
-      for (const notif of this.notifications) {
-        syncNotificationToFirestore(notif);
-      }
+      // Note: Data is saved locally. We do not loop and overwrite cloud to conserve daily write quota.
     } catch (err) {
       console.warn('Firestore initial sync notice:', err);
     }
@@ -535,6 +520,7 @@ class Database {
     role?: 'ADMIN' | 'USER' | 'DRIVER';
     status?: 'active' | 'inactive';
     permissions?: UserPermissions;
+    liveTrackingEnabled?: boolean;
     lastLogin?: string;
     lastActivity?: string;
   }): UserRecord {
@@ -547,6 +533,7 @@ class Database {
     if (updates.role !== undefined) user.role = updates.role;
     if (updates.status !== undefined) user.status = updates.status;
     if (updates.permissions !== undefined) user.permissions = updates.permissions;
+    if (updates.liveTrackingEnabled !== undefined) user.liveTrackingEnabled = updates.liveTrackingEnabled;
     if (updates.lastLogin !== undefined) user.lastLogin = updates.lastLogin;
     if (updates.lastActivity !== undefined) user.lastActivity = updates.lastActivity;
     user.updatedAt = new Date().toISOString();
@@ -1054,7 +1041,12 @@ class Database {
         order.trajectory = order.trajectory.slice(-2500);
       }
       order.updatedAt = nowIso;
-      syncOrderToFirestore(order);
+      const nowMs = Date.now();
+      const lastOrdSync = this.lastCloudSyncOrder.get(order.id) || 0;
+      if (nowMs - lastOrdSync > 60000) {
+        this.lastCloudSyncOrder.set(order.id, nowMs);
+        syncOrderToFirestore(order);
+      }
       ordersUpdated = true;
     }
     if (ordersUpdated) {
@@ -1068,7 +1060,13 @@ class Database {
       this.drivers.push(driver);
     }
     this.saveDrivers();
-    syncDriverToFirestore(driver);
+
+    const nowMs = Date.now();
+    const lastDrvSync = this.lastCloudSyncDriver.get(driver.id) || 0;
+    if (nowMs - lastDrvSync > 60000) {
+      this.lastCloudSyncDriver.set(driver.id, nowMs);
+      syncDriverToFirestore(driver);
+    }
 
     return driver;
   }
@@ -1158,6 +1156,146 @@ class Database {
       currentLocation: driver.currentLocation || null,
       trajectory: driver.trajectory || [],
       stops: driver.stops || [],
+    };
+  }
+
+  // --- Live User Tracking (Moderator / Admin Authorized) ---
+  public updateUserLiveTracking(userId: string, enabled: boolean): UserRecord {
+    const user = this.getUserById(userId);
+    if (!user) throw new Error('İstifadəçi tapılmadı.');
+    user.liveTrackingEnabled = enabled;
+    user.updatedAt = new Date().toISOString();
+    this.saveUsers();
+    syncUserToFirestore(user);
+    return user;
+  }
+
+  public updateUserLocation(
+    userId: string,
+    coords: {
+      latitude: number;
+      longitude: number;
+      speed?: number | null;
+      heading?: number | null;
+      accuracy?: number | null;
+      batteryLevel?: number | null;
+      address?: string;
+    }
+  ): UserRecord {
+    const user = this.getUserById(userId);
+    if (!user) throw new Error('İstifadəçi tapılmadı.');
+
+    const now = new Date();
+    const nowIso = now.toISOString();
+
+    let speedKmH = 0;
+    if (coords.speed !== undefined && coords.speed !== null && !isNaN(coords.speed) && coords.speed > 0) {
+      speedKmH = coords.speed;
+    }
+    speedKmH = Math.max(0, Math.round(speedKmH));
+    const isMoving = speedKmH >= 3;
+
+    let heading = coords.heading ?? null;
+    if (user.currentLocation && (!heading || heading === 0)) {
+      const dist = calculateDistanceMeters(
+        user.currentLocation.latitude,
+        user.currentLocation.longitude,
+        coords.latitude,
+        coords.longitude
+      );
+      if (dist > 3) {
+        heading = Math.round(
+          calculateBearing(
+            user.currentLocation.latitude,
+            user.currentLocation.longitude,
+            coords.latitude,
+            coords.longitude
+          )
+        );
+      } else {
+        heading = user.currentLocation.heading ?? 0;
+      }
+    }
+
+    user.isLive = true;
+    user.lastSeen = nowIso;
+    user.currentLocation = {
+      latitude: coords.latitude,
+      longitude: coords.longitude,
+      speed: speedKmH,
+      heading: heading ?? null,
+      accuracy: coords.accuracy ?? null,
+      batteryLevel: coords.batteryLevel ?? null,
+      updatedAt: nowIso,
+      isMoving,
+      address: coords.address || undefined,
+    };
+
+    if (!user.trajectory) {
+      user.trajectory = [];
+    }
+
+    const lastPoint = user.trajectory[user.trajectory.length - 1];
+    let shouldAddPoint = false;
+    if (!lastPoint) {
+      shouldAddPoint = true;
+    } else {
+      const distFromLast = calculateDistanceMeters(
+        lastPoint.latitude,
+        lastPoint.longitude,
+        coords.latitude,
+        coords.longitude
+      );
+      const timeDiffSec = (now.getTime() - new Date(lastPoint.timestamp).getTime()) / 1000;
+      if (distFromLast >= 5 || (timeDiffSec >= 20 && isMoving)) {
+        shouldAddPoint = true;
+      }
+    }
+
+    if (shouldAddPoint) {
+      user.trajectory.push({
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+        timestamp: nowIso,
+        speed: speedKmH,
+      });
+      if (user.trajectory.length > 4000) {
+        user.trajectory = user.trajectory.slice(-4000);
+      }
+    }
+
+    this.saveUsers();
+    return user;
+  }
+
+  public getLiveUsers(): UserRecord[] {
+    const now = Date.now();
+    // Return users that have live tracking enabled OR have active location
+    return this.users
+      .filter(u => u.liveTrackingEnabled || u.isLive || u.currentLocation)
+      .map(u => {
+        const lastSeenMs = u.lastSeen ? new Date(u.lastSeen).getTime() : 0;
+        const isRecentlyActive = lastSeenMs > 0 && (now - lastSeenMs) < 15 * 60 * 1000;
+        return {
+          ...u,
+          isLive: Boolean(u.isLive && isRecentlyActive),
+        };
+      });
+  }
+
+  public getUserTrajectory(userId: string): {
+    user: UserRecord | null;
+    currentLocation: DriverCurrentLocation | null;
+    trajectory: TrajectoryPoint[];
+  } {
+    const user = this.getUserById(userId);
+    if (!user) {
+      return { user: null, currentLocation: null, trajectory: [] };
+    }
+    return {
+      user,
+      currentLocation: user.currentLocation || null,
+      trajectory: user.trajectory || [],
     };
   }
 

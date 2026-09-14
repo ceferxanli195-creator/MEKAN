@@ -26,6 +26,11 @@ export interface UserRecord {
   updatedAt: string;
   lastLogin?: string;
   lastActivity?: string;
+  liveTrackingEnabled?: boolean;
+  currentLocation?: DriverCurrentLocation | null;
+  isLive?: boolean;
+  lastSeen?: string;
+  trajectory?: TrajectoryPoint[];
 }
 
 export interface CustomerRecord {

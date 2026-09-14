@@ -53,6 +53,86 @@ export function getFirestoreDb(): Firestore | null {
   }
 }
 
+// Quota circuit breaker to prevent stream crash when daily write quota is exceeded
+const QUOTA_STATE_FILE = path.join(process.cwd(), 'data', '.firestore_quota_state.json');
+
+function getNextQuotaResetTime(): number {
+  const now = new Date();
+  const reset = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+  reset.setUTCHours(8, 0, 0, 0); // 8 AM UTC safely covers midnight Pacific Time
+  return reset.getTime();
+}
+
+function loadQuotaState(): { isExhausted: boolean; exhaustedUntil: number } {
+  try {
+    if (fs.existsSync(QUOTA_STATE_FILE)) {
+      const raw = fs.readFileSync(QUOTA_STATE_FILE, 'utf-8');
+      const data = JSON.parse(raw);
+      if (data && data.isExhausted && (typeof data.exhaustedUntil !== 'number' || data.exhaustedUntil > Date.now())) {
+        return { isExhausted: true, exhaustedUntil: data.exhaustedUntil || (Date.now() + 12 * 3600 * 1000) };
+      }
+    }
+  } catch {}
+  return { isExhausted: false, exhaustedUntil: 0 };
+}
+
+function saveQuotaState(isExhausted: boolean, exhaustedUntil: number, reason: string = 'RESOURCE_EXHAUSTED') {
+  try {
+    const dir = path.dirname(QUOTA_STATE_FILE);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(
+      QUOTA_STATE_FILE,
+      JSON.stringify({ isExhausted, exhaustedUntil, reason, updatedAt: new Date().toISOString() }, null, 2),
+      'utf-8'
+    );
+  } catch {}
+}
+
+const initialQuota = loadQuotaState();
+let isQuotaExhausted = initialQuota.isExhausted;
+let quotaExhaustedUntil = initialQuota.exhaustedUntil;
+let lastQuotaLogTime = 0;
+
+export function isFirestoreQuotaExceeded(): boolean {
+  if (!isQuotaExhausted) return false;
+  if (quotaExhaustedUntil > 0 && Date.now() > quotaExhaustedUntil) {
+    // Quota reset period elapsed, allow writes again
+    isQuotaExhausted = false;
+    quotaExhaustedUntil = 0;
+    saveQuotaState(false, 0, 'RESET');
+    return false;
+  }
+  return true;
+}
+
+function handleFirestoreWriteError(operation: string, targetId: string, err: any) {
+  const errMsg = err?.message || String(err);
+  const isQuota =
+    errMsg.includes('RESOURCE_EXHAUSTED') ||
+    errMsg.includes('Quota limit exceeded') ||
+    errMsg.includes('resource-exhausted') ||
+    err?.code === 8 ||
+    err?.code === 'resource-exhausted';
+
+  if (isQuota) {
+    isQuotaExhausted = true;
+    quotaExhaustedUntil = getNextQuotaResetTime();
+    saveQuotaState(true, quotaExhaustedUntil, errMsg);
+    const now = Date.now();
+    if (now - lastQuotaLogTime > 10 * 60 * 1000) {
+      lastQuotaLogTime = now;
+      console.warn(
+        '[Firestore Guard] Firebase pulsuz gündəlik yazma limiti (20,000) doldu. ' +
+        'Tətbiq fasiləsiz olaraq yerli JSON fayl bazasında (data/*.json) işləyir. ' +
+        'Bütün məlumatlar itkisiz saxlanılır.'
+      );
+    }
+    return;
+  }
+
+  console.error(`Failed to ${operation} ${targetId} to Firestore:`, errMsg);
+}
+
 function sanitizeForFirestore<T>(data: T): any {
   if (data === null || data === undefined) return null;
   if (typeof data !== 'object') return data;
@@ -69,151 +149,157 @@ function sanitizeForFirestore<T>(data: T): any {
 
 // Save customer to Firestore
 export async function syncCustomerToFirestore(customer: CustomerRecord): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     const docRef = doc(fdb, 'customers', customer.id);
     await setDoc(docRef, sanitizeForFirestore(customer), { merge: true });
   } catch (err) {
-    console.error(`Failed to sync customer ${customer.id} to Firestore:`, err);
+    handleFirestoreWriteError('sync customer', customer.id, err);
   }
 }
 
 // Delete customer from Firestore
 export async function deleteCustomerFromFirestore(customerId: string): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     const docRef = doc(fdb, 'customers', customerId);
     await deleteDoc(docRef);
   } catch (err) {
-    console.error(`Failed to delete customer ${customerId} from Firestore:`, err);
+    handleFirestoreWriteError('delete customer', customerId, err);
   }
 }
 
 // Save user to Firestore
 export async function syncUserToFirestore(user: UserRecord): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     const docRef = doc(fdb, 'users', user.id);
     await setDoc(docRef, sanitizeForFirestore(user), { merge: true });
   } catch (err) {
-    console.error(`Failed to sync user ${user.id} to Firestore:`, err);
+    handleFirestoreWriteError('sync user', user.id, err);
   }
 }
 
 // Delete user from Firestore
 export async function deleteUserFromFirestore(userId: string): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     const docRef = doc(fdb, 'users', userId);
     await deleteDoc(docRef);
   } catch (err) {
-    console.error(`Failed to delete user ${userId} from Firestore:`, err);
+    handleFirestoreWriteError('delete user', userId, err);
   }
 }
 
 // Save driver to Firestore
 export async function syncDriverToFirestore(driver: DriverRecord): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     const docRef = doc(fdb, 'drivers', driver.id);
     await setDoc(docRef, sanitizeForFirestore(driver), { merge: true });
   } catch (err) {
-    console.error(`Failed to sync driver ${driver.id} to Firestore:`, err);
+    handleFirestoreWriteError('sync driver', driver.id, err);
   }
 }
 
 // Delete driver from Firestore
 export async function deleteDriverFromFirestore(driverId: string): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     const docRef = doc(fdb, 'drivers', driverId);
     await deleteDoc(docRef);
   } catch (err) {
-    console.error(`Failed to delete driver ${driverId} from Firestore:`, err);
+    handleFirestoreWriteError('delete driver', driverId, err);
   }
 }
 
-// Save log to Firestore
-export async function syncLogToFirestore(log: AuditLogRecord): Promise<void> {
-  const fdb = getFirestoreDb();
-  if (!fdb) return;
-  try {
-    const docRef = doc(fdb, 'logs', log.id);
-    await setDoc(docRef, sanitizeForFirestore(log));
-  } catch (err) {
-    console.error(`Failed to sync log ${log.id} to Firestore:`, err);
-  }
+// Save log to Firestore (Reserved: Audit logs are stored in data/logs.json to protect free cloud write quota)
+export async function syncLogToFirestore(_log: AuditLogRecord): Promise<void> {
+  // Deliberately no-op to preserve Firestore write quota for critical entities
+  return;
 }
 
 // Save order to Firestore
 export async function syncOrderToFirestore(order: OrderRecord): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     const docRef = doc(fdb, 'orders', order.id);
     await setDoc(docRef, sanitizeForFirestore(order), { merge: true });
   } catch (err) {
-    console.error(`Failed to sync order ${order.id} to Firestore:`, err);
+    handleFirestoreWriteError('sync order', order.id, err);
   }
 }
 
 export async function deleteOrderFromFirestore(id: string): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     await deleteDoc(doc(fdb, 'orders', id));
   } catch (err) {
-    console.error(`Failed to delete order ${id} from Firestore:`, err);
+    handleFirestoreWriteError('delete order', id, err);
   }
 }
 
 // Save delivery to Firestore
 export async function syncDeliveryToFirestore(delivery: DeliveryRecord): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     const docRef = doc(fdb, 'deliveries', delivery.id);
     await setDoc(docRef, sanitizeForFirestore(delivery), { merge: true });
   } catch (err) {
-    console.error(`Failed to sync delivery ${delivery.id} to Firestore:`, err);
+    handleFirestoreWriteError('sync delivery', delivery.id, err);
   }
 }
 
 export async function deleteDeliveryFromFirestore(id: string): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     await deleteDoc(doc(fdb, 'deliveries', id));
   } catch (err) {
-    console.error(`Failed to delete delivery ${id} from Firestore:`, err);
+    handleFirestoreWriteError('delete delivery', id, err);
   }
 }
 
 // Save notification to Firestore
 export async function syncNotificationToFirestore(notification: NotificationRecord): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     const docRef = doc(fdb, 'notifications', notification.id);
     await setDoc(docRef, sanitizeForFirestore(notification), { merge: true });
   } catch (err) {
-    console.error(`Failed to sync notification ${notification.id} to Firestore:`, err);
+    handleFirestoreWriteError('sync notification', notification.id, err);
   }
 }
 
 export async function deleteNotificationFromFirestore(id: string): Promise<void> {
+  if (isFirestoreQuotaExceeded()) return;
   const fdb = getFirestoreDb();
   if (!fdb) return;
   try {
     await deleteDoc(doc(fdb, 'notifications', id));
   } catch (err) {
-    console.error(`Failed to delete notification ${id} from Firestore:`, err);
+    handleFirestoreWriteError('delete notification', id, err);
   }
 }
 

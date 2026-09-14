@@ -205,6 +205,36 @@ export const api = {
       method: 'DELETE',
     }),
 
+  updateUserLiveTracking: (id: string, enabled: boolean, pin?: string) =>
+    request<{ success: boolean; user: User }>(`/api/users/${id}/live-tracking`, {
+      method: 'POST',
+      body: JSON.stringify({ enabled, pin }),
+    }),
+
+  getLiveUsers: () =>
+    request<{ users: User[] }>('/api/users/live'),
+
+  updateUserLocation: (data: {
+    latitude: number;
+    longitude: number;
+    speed?: number | null;
+    heading?: number | null;
+    accuracy?: number | null;
+    batteryLevel?: number | null;
+    address?: string;
+  }) =>
+    request<{ success: boolean; user: any }>('/api/user/location', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    }),
+
+  getUserTrajectory: (userId: string) =>
+    request<{
+      user: User;
+      currentLocation: any;
+      trajectory: any[];
+    }>(`/api/users/${userId}/trajectory`),
+
   // Drivers
   getDrivers: () =>
     request<{ drivers: Driver[] }>('/api/drivers'),

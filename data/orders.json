@@ -1,684 +1,4952 @@
 [
   {
-    "customerId": "cst_1789036340148_b36mh7",
-    "ownerId": "usr_1789036141222_r5meu",
-    "id": "ord_1789217060820_uub9g",
-    "creatorRole": "ADMIN",
-    "deliveredLocation": null,
+    "status": "in_transit",
+    "customerName": "Metal Store",
+    "customerLongitude": 50.095065,
+    "orderNumber": 1058,
     "executorType": "DRIVER",
     "dispatchType": "DRIVER",
+    "driverId": "usr_1789039439449_tp4xm",
+    "deliveredAt": null,
     "departedAt": "2026-09-12T12:44:32.773Z",
-    "customerPhone": "1",
-    "deliveredBy": null,
-    "customerName": "Metal Store",
+    "creatorName": "Sistem Admini",
+    "customerNotes": "",
+    "id": "ord_1789217060820_uub9g",
+    "customerId": "cst_1789036340148_b36mh7",
     "createdDateStr": "12.09.2026",
     "currentLocation": null,
-    "customerNotes": "",
-    "creatorName": "Sistem Admini",
-    "createdAt": "2026-09-12T12:44:20.820Z",
-    "ownerName": "Vüsal",
-    "createdTimeStr": "16:44",
-    "deliveredAt": null,
     "history": [
       {
         "title": "Sifariş yaradıldı",
-        "timeStr": "16:44",
-        "actorRole": "ADMIN",
         "actorName": "Sistem Admini",
-        "dateStr": "12.09.2026",
+        "actorId": "usr_admin_master",
         "timestamp": "2026-09-12T12:44:20.820Z",
+        "dateStr": "12.09.2026",
         "details": "User Sistem Admini sifarişi yaratdı və sürücülərə yönləndirdi.",
-        "actorId": "usr_admin_master",
-        "step": "CREATED"
+        "actorRole": "ADMIN",
+        "step": "CREATED",
+        "timeStr": "16:44"
       },
       {
-        "timeStr": "16:44",
-        "actorName": "C",
-        "step": "CLAIMED",
         "timestamp": "2026-09-12T12:44:30.973Z",
+        "actorId": "usr_1789039439449_tp4xm",
+        "step": "CLAIMED",
+        "actorName": "C",
         "details": "Sürücü C sifarişi qəbul etdi.",
         "dateStr": "12.09.2026",
-        "title": "Sürücü sifarişi götürdü",
-        "actorId": "usr_1789039439449_tp4xm",
-        "actorRole": "DRIVER"
-      },
-      {
+        "actorRole": "DRIVER",
         "timeStr": "16:44",
+        "title": "Sürücü sifarişi götürdü"
+      },
+      {
+        "actorName": "C",
         "timestamp": "2026-09-12T12:44:32.773Z",
-        "actorName": "C",
+        "timeStr": "16:44",
         "step": "DEPARTED",
+        "actorId": "usr_1789039439449_tp4xm",
+        "actorRole": "DRIVER",
+        "title": "Yola çıxdı",
         "details": "C müştəriyə doğru yola çıxdı.",
-        "dateStr": "12.09.2026",
-        "actorRole": "DRIVER",
-        "title": "Yola çıxdı",
-        "actorId": "usr_1789039439449_tp4xm"
-      }
-    ],
-    "executorId": "usr_1789039439449_tp4xm",
-    "driverName": "C",
-    "customerAddress": "1",
-    "orderNumber": 1058,
-    "customerLongitude": 50.095065,
-    "deliveredByName": null,
-    "executorName": "C",
-    "updatedAt": "2026-09-12T12:44:32.773Z",
-    "driverId": "usr_1789039439449_tp4xm",
-    "notes": "",
-    "status": "in_transit",
-    "claimedAt": "2026-09-12T12:44:30.973Z",
-    "creatorId": "usr_admin_master",
-    "customerLatitude": 40.41477
-  },
-  {
-    "customerName": "Metal Store",
-    "customerPhone": "1",
-    "creatorRole": "ADMIN",
-    "departedAt": "2026-09-11T12:36:03.388Z",
-    "driverId": "usr_1789039439449_tp4xm",
-    "executorType": "DRIVER",
-    "dispatchType": "DRIVER",
-    "deliveredBy": "usr_1789039439449_tp4xm",
-    "currentLocation": {
-      "accuracy": 241,
-      "latitude": 40.406185,
-      "updatedAt": "2026-09-11T12:36:03.554Z",
-      "longitude": 49.888046,
-      "speed": null
-    },
-    "history": [
-      {
-        "title": "Sifariş yaradıldı",
-        "actorName": "Sistem Admini",
-        "timestamp": "2026-09-11T10:31:05.024Z",
-        "timeStr": "14:31",
-        "actorId": "usr_admin_master",
-        "actorRole": "ADMIN",
-        "dateStr": "11.09.2026",
-        "step": "CREATED",
-        "details": "User Sistem Admini sifarişi yaratdı və sürücülərə yönləndirdi."
-      },
-      {
-        "step": "CLAIMED",
-        "actorRole": "DRIVER",
-        "title": "Sürücü sifarişi götürdü",
-        "timeStr": "14:31",
-        "actorId": "usr_1789039439449_tp4xm",
-        "dateStr": "11.09.2026",
-        "timestamp": "2026-09-11T10:31:20.523Z",
-        "actorName": "C",
-        "details": "Sürücü C sifarişi qəbul etdi."
-      },
-      {
-        "timeStr": "16:36",
-        "actorRole": "DRIVER",
-        "step": "DEPARTED",
-        "actorName": "C",
-        "details": "C müştəriyə doğru yola çıxdı.",
-        "timestamp": "2026-09-11T12:36:03.388Z",
-        "dateStr": "11.09.2026",
-        "title": "Yola çıxdı",
-        "actorId": "usr_1789039439449_tp4xm"
-      },
-      {
-        "actorId": "usr_1789039439449_tp4xm",
-        "step": "DELIVERED",
-        "dateStr": "11.09.2026",
-        "actorName": "C",
-        "title": "Təhvil verildi",
-        "details": "C sifarişi müştəriyə təhvil verdi.",
-        "timestamp": "2026-09-11T12:36:10.178Z",
-        "actorRole": "DRIVER",
-        "timeStr": "16:36"
-      }
-    ],
-    "customerId": "cst_1789036340148_b36mh7",
-    "createdTimeStr": "14:31",
-    "customerLongitude": 50.095065,
-    "customerAddress": "1",
-    "createdDateStr": "11.09.2026",
-    "ownerName": "Vüsal",
-    "createdAt": "2026-09-11T10:31:05.024Z",
-    "deliveredAt": "2026-09-11T12:36:10.178Z",
-    "orderNumber": 1058,
-    "deliveredByName": "C",
-    "creatorName": "Sistem Admini",
-    "notes": "",
-    "executorName": "C",
-    "updatedAt": "2026-09-11T12:36:10.178Z",
-    "customerNotes": "",
-    "deliveredLocation": null,
-    "creatorId": "usr_admin_master",
-    "ownerId": "usr_1789036141222_r5meu",
-    "status": "delivered",
-    "claimedAt": "2026-09-11T10:31:20.523Z",
-    "customerLatitude": 40.41477,
-    "driverName": "C",
-    "executorId": "usr_1789039439449_tp4xm",
-    "id": "ord_1789122665025_jw9qi"
-  },
-  {
-    "customerNotes": "",
-    "driverId": "usr_1789039439449_tp4xm",
-    "claimedAt": "2026-09-11T10:32:12.832Z",
-    "deliveredByName": "C",
-    "deliveredBy": "usr_1789039439449_tp4xm",
-    "creatorId": "usr_1789036141222_r5meu",
-    "updatedAt": "2026-09-11T11:23:59.076Z",
-    "customerId": "cst_1789036340148_b36mh7",
-    "createdDateStr": "11.09.2026",
-    "customerAddress": "1",
-    "executorType": "DRIVER",
-    "dispatchType": "DRIVER",
-    "creatorRole": "USER",
-    "createdAt": "2026-09-11T10:31:56.179Z",
-    "ownerName": "Vüsal",
-    "customerName": "Metal Store",
-    "departedAt": "2026-09-11T11:23:45.712Z",
-    "ownerId": "usr_1789036141222_r5meu",
-    "customerLatitude": 40.41477,
-    "deliveredLocation": null,
-    "driverName": "C",
-    "executorName": "C",
-    "executorId": "usr_1789039439449_tp4xm",
-    "notes": "",
-    "createdTimeStr": "14:31",
-    "customerPhone": "1",
-    "status": "delivered",
-    "currentLocation": {
-      "accuracy": 209,
-      "longitude": 49.88824513226794,
-      "speed": null,
-      "latitude": 40.405951229513775,
-      "updatedAt": "2026-09-11T11:23:59.076Z"
-    },
-    "customerLongitude": 50.095065,
-    "deliveredAt": "2026-09-11T11:23:53.483Z",
-    "orderNumber": 1059,
-    "creatorName": "Vüsal",
-    "history": [
-      {
-        "title": "Sifariş yaradıldı",
-        "timeStr": "14:31",
-        "actorName": "Vüsal",
-        "timestamp": "2026-09-11T10:31:56.179Z",
-        "dateStr": "11.09.2026",
-        "details": "User Vüsal sifarişi yaratdı və sürücülərə yönləndirdi.",
-        "actorId": "usr_1789036141222_r5meu",
-        "step": "CREATED",
-        "actorRole": "USER"
-      },
-      {
-        "title": "Sürücü sifarişi götürdü",
-        "timestamp": "2026-09-11T10:32:12.832Z",
-        "actorName": "C",
-        "timeStr": "14:32",
-        "actorRole": "DRIVER",
-        "actorId": "usr_1789039439449_tp4xm",
-        "step": "CLAIMED",
-        "dateStr": "11.09.2026",
-        "details": "Sürücü C sifarişi qəbul etdi."
-      },
-      {
-        "timeStr": "15:23",
-        "actorName": "C",
-        "step": "DEPARTED",
-        "timestamp": "2026-09-11T11:23:45.712Z",
-        "details": "C müştəriyə doğru yola çıxdı.",
-        "dateStr": "11.09.2026",
-        "actorRole": "DRIVER",
-        "actorId": "usr_1789039439449_tp4xm",
-        "title": "Yola çıxdı"
-      },
-      {
-        "timeStr": "15:23",
-        "actorName": "C",
-        "step": "DELIVERED",
-        "timestamp": "2026-09-11T11:23:53.483Z",
-        "details": "C sifarişi müştəriyə təhvil verdi.",
-        "dateStr": "11.09.2026",
-        "title": "Təhvil verildi",
-        "actorRole": "DRIVER",
-        "actorId": "usr_1789039439449_tp4xm"
-      }
-    ],
-    "id": "ord_1789122716179_1d7u3"
-  },
-  {
-    "notes": "",
-    "customerLongitude": 50.095065,
-    "createdTimeStr": "15:24",
-    "history": [
-      {
-        "timeStr": "15:24",
-        "actorRole": "USER",
-        "title": "Sifariş yaradıldı",
-        "step": "CREATED",
-        "dateStr": "11.09.2026",
-        "details": "User Vüsal sifarişi yaratdı və sürücülərə yönləndirdi.",
-        "actorId": "usr_1789036141222_r5meu",
-        "timestamp": "2026-09-11T11:24:56.405Z",
-        "actorName": "Vüsal"
-      },
-      {
-        "dateStr": "11.09.2026",
-        "actorRole": "DRIVER",
-        "details": "Sürücü C sifarişi qəbul etdi.",
-        "title": "Sürücü sifarişi götürdü",
-        "actorId": "usr_1789039439449_tp4xm",
-        "timestamp": "2026-09-11T11:25:07.213Z",
-        "step": "CLAIMED",
-        "actorName": "C",
-        "timeStr": "15:25"
-      },
-      {
-        "actorRole": "DRIVER",
-        "title": "Yola çıxdı",
-        "timeStr": "16:35",
-        "step": "DEPARTED",
-        "actorId": "usr_1789039439449_tp4xm",
-        "timestamp": "2026-09-11T12:35:55.830Z",
-        "actorName": "C",
-        "dateStr": "11.09.2026",
-        "details": "C müştəriyə doğru yola çıxdı."
-      },
-      {
-        "timeStr": "16:36",
-        "actorRole": "DRIVER",
-        "title": "Təhvil verildi",
-        "step": "DELIVERED",
-        "actorName": "C",
-        "dateStr": "11.09.2026",
-        "timestamp": "2026-09-11T12:36:02.316Z",
-        "details": "C sifarişi müştəriyə təhvil verdi.",
-        "actorId": "usr_1789039439449_tp4xm"
-      }
-    ],
-    "currentLocation": {
-      "longitude": 49.888046,
-      "speed": null,
-      "latitude": 40.406185,
-      "updatedAt": "2026-09-11T12:35:55.957Z",
-      "accuracy": 241
-    },
-    "creatorRole": "USER",
-    "executorName": "C",
-    "customerNotes": "",
-    "deliveredBy": "usr_1789039439449_tp4xm",
-    "driverName": "C",
-    "executorId": "usr_1789039439449_tp4xm",
-    "deliveredAt": "2026-09-11T12:36:02.316Z",
-    "customerName": "Metal Store",
-    "orderNumber": 1060,
-    "creatorName": "Vüsal",
-    "deliveredLocation": null,
-    "ownerName": "Vüsal",
-    "createdAt": "2026-09-11T11:24:56.405Z",
-    "ownerId": "usr_1789036141222_r5meu",
-    "departedAt": "2026-09-11T12:35:55.830Z",
-    "dispatchType": "DRIVER",
-    "executorType": "DRIVER",
-    "status": "delivered",
-    "customerLatitude": 40.41477,
-    "id": "ord_1789125896405_nm977",
-    "customerPhone": "1",
-    "updatedAt": "2026-09-11T12:36:02.316Z",
-    "customerAddress": "1",
-    "deliveredByName": "C",
-    "driverId": "usr_1789039439449_tp4xm",
-    "customerId": "cst_1789036340148_b36mh7",
-    "creatorId": "usr_1789036141222_r5meu",
-    "claimedAt": "2026-09-11T11:25:07.213Z",
-    "createdDateStr": "11.09.2026"
-  },
-  {
-    "status": "delivered",
-    "customerLatitude": 40.41477,
-    "customerNotes": "",
-    "departedAt": "2026-09-11T12:54:45.183Z",
-    "trajectory": [
-      {
-        "heading": null,
-        "latitude": 40.406185,
-        "accuracy": 241,
-        "speed": null,
-        "longitude": 49.888046,
-        "timestamp": "2026-09-11T12:54:45.424Z"
-      }
-    ],
-    "deliveredAt": "2026-09-11T12:54:52.073Z",
-    "orderNumber": 1061,
-    "executorName": "Sistem Admini",
-    "creatorName": "Sistem Admini",
-    "customerLongitude": 50.095065,
-    "customerId": "cst_1789036340148_b36mh7",
-    "createdTimeStr": "16:35",
-    "currentLocation": {
-      "updatedAt": "2026-09-11T12:54:45.430Z",
-      "speed": null,
-      "accuracy": 241,
-      "heading": null,
-      "latitude": 40.406185,
-      "longitude": 49.888046
-    },
-    "history": [
-      {
-        "actorRole": "ADMIN",
-        "actorId": "usr_admin_master",
-        "details": "User Sistem Admini sifarişi yaratdı və özü aparmağı seçdi.",
-        "dateStr": "11.09.2026",
-        "step": "CREATED",
-        "timestamp": "2026-09-11T12:35:08.617Z",
-        "actorName": "Sistem Admini",
-        "timeStr": "16:35",
-        "title": "Sifariş yaradıldı"
-      },
-      {
-        "actorName": "Sistem Admini",
-        "title": "Yola çıxdı",
-        "timestamp": "2026-09-11T12:54:45.183Z",
-        "timeStr": "16:54",
-        "dateStr": "11.09.2026",
-        "details": "Sistem Admini müştəriyə doğru yola çıxdı.",
-        "actorRole": "ADMIN",
-        "step": "DEPARTED",
-        "actorId": "usr_admin_master"
-      },
-      {
-        "actorName": "Sistem Admini",
-        "timestamp": "2026-09-11T12:54:52.073Z",
-        "timeStr": "16:54",
-        "actorRole": "USER",
-        "step": "DELIVERED",
-        "actorId": "usr_admin_master",
-        "title": "Təhvil verildi",
-        "details": "Sistem Admini sifarişi müştəriyə təhvil verdi.",
-        "dateStr": "11.09.2026"
-      }
-    ],
-    "claimedAt": "2026-09-11T12:35:08.617Z",
-    "customerAddress": "1",
-    "customerName": "Metal Store",
-    "createdDateStr": "11.09.2026",
-    "creatorId": "usr_admin_master",
-    "notes": "",
-    "updatedAt": "2026-09-11T12:54:52.073Z",
-    "executorType": "USER",
-    "dispatchType": "USER",
-    "deliveredBy": "usr_admin_master",
-    "deliveredByName": "Sistem Admini",
-    "driverId": null,
-    "id": "ord_1789130108617_0jbsk",
-    "deliveredLocation": null,
-    "ownerName": "Vüsal",
-    "createdAt": "2026-09-11T12:35:08.617Z",
-    "customerPhone": "1",
-    "driverName": null,
-    "executorId": "usr_admin_master",
-    "creatorRole": "ADMIN",
-    "ownerId": "usr_1789036141222_r5meu"
-  },
-  {
-    "customerLongitude": 50.095065,
-    "customerNotes": "",
-    "deliveredBy": "usr_1789039439449_tp4xm",
-    "ownerName": "Vüsal",
-    "createdAt": "2026-09-11T12:35:34.539Z",
-    "createdTimeStr": "16:35",
-    "customerId": "cst_1789036340148_b36mh7",
-    "executorName": "C",
-    "currentLocation": {
-      "longitude": 49.888046,
-      "latitude": 40.406185,
-      "accuracy": 241,
-      "speed": null,
-      "updatedAt": "2026-09-11T12:35:53.761Z"
-    },
-    "creatorId": "usr_admin_master",
-    "claimedAt": "2026-09-11T12:35:47.595Z",
-    "notes": "",
-    "customerLatitude": 40.41477,
-    "history": [
-      {
-        "title": "Sifariş yaradıldı",
-        "timeStr": "16:35",
-        "timestamp": "2026-09-11T12:35:34.539Z",
-        "actorName": "Sistem Admini",
-        "dateStr": "11.09.2026",
-        "details": "User Sistem Admini sifarişi yaratdı və sürücülərə yönləndirdi.",
-        "actorRole": "ADMIN",
-        "actorId": "usr_admin_master",
-        "step": "CREATED"
-      },
-      {
-        "dateStr": "11.09.2026",
-        "step": "CLAIMED",
-        "details": "Sürücü C sifarişi qəbul etdi.",
-        "timestamp": "2026-09-11T12:35:47.595Z",
-        "actorId": "usr_1789039439449_tp4xm",
-        "actorName": "C",
-        "title": "Sürücü sifarişi götürdü",
-        "timeStr": "16:35",
-        "actorRole": "DRIVER"
-      },
-      {
-        "actorRole": "DRIVER",
-        "title": "Yola çıxdı",
-        "timeStr": "16:35",
-        "actorId": "usr_1789039439449_tp4xm",
-        "timestamp": "2026-09-11T12:35:49.432Z",
-        "step": "DEPARTED",
-        "actorName": "C",
-        "dateStr": "11.09.2026",
-        "details": "C müştəriyə doğru yola çıxdı."
-      },
-      {
-        "actorName": "C",
-        "timestamp": "2026-09-11T12:35:53.750Z",
-        "timeStr": "16:35",
-        "location": {
-          "longitude": 49.888046,
-          "latitude": 40.406185,
-          "accuracy": 241
-        },
-        "actorRole": "DRIVER",
-        "step": "DELIVERED",
-        "title": "Təhvil verildi",
-        "actorId": "usr_1789039439449_tp4xm",
-        "details": "C sifarişi müştəriyə təhvil verdi.",
-        "dateStr": "11.09.2026"
-      }
-    ],
-    "creatorRole": "ADMIN",
-    "updatedAt": "2026-09-11T12:35:53.761Z",
-    "departedAt": "2026-09-11T12:35:49.432Z",
-    "id": "ord_1789130134539_chf0w",
-    "deliveredByName": "C",
-    "customerName": "Metal Store",
-    "driverName": "C",
-    "driverId": "usr_1789039439449_tp4xm",
-    "executorId": "usr_1789039439449_tp4xm",
-    "customerAddress": "1",
-    "executorType": "DRIVER",
-    "dispatchType": "DRIVER",
-    "deliveredLocation": {
-      "accuracy": 241,
-      "longitude": 49.888046,
-      "latitude": 40.406185
-    },
-    "creatorName": "Sistem Admini",
-    "orderNumber": 1062,
-    "deliveredAt": "2026-09-11T12:35:53.750Z",
-    "createdDateStr": "11.09.2026",
-    "ownerId": "usr_1789036141222_r5meu",
-    "customerPhone": "1",
-    "status": "delivered"
-  },
-  {
-    "executorId": "usr_1789039439449_tp4xm",
-    "driverName": "C",
-    "claimedAt": "2026-09-11T12:40:06.446Z",
-    "executorType": "DRIVER",
-    "dispatchType": "DRIVER",
-    "creatorId": "usr_admin_master",
-    "driverId": "usr_1789039439449_tp4xm",
-    "creatorName": "Sistem Admini",
-    "createdTimeStr": "16:39",
-    "updatedAt": "2026-09-12T12:06:15.583Z",
-    "orderNumber": 1063,
-    "customerName": "Metal Store",
-    "deliveredAt": "2026-09-11T13:00:35.776Z",
-    "ownerId": "usr_1789036141222_r5meu",
-    "deliveredLocation": null,
-    "currentLocation": {
-      "accuracy": 241,
-      "latitude": 40.406185,
-      "updatedAt": "2026-09-11T13:00:29.533Z",
-      "longitude": 49.888046,
-      "speed": null,
-      "heading": null
-    },
-    "customerPhone": "1",
-    "ownerName": "Vüsal",
-    "createdAt": "2026-09-11T12:39:58.537Z",
-    "status": "delivered",
-    "creatorRole": "ADMIN",
-    "notes": "Təcili çatdırılma qeydi",
-    "customerId": "cst_1789036340148_b36mh7",
-    "deliveredByName": "C",
-    "customerAddress": "1",
-    "customerNotes": "",
-    "id": "ord_1789130398537_265vk",
-    "trajectory": [
-      {
-        "accuracy": 241,
-        "latitude": 40.406185,
-        "timestamp": "2026-09-11T13:00:29.525Z",
-        "longitude": 49.888046,
-        "heading": null,
-        "speed": null
-      }
-    ],
-    "history": [
-      {
-        "actorId": "usr_admin_master",
-        "details": "User Sistem Admini sifarişi yaratdı və sürücülərə yönləndirdi.",
-        "timestamp": "2026-09-11T12:39:58.537Z",
-        "actorName": "Sistem Admini",
-        "dateStr": "11.09.2026",
-        "title": "Sifariş yaradıldı",
-        "actorRole": "ADMIN",
-        "timeStr": "16:39",
-        "step": "CREATED"
-      },
-      {
-        "step": "CLAIMED",
-        "timestamp": "2026-09-11T12:40:06.446Z",
-        "actorName": "C",
-        "timeStr": "16:40",
-        "title": "Sürücü sifarişi götürdü",
-        "dateStr": "11.09.2026",
-        "actorRole": "DRIVER",
-        "details": "Sürücü C sifarişi qəbul etdi.",
-        "actorId": "usr_1789039439449_tp4xm"
-      },
-      {
-        "title": "Yola çıxdı",
-        "actorName": "C",
-        "timeStr": "17:00",
-        "timestamp": "2026-09-11T13:00:29.293Z",
-        "actorId": "usr_1789039439449_tp4xm",
-        "step": "DEPARTED",
-        "dateStr": "11.09.2026",
-        "details": "C müştəriyə doğru yola çıxdı.",
-        "actorRole": "DRIVER"
-      },
-      {
-        "actorName": "C",
-        "timestamp": "2026-09-11T13:00:35.776Z",
-        "title": "Təhvil verildi",
-        "timeStr": "17:00",
-        "step": "DELIVERED",
-        "actorId": "usr_1789039439449_tp4xm",
-        "actorRole": "DRIVER",
-        "dateStr": "11.09.2026",
-        "details": "C sifarişi müştəriyə təhvil verdi."
-      },
-      {
-        "actorName": "Sistem Admini",
-        "timestamp": "2026-09-12T12:06:15.583Z",
-        "timeStr": "16:06",
-        "actorRole": "ADMIN",
-        "step": "EDITED",
-        "actorId": "usr_admin_master",
-        "title": "Sifariş redaktə edildi",
-        "details": "Sistem Admini tərəfindən redaktə edildi.",
         "dateStr": "12.09.2026"
       }
     ],
-    "deliveredBy": "usr_1789039439449_tp4xm",
-    "createdDateStr": "11.09.2026",
-    "customerLongitude": 50.095065,
-    "departedAt": "2026-09-11T13:00:29.293Z",
+    "deliveredLocation": null,
+    "createdTimeStr": "16:44",
+    "creatorRole": "ADMIN",
+    "ownerName": "Vüsal",
+    "createdAt": "2026-09-12T12:44:20.820Z",
+    "customerAddress": "1",
+    "deliveredByName": null,
+    "notes": "",
+    "executorName": "C",
+    "updatedAt": "2026-09-12T12:44:32.773Z",
+    "deliveredBy": null,
+    "creatorId": "usr_admin_master",
+    "driverName": "C",
+    "customerPhone": "1",
+    "executorId": "usr_1789039439449_tp4xm",
+    "claimedAt": "2026-09-12T12:44:30.973Z",
     "customerLatitude": 40.41477,
-    "executorName": "C"
+    "ownerId": "usr_1789036141222_r5meu"
   },
   {
-    "departedAt": null,
-    "creatorRole": "ADMIN",
-    "currentLocation": null,
-    "deliveredLocation": null,
-    "deliveredBy": null,
-    "customerLatitude": 40.41477,
-    "status": "assigned",
-    "customerNotes": "",
-    "customerId": "cst_1789036340148_b36mh7",
-    "customerName": "Metal Store",
-    "ownerId": "usr_1789036141222_r5meu",
-    "dispatchType": "DRIVER",
     "executorType": "DRIVER",
-    "createdDateStr": "12.09.2026",
-    "driverId": "usr_1789039439449_tp4xm",
-    "customerPhone": "1",
-    "createdTimeStr": "16:47",
-    "executorName": "C",
-    "creatorName": "Sistem Admini",
-    "customerLongitude": 50.095065,
-    "deliveredAt": null,
-    "ownerName": "Vüsal",
-    "createdAt": "2026-09-12T12:47:28.807Z",
-    "orderNumber": 1064,
-    "creatorId": "usr_admin_master",
-    "deliveredByName": null,
-    "executorId": "usr_1789039439449_tp4xm",
+    "creatorRole": "ADMIN",
+    "driverName": "C",
+    "customerLatitude": 40.41477,
+    "customerName": "Metal Store",
+    "departedAt": "2026-09-11T12:36:03.388Z",
+    "id": "ord_1789122665025_jw9qi",
     "history": [
       {
-        "title": "Sifariş yaradıldı",
-        "timeStr": "16:47",
-        "actorName": "Sistem Admini",
-        "timestamp": "2026-09-12T12:47:28.807Z",
-        "dateStr": "12.09.2026",
+        "dateStr": "11.09.2026",
         "details": "User Sistem Admini sifarişi yaratdı və sürücülərə yönləndirdi.",
+        "timestamp": "2026-09-11T10:31:05.024Z",
+        "timeStr": "14:31",
         "actorId": "usr_admin_master",
+        "title": "Sifariş yaradıldı",
+        "actorName": "Sistem Admini",
         "step": "CREATED",
         "actorRole": "ADMIN"
       },
       {
+        "details": "Sürücü C sifarişi qəbul etdi.",
+        "actorName": "C",
+        "dateStr": "11.09.2026",
+        "timeStr": "14:31",
         "step": "CLAIMED",
-        "timeStr": "16:47",
+        "actorRole": "DRIVER",
+        "actorId": "usr_1789039439449_tp4xm",
+        "timestamp": "2026-09-11T10:31:20.523Z",
+        "title": "Sürücü sifarişi götürdü"
+      },
+      {
+        "timeStr": "16:36",
+        "timestamp": "2026-09-11T12:36:03.388Z",
+        "dateStr": "11.09.2026",
+        "details": "C müştəriyə doğru yola çıxdı.",
+        "title": "Yola çıxdı",
+        "actorName": "C",
+        "actorId": "usr_1789039439449_tp4xm",
+        "step": "DEPARTED",
+        "actorRole": "DRIVER"
+      },
+      {
         "actorRole": "DRIVER",
         "actorId": "usr_1789039439449_tp4xm",
         "actorName": "C",
-        "details": "Sürücü C sifarişi qəbul etdi.",
-        "timestamp": "2026-09-12T12:47:45.361Z",
-        "dateStr": "12.09.2026",
-        "title": "Sürücü sifarişi götürdü"
+        "dateStr": "11.09.2026",
+        "timestamp": "2026-09-11T12:36:10.178Z",
+        "title": "Təhvil verildi",
+        "details": "C sifarişi müştəriyə təhvil verdi.",
+        "timeStr": "16:36",
+        "step": "DELIVERED"
       }
     ],
-    "driverName": "C",
-    "claimedAt": "2026-09-12T12:47:45.361Z",
+    "creatorId": "usr_admin_master",
+    "dispatchType": "DRIVER",
+    "status": "delivered",
+    "updatedAt": "2026-09-11T12:36:10.178Z",
+    "ownerId": "usr_1789036141222_r5meu",
     "notes": "",
-    "id": "ord_1789217248807_2zgce",
+    "createdDateStr": "11.09.2026",
+    "deliveredBy": "usr_1789039439449_tp4xm",
+    "executorName": "C",
+    "currentLocation": {
+      "latitude": 40.406185,
+      "longitude": 49.888046,
+      "updatedAt": "2026-09-11T12:36:03.554Z",
+      "speed": null,
+      "accuracy": 241
+    },
+    "createdTimeStr": "14:31",
+    "customerId": "cst_1789036340148_b36mh7",
+    "deliveredByName": "C",
+    "deliveredAt": "2026-09-11T12:36:10.178Z",
+    "driverId": "usr_1789039439449_tp4xm",
+    "customerLongitude": 50.095065,
+    "createdAt": "2026-09-11T10:31:05.024Z",
+    "customerPhone": "1",
+    "ownerName": "Vüsal",
+    "executorId": "usr_1789039439449_tp4xm",
+    "claimedAt": "2026-09-11T10:31:20.523Z",
+    "customerNotes": "",
     "customerAddress": "1",
-    "updatedAt": "2026-09-12T12:47:45.361Z"
+    "creatorName": "Sistem Admini",
+    "deliveredLocation": null,
+    "orderNumber": 1058
+  },
+  {
+    "customerName": "Metal Store",
+    "customerAddress": "1",
+    "executorType": "DRIVER",
+    "notes": "",
+    "deliveredAt": "2026-09-11T11:23:53.483Z",
+    "executorId": "usr_1789039439449_tp4xm",
+    "deliveredByName": "C",
+    "creatorName": "Vüsal",
+    "currentLocation": {
+      "latitude": 40.405951229513775,
+      "speed": null,
+      "longitude": 49.88824513226794,
+      "accuracy": 209,
+      "updatedAt": "2026-09-11T11:23:59.076Z"
+    },
+    "updatedAt": "2026-09-11T11:23:59.076Z",
+    "creatorId": "usr_1789036141222_r5meu",
+    "customerId": "cst_1789036340148_b36mh7",
+    "orderNumber": 1059,
+    "createdDateStr": "11.09.2026",
+    "dispatchType": "DRIVER",
+    "createdAt": "2026-09-11T10:31:56.179Z",
+    "id": "ord_1789122716179_1d7u3",
+    "ownerId": "usr_1789036141222_r5meu",
+    "createdTimeStr": "14:31",
+    "status": "delivered",
+    "creatorRole": "USER",
+    "customerLongitude": 50.095065,
+    "executorName": "C",
+    "customerNotes": "",
+    "customerPhone": "1",
+    "customerLatitude": 40.41477,
+    "driverId": "usr_1789039439449_tp4xm",
+    "departedAt": "2026-09-11T11:23:45.712Z",
+    "history": [
+      {
+        "actorRole": "USER",
+        "actorId": "usr_1789036141222_r5meu",
+        "actorName": "Vüsal",
+        "step": "CREATED",
+        "timestamp": "2026-09-11T10:31:56.179Z",
+        "timeStr": "14:31",
+        "details": "User Vüsal sifarişi yaratdı və sürücülərə yönləndirdi.",
+        "title": "Sifariş yaradıldı",
+        "dateStr": "11.09.2026"
+      },
+      {
+        "timestamp": "2026-09-11T10:32:12.832Z",
+        "step": "CLAIMED",
+        "title": "Sürücü sifarişi götürdü",
+        "actorId": "usr_1789039439449_tp4xm",
+        "actorRole": "DRIVER",
+        "timeStr": "14:32",
+        "details": "Sürücü C sifarişi qəbul etdi.",
+        "actorName": "C",
+        "dateStr": "11.09.2026"
+      },
+      {
+        "timeStr": "15:23",
+        "step": "DEPARTED",
+        "actorName": "C",
+        "details": "C müştəriyə doğru yola çıxdı.",
+        "actorRole": "DRIVER",
+        "dateStr": "11.09.2026",
+        "title": "Yola çıxdı",
+        "actorId": "usr_1789039439449_tp4xm",
+        "timestamp": "2026-09-11T11:23:45.712Z"
+      },
+      {
+        "actorName": "C",
+        "step": "DELIVERED",
+        "actorRole": "DRIVER",
+        "title": "Təhvil verildi",
+        "actorId": "usr_1789039439449_tp4xm",
+        "timeStr": "15:23",
+        "details": "C sifarişi müştəriyə təhvil verdi.",
+        "dateStr": "11.09.2026",
+        "timestamp": "2026-09-11T11:23:53.483Z"
+      }
+    ],
+    "deliveredLocation": null,
+    "deliveredBy": "usr_1789039439449_tp4xm",
+    "claimedAt": "2026-09-11T10:32:12.832Z",
+    "driverName": "C",
+    "ownerName": "Vüsal"
+  },
+  {
+    "history": [
+      {
+        "step": "CREATED",
+        "timeStr": "15:24",
+        "actorRole": "USER",
+        "title": "Sifariş yaradıldı",
+        "details": "User Vüsal sifarişi yaratdı və sürücülərə yönləndirdi.",
+        "dateStr": "11.09.2026",
+        "actorName": "Vüsal",
+        "timestamp": "2026-09-11T11:24:56.405Z",
+        "actorId": "usr_1789036141222_r5meu"
+      },
+      {
+        "details": "Sürücü C sifarişi qəbul etdi.",
+        "dateStr": "11.09.2026",
+        "actorRole": "DRIVER",
+        "step": "CLAIMED",
+        "title": "Sürücü sifarişi götürdü",
+        "timeStr": "15:25",
+        "actorName": "C",
+        "timestamp": "2026-09-11T11:25:07.213Z",
+        "actorId": "usr_1789039439449_tp4xm"
+      },
+      {
+        "actorId": "usr_1789039439449_tp4xm",
+        "step": "DEPARTED",
+        "actorRole": "DRIVER",
+        "actorName": "C",
+        "timestamp": "2026-09-11T12:35:55.830Z",
+        "details": "C müştəriyə doğru yola çıxdı.",
+        "dateStr": "11.09.2026",
+        "timeStr": "16:35",
+        "title": "Yola çıxdı"
+      },
+      {
+        "timestamp": "2026-09-11T12:36:02.316Z",
+        "actorId": "usr_1789039439449_tp4xm",
+        "step": "DELIVERED",
+        "title": "Təhvil verildi",
+        "details": "C sifarişi müştəriyə təhvil verdi.",
+        "dateStr": "11.09.2026",
+        "actorRole": "DRIVER",
+        "timeStr": "16:36",
+        "actorName": "C"
+      }
+    ],
+    "deliveredLocation": null,
+    "customerId": "cst_1789036340148_b36mh7",
+    "deliveredBy": "usr_1789039439449_tp4xm",
+    "creatorId": "usr_1789036141222_r5meu",
+    "createdTimeStr": "15:24",
+    "customerLatitude": 40.41477,
+    "status": "delivered",
+    "updatedAt": "2026-09-11T12:36:02.316Z",
+    "customerLongitude": 50.095065,
+    "ownerId": "usr_1789036141222_r5meu",
+    "executorName": "C",
+    "executorId": "usr_1789039439449_tp4xm",
+    "creatorRole": "USER",
+    "customerPhone": "1",
+    "deliveredByName": "C",
+    "notes": "",
+    "orderNumber": 1060,
+    "dispatchType": "DRIVER",
+    "currentLocation": {
+      "speed": null,
+      "accuracy": 241,
+      "latitude": 40.406185,
+      "longitude": 49.888046,
+      "updatedAt": "2026-09-11T12:35:55.957Z"
+    },
+    "claimedAt": "2026-09-11T11:25:07.213Z",
+    "ownerName": "Vüsal",
+    "driverName": "C",
+    "creatorName": "Vüsal",
+    "departedAt": "2026-09-11T12:35:55.830Z",
+    "customerAddress": "1",
+    "deliveredAt": "2026-09-11T12:36:02.316Z",
+    "executorType": "DRIVER",
+    "driverId": "usr_1789039439449_tp4xm",
+    "createdDateStr": "11.09.2026",
+    "createdAt": "2026-09-11T11:24:56.405Z",
+    "id": "ord_1789125896405_nm977",
+    "customerNotes": "",
+    "customerName": "Metal Store"
+  },
+  {
+    "customerName": "Metal Store",
+    "ownerId": "usr_1789036141222_r5meu",
+    "driverName": null,
+    "orderNumber": 1061,
+    "customerPhone": "1",
+    "createdDateStr": "11.09.2026",
+    "notes": "",
+    "executorType": "USER",
+    "departedAt": "2026-09-11T12:54:45.183Z",
+    "creatorName": "Sistem Admini",
+    "claimedAt": "2026-09-11T12:35:08.617Z",
+    "ownerName": "Vüsal",
+    "createdAt": "2026-09-11T12:35:08.617Z",
+    "history": [
+      {
+        "actorRole": "ADMIN",
+        "title": "Sifariş yaradıldı",
+        "step": "CREATED",
+        "actorName": "Sistem Admini",
+        "actorId": "usr_admin_master",
+        "timestamp": "2026-09-11T12:35:08.617Z",
+        "timeStr": "16:35",
+        "details": "User Sistem Admini sifarişi yaratdı və özü aparmağı seçdi.",
+        "dateStr": "11.09.2026"
+      },
+      {
+        "actorName": "Sistem Admini",
+        "step": "DEPARTED",
+        "actorRole": "ADMIN",
+        "title": "Yola çıxdı",
+        "actorId": "usr_admin_master",
+        "timeStr": "16:54",
+        "details": "Sistem Admini müştəriyə doğru yola çıxdı.",
+        "dateStr": "11.09.2026",
+        "timestamp": "2026-09-11T12:54:45.183Z"
+      },
+      {
+        "actorName": "Sistem Admini",
+        "dateStr": "11.09.2026",
+        "details": "Sistem Admini sifarişi müştəriyə təhvil verdi.",
+        "actorRole": "USER",
+        "timeStr": "16:54",
+        "actorId": "usr_admin_master",
+        "title": "Təhvil verildi",
+        "step": "DELIVERED",
+        "timestamp": "2026-09-11T12:54:52.073Z"
+      }
+    ],
+    "deliveredAt": "2026-09-11T12:54:52.073Z",
+    "trajectory": [
+      {
+        "longitude": 49.888046,
+        "timestamp": "2026-09-11T12:54:45.424Z",
+        "latitude": 40.406185,
+        "accuracy": 241,
+        "heading": null,
+        "speed": null
+      }
+    ],
+    "status": "delivered",
+    "customerNotes": "",
+    "dispatchType": "USER",
+    "customerId": "cst_1789036340148_b36mh7",
+    "currentLocation": {
+      "accuracy": 241,
+      "updatedAt": "2026-09-11T12:54:45.430Z",
+      "speed": null,
+      "longitude": 49.888046,
+      "heading": null,
+      "latitude": 40.406185
+    },
+    "deliveredBy": "usr_admin_master",
+    "customerLatitude": 40.41477,
+    "updatedAt": "2026-09-11T12:54:52.073Z",
+    "driverId": null,
+    "deliveredByName": "Sistem Admini",
+    "id": "ord_1789130108617_0jbsk",
+    "executorName": "Sistem Admini",
+    "creatorId": "usr_admin_master",
+    "customerLongitude": 50.095065,
+    "executorId": "usr_admin_master",
+    "customerAddress": "1",
+    "creatorRole": "ADMIN",
+    "deliveredLocation": null,
+    "createdTimeStr": "16:35"
+  },
+  {
+    "notes": "",
+    "executorType": "DRIVER",
+    "updatedAt": "2026-09-11T12:35:53.761Z",
+    "customerAddress": "1",
+    "creatorId": "usr_admin_master",
+    "customerPhone": "1",
+    "creatorRole": "ADMIN",
+    "customerName": "Metal Store",
+    "dispatchType": "DRIVER",
+    "deliveredBy": "usr_1789039439449_tp4xm",
+    "currentLocation": {
+      "accuracy": 241,
+      "latitude": 40.406185,
+      "longitude": 49.888046,
+      "speed": null,
+      "updatedAt": "2026-09-11T12:35:53.761Z"
+    },
+    "departedAt": "2026-09-11T12:35:49.432Z",
+    "deliveredByName": "C",
+    "customerNotes": "",
+    "driverName": "C",
+    "id": "ord_1789130134539_chf0w",
+    "createdTimeStr": "16:35",
+    "customerLatitude": 40.41477,
+    "history": [
+      {
+        "timeStr": "16:35",
+        "actorRole": "ADMIN",
+        "actorName": "Sistem Admini",
+        "details": "User Sistem Admini sifarişi yaratdı və sürücülərə yönləndirdi.",
+        "step": "CREATED",
+        "dateStr": "11.09.2026",
+        "timestamp": "2026-09-11T12:35:34.539Z",
+        "actorId": "usr_admin_master",
+        "title": "Sifariş yaradıldı"
+      },
+      {
+        "timeStr": "16:35",
+        "actorRole": "DRIVER",
+        "step": "CLAIMED",
+        "actorName": "C",
+        "details": "Sürücü C sifarişi qəbul etdi.",
+        "dateStr": "11.09.2026",
+        "timestamp": "2026-09-11T12:35:47.595Z",
+        "title": "Sürücü sifarişi götürdü",
+        "actorId": "usr_1789039439449_tp4xm"
+      },
+      {
+        "actorId": "usr_1789039439449_tp4xm",
+        "actorRole": "DRIVER",
+        "actorName": "C",
+        "title": "Yola çıxdı",
+        "step": "DEPARTED",
+        "timestamp": "2026-09-11T12:35:49.432Z",
+        "dateStr": "11.09.2026",
+        "details": "C müştəriyə doğru yola çıxdı.",
+        "timeStr": "16:35"
+      },
+      {
+        "actorName": "C",
+        "dateStr": "11.09.2026",
+        "details": "C sifarişi müştəriyə təhvil verdi.",
+        "actorRole": "DRIVER",
+        "timeStr": "16:35",
+        "location": {
+          "accuracy": 241,
+          "longitude": 49.888046,
+          "latitude": 40.406185
+        },
+        "actorId": "usr_1789039439449_tp4xm",
+        "title": "Təhvil verildi",
+        "step": "DELIVERED",
+        "timestamp": "2026-09-11T12:35:53.750Z"
+      }
+    ],
+    "createdDateStr": "11.09.2026",
+    "executorName": "C",
+    "deliveredAt": "2026-09-11T12:35:53.750Z",
+    "driverId": "usr_1789039439449_tp4xm",
+    "executorId": "usr_1789039439449_tp4xm",
+    "claimedAt": "2026-09-11T12:35:47.595Z",
+    "ownerName": "Vüsal",
+    "deliveredLocation": {
+      "latitude": 40.406185,
+      "longitude": 49.888046,
+      "accuracy": 241
+    },
+    "createdAt": "2026-09-11T12:35:34.539Z",
+    "orderNumber": 1062,
+    "ownerId": "usr_1789036141222_r5meu",
+    "status": "delivered",
+    "creatorName": "Sistem Admini",
+    "customerLongitude": 50.095065,
+    "customerId": "cst_1789036340148_b36mh7"
+  },
+  {
+    "ownerId": "usr_1789036141222_r5meu",
+    "executorType": "DRIVER",
+    "creatorName": "Sistem Admini",
+    "claimedAt": "2026-09-11T12:40:06.446Z",
+    "ownerName": "Vüsal",
+    "customerName": "Metal Store",
+    "executorId": "usr_1789039439449_tp4xm",
+    "orderNumber": 1063,
+    "history": [
+      {
+        "dateStr": "11.09.2026",
+        "details": "User Sistem Admini sifarişi yaratdı və sürücülərə yönləndirdi.",
+        "title": "Sifariş yaradıldı",
+        "actorName": "Sistem Admini",
+        "actorRole": "ADMIN",
+        "timeStr": "16:39",
+        "actorId": "usr_admin_master",
+        "step": "CREATED",
+        "timestamp": "2026-09-11T12:39:58.537Z"
+      },
+      {
+        "actorRole": "DRIVER",
+        "actorId": "usr_1789039439449_tp4xm",
+        "actorName": "C",
+        "title": "Sürücü sifarişi götürdü",
+        "timestamp": "2026-09-11T12:40:06.446Z",
+        "dateStr": "11.09.2026",
+        "details": "Sürücü C sifarişi qəbul etdi.",
+        "step": "CLAIMED",
+        "timeStr": "16:40"
+      },
+      {
+        "actorRole": "DRIVER",
+        "actorId": "usr_1789039439449_tp4xm",
+        "step": "DEPARTED",
+        "title": "Yola çıxdı",
+        "actorName": "C",
+        "details": "C müştəriyə doğru yola çıxdı.",
+        "timestamp": "2026-09-11T13:00:29.293Z",
+        "dateStr": "11.09.2026",
+        "timeStr": "17:00"
+      },
+      {
+        "timestamp": "2026-09-11T13:00:35.776Z",
+        "timeStr": "17:00",
+        "dateStr": "11.09.2026",
+        "details": "C sifarişi müştəriyə təhvil verdi.",
+        "actorRole": "DRIVER",
+        "title": "Təhvil verildi",
+        "actorId": "usr_1789039439449_tp4xm",
+        "step": "DELIVERED",
+        "actorName": "C"
+      },
+      {
+        "actorName": "Sistem Admini",
+        "dateStr": "12.09.2026",
+        "details": "Sistem Admini tərəfindən redaktə edildi.",
+        "actorRole": "ADMIN",
+        "timeStr": "16:06",
+        "actorId": "usr_admin_master",
+        "title": "Sifariş redaktə edildi",
+        "step": "EDITED",
+        "timestamp": "2026-09-12T12:06:15.583Z"
+      }
+    ],
+    "id": "ord_1789130398537_265vk",
+    "createdAt": "2026-09-11T12:39:58.537Z",
+    "dispatchType": "DRIVER",
+    "customerId": "cst_1789036340148_b36mh7",
+    "deliveredAt": "2026-09-11T13:00:35.776Z",
+    "status": "delivered",
+    "createdTimeStr": "16:39",
+    "driverId": "usr_1789039439449_tp4xm",
+    "executorName": "C",
+    "trajectory": [
+      {
+        "latitude": 40.406185,
+        "longitude": 49.888046,
+        "speed": null,
+        "timestamp": "2026-09-11T13:00:29.525Z",
+        "heading": null,
+        "accuracy": 241
+      }
+    ],
+    "updatedAt": "2026-09-12T12:06:15.583Z",
+    "createdDateStr": "11.09.2026",
+    "customerLongitude": 50.095065,
+    "currentLocation": {
+      "accuracy": 241,
+      "speed": null,
+      "updatedAt": "2026-09-11T13:00:29.533Z",
+      "heading": null,
+      "longitude": 49.888046,
+      "latitude": 40.406185
+    },
+    "deliveredBy": "usr_1789039439449_tp4xm",
+    "customerNotes": "",
+    "deliveredByName": "C",
+    "creatorId": "usr_admin_master",
+    "creatorRole": "ADMIN",
+    "customerPhone": "1",
+    "departedAt": "2026-09-11T13:00:29.293Z",
+    "customerLatitude": 40.41477,
+    "deliveredLocation": null,
+    "notes": "Təcili çatdırılma qeydi",
+    "driverName": "C",
+    "customerAddress": "1"
+  },
+  {
+    "createdAt": "2026-09-12T12:47:28.807Z",
+    "deliveredBy": null,
+    "dispatchType": "DRIVER",
+    "createdTimeStr": "16:47",
+    "customerNotes": "",
+    "history": [
+      {
+        "actorId": "usr_admin_master",
+        "step": "CREATED",
+        "timestamp": "2026-09-12T12:47:28.807Z",
+        "actorName": "Sistem Admini",
+        "details": "User Sistem Admini sifarişi yaratdı və sürücülərə yönləndirdi.",
+        "dateStr": "12.09.2026",
+        "actorRole": "ADMIN",
+        "timeStr": "16:47",
+        "title": "Sifariş yaradıldı"
+      },
+      {
+        "dateStr": "12.09.2026",
+        "timestamp": "2026-09-12T12:47:45.361Z",
+        "details": "Sürücü C sifarişi qəbul etdi.",
+        "timeStr": "16:47",
+        "actorId": "usr_1789039439449_tp4xm",
+        "actorRole": "DRIVER",
+        "title": "Sürücü sifarişi götürdü",
+        "step": "CLAIMED",
+        "actorName": "C"
+      }
+    ],
+    "executorId": "usr_1789039439449_tp4xm",
+    "currentLocation": null,
+    "deliveredByName": null,
+    "executorType": "DRIVER",
+    "ownerId": "usr_1789036141222_r5meu",
+    "notes": "",
+    "customerName": "Metal Store",
+    "claimedAt": "2026-09-12T12:47:45.361Z",
+    "customerPhone": "1",
+    "creatorRole": "ADMIN",
+    "customerAddress": "1",
+    "customerId": "cst_1789036340148_b36mh7",
+    "ownerName": "Vüsal",
+    "deliveredLocation": null,
+    "orderNumber": 1064,
+    "creatorName": "Sistem Admini",
+    "customerLatitude": 40.41477,
+    "customerLongitude": 50.095065,
+    "departedAt": null,
+    "status": "assigned",
+    "driverId": "usr_1789039439449_tp4xm",
+    "deliveredAt": null,
+    "updatedAt": "2026-09-12T12:47:45.361Z",
+    "executorName": "C",
+    "id": "ord_1789217248807_2zgce",
+    "creatorId": "usr_admin_master",
+    "driverName": "C",
+    "createdDateStr": "12.09.2026"
+  },
+  {
+    "currentLocation": {
+      "longitude": 50.060724,
+      "accuracy": 4,
+      "speed": 94,
+      "latitude": 40.425432,
+      "heading": 171,
+      "updatedAt": "2026-09-12T13:15:53.002Z"
+    },
+    "creatorRole": "ADMIN",
+    "ownerId": "usr_1789036141222_r5meu",
+    "customerNotes": "",
+    "customerLongitude": 50.069518,
+    "driverName": "Cavid",
+    "executorId": "usr_1789217849108_5xi64",
+    "executorName": "Cavid",
+    "deliveredBy": null,
+    "createdTimeStr": "16:55",
+    "trajectory": [
+      {
+        "heading": 358,
+        "latitude": 40.446998,
+        "longitude": 49.989306,
+        "accuracy": 4,
+        "speed": 0,
+        "timestamp": "2026-09-12T13:00:49.167Z"
+      },
+      {
+        "heading": 358,
+        "speed": 0,
+        "latitude": 40.446998,
+        "accuracy": 4,
+        "longitude": 49.989306,
+        "timestamp": "2026-09-12T13:00:50.167Z"
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.446998,
+        "speed": 0,
+        "heading": 358,
+        "timestamp": "2026-09-12T13:00:50.312Z",
+        "longitude": 49.989306
+      },
+      {
+        "heading": 358,
+        "speed": 0,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:00:51.160Z",
+        "longitude": 49.989306,
+        "latitude": 40.446999
+      },
+      {
+        "speed": 0,
+        "timestamp": "2026-09-12T13:00:52.155Z",
+        "heading": 358,
+        "accuracy": 4,
+        "longitude": 49.989305,
+        "latitude": 40.447001
+      },
+      {
+        "heading": 358,
+        "speed": 0,
+        "latitude": 40.447002,
+        "longitude": 49.989304,
+        "timestamp": "2026-09-12T13:00:53.182Z",
+        "accuracy": 4
+      },
+      {
+        "longitude": 49.989304,
+        "timestamp": "2026-09-12T13:00:53.815Z",
+        "heading": 358,
+        "latitude": 40.447002,
+        "accuracy": 4,
+        "speed": 0
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:00:54.178Z",
+        "longitude": 49.989304,
+        "latitude": 40.447002,
+        "heading": 358,
+        "speed": 0
+      },
+      {
+        "speed": 0,
+        "heading": 358,
+        "longitude": 49.989304,
+        "latitude": 40.447002,
+        "timestamp": "2026-09-12T13:00:55.173Z",
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.447003,
+        "accuracy": 4,
+        "longitude": 49.989304,
+        "heading": 358,
+        "timestamp": "2026-09-12T13:00:56.157Z",
+        "speed": 0
+      },
+      {
+        "speed": 0,
+        "latitude": 40.447002,
+        "accuracy": 4,
+        "longitude": 49.989304,
+        "heading": 358,
+        "timestamp": "2026-09-12T13:00:57.178Z"
+      },
+      {
+        "speed": 0,
+        "longitude": 49.989304,
+        "latitude": 40.447002,
+        "timestamp": "2026-09-12T13:00:57.343Z",
+        "heading": 358,
+        "accuracy": 4
+      },
+      {
+        "heading": 358,
+        "speed": 0,
+        "longitude": 49.989304,
+        "timestamp": "2026-09-12T13:00:58.164Z",
+        "latitude": 40.447004,
+        "accuracy": 4
+      },
+      {
+        "speed": 0,
+        "heading": 358,
+        "longitude": 49.989304,
+        "latitude": 40.447004,
+        "timestamp": "2026-09-12T13:00:59.167Z",
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:01:00.169Z",
+        "latitude": 40.447004,
+        "longitude": 49.989305,
+        "speed": 0,
+        "heading": 358
+      },
+      {
+        "heading": 358,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:01:00.844Z",
+        "speed": 0,
+        "latitude": 40.447004,
+        "longitude": 49.989305
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:01:01.171Z",
+        "heading": 358,
+        "latitude": 40.447003,
+        "longitude": 49.989306,
+        "speed": 0
+      },
+      {
+        "heading": 358,
+        "longitude": 49.989307,
+        "timestamp": "2026-09-12T13:01:02.241Z",
+        "latitude": 40.447003,
+        "speed": 0,
+        "accuracy": 5
+      },
+      {
+        "speed": 0,
+        "timestamp": "2026-09-12T13:01:03.179Z",
+        "heading": 358,
+        "accuracy": 6,
+        "longitude": 49.989307,
+        "latitude": 40.447003
+      },
+      {
+        "accuracy": 7,
+        "speed": 0,
+        "timestamp": "2026-09-12T13:01:04.166Z",
+        "longitude": 49.989307,
+        "latitude": 40.447003,
+        "heading": 358
+      },
+      {
+        "heading": 358,
+        "speed": 0,
+        "accuracy": 7,
+        "longitude": 49.989307,
+        "latitude": 40.447003,
+        "timestamp": "2026-09-12T13:01:04.322Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:01:05.192Z",
+        "longitude": 49.989306,
+        "heading": 358,
+        "speed": 0,
+        "accuracy": 9,
+        "latitude": 40.447004
+      },
+      {
+        "heading": 358,
+        "longitude": 49.989306,
+        "timestamp": "2026-09-12T13:01:06.172Z",
+        "speed": 0,
+        "latitude": 40.447004,
+        "accuracy": 10
+      },
+      {
+        "speed": 0,
+        "heading": 358,
+        "latitude": 40.447004,
+        "longitude": 49.989306,
+        "timestamp": "2026-09-12T13:01:07.185Z",
+        "accuracy": 10
+      },
+      {
+        "speed": 0,
+        "timestamp": "2026-09-12T13:01:07.823Z",
+        "accuracy": 10,
+        "longitude": 49.989306,
+        "latitude": 40.447004,
+        "heading": 358
+      },
+      {
+        "longitude": 49.989306,
+        "timestamp": "2026-09-12T13:01:08.157Z",
+        "heading": 358,
+        "speed": 0,
+        "latitude": 40.447004,
+        "accuracy": 10
+      },
+      {
+        "heading": 331,
+        "longitude": 49.989302,
+        "latitude": 40.447009,
+        "timestamp": "2026-09-12T13:01:09.175Z",
+        "accuracy": 10,
+        "speed": 3
+      },
+      {
+        "accuracy": 10,
+        "speed": 3,
+        "latitude": 40.447019,
+        "heading": 335,
+        "timestamp": "2026-09-12T13:01:10.163Z",
+        "longitude": 49.989296
+      },
+      {
+        "latitude": 40.447031,
+        "accuracy": 10,
+        "heading": 358,
+        "speed": 5,
+        "longitude": 49.989294,
+        "timestamp": "2026-09-12T13:01:11.210Z"
+      },
+      {
+        "latitude": 40.447031,
+        "speed": 5,
+        "accuracy": 10,
+        "longitude": 49.989294,
+        "heading": 358,
+        "timestamp": "2026-09-12T13:01:11.339Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:01:12.194Z",
+        "longitude": 49.989291,
+        "speed": 8,
+        "heading": 354,
+        "accuracy": 10,
+        "latitude": 40.447052
+      },
+      {
+        "accuracy": 10,
+        "speed": 8,
+        "latitude": 40.447074,
+        "timestamp": "2026-09-12T13:01:13.207Z",
+        "heading": 355,
+        "longitude": 49.989289
+      },
+      {
+        "latitude": 40.447099,
+        "accuracy": 10,
+        "longitude": 49.989286,
+        "heading": 353,
+        "timestamp": "2026-09-12T13:01:14.173Z",
+        "speed": 10
+      },
+      {
+        "heading": 353,
+        "longitude": 49.989286,
+        "timestamp": "2026-09-12T13:01:14.829Z",
+        "speed": 10,
+        "latitude": 40.447099,
+        "accuracy": 10
+      },
+      {
+        "heading": 354,
+        "timestamp": "2026-09-12T13:01:15.185Z",
+        "longitude": 49.989284,
+        "speed": 9,
+        "accuracy": 10,
+        "latitude": 40.447122
+      },
+      {
+        "latitude": 40.447142,
+        "accuracy": 10,
+        "heading": 2,
+        "speed": 8,
+        "longitude": 49.989285,
+        "timestamp": "2026-09-12T13:01:16.186Z"
+      },
+      {
+        "accuracy": 10,
+        "speed": 8,
+        "latitude": 40.447159,
+        "timestamp": "2026-09-12T13:01:17.219Z",
+        "longitude": 49.989289,
+        "heading": 3
+      },
+      {
+        "accuracy": 10,
+        "timestamp": "2026-09-12T13:01:18.168Z",
+        "speed": 6,
+        "longitude": 49.989294,
+        "latitude": 40.447174,
+        "heading": 12
+      },
+      {
+        "timestamp": "2026-09-12T13:01:18.358Z",
+        "longitude": 49.989294,
+        "heading": 12,
+        "accuracy": 10,
+        "speed": 6,
+        "latitude": 40.447174
+      },
+      {
+        "speed": 7,
+        "accuracy": 10,
+        "latitude": 40.447199,
+        "heading": 12,
+        "timestamp": "2026-09-12T13:01:19.189Z",
+        "longitude": 49.989292
+      },
+      {
+        "speed": 3,
+        "heading": 334,
+        "accuracy": 10,
+        "timestamp": "2026-09-12T13:01:20.250Z",
+        "latitude": 40.447214,
+        "longitude": 49.989282
+      },
+      {
+        "timestamp": "2026-09-12T13:01:21.179Z",
+        "longitude": 49.989271,
+        "accuracy": 10,
+        "speed": 5,
+        "latitude": 40.447228,
+        "heading": 332
+      },
+      {
+        "longitude": 49.989271,
+        "heading": 332,
+        "timestamp": "2026-09-12T13:01:21.839Z",
+        "speed": 5,
+        "latitude": 40.447228,
+        "accuracy": 10
+      },
+      {
+        "speed": 3,
+        "longitude": 49.989262,
+        "latitude": 40.447238,
+        "timestamp": "2026-09-12T13:01:22.191Z",
+        "heading": 332,
+        "accuracy": 10
+      },
+      {
+        "speed": 2,
+        "accuracy": 10,
+        "latitude": 40.447244,
+        "timestamp": "2026-09-12T13:01:23.191Z",
+        "longitude": 49.989257,
+        "heading": 332
+      },
+      {
+        "heading": 332,
+        "longitude": 49.989255,
+        "speed": 0,
+        "latitude": 40.447247,
+        "timestamp": "2026-09-12T13:01:24.212Z",
+        "accuracy": 10
+      },
+      {
+        "heading": 332,
+        "latitude": 40.447246,
+        "speed": 0,
+        "longitude": 49.989254,
+        "timestamp": "2026-09-12T13:01:25.185Z",
+        "accuracy": 10
+      },
+      {
+        "heading": 332,
+        "accuracy": 10,
+        "latitude": 40.447246,
+        "timestamp": "2026-09-12T13:01:25.330Z",
+        "longitude": 49.989254,
+        "speed": 0
+      },
+      {
+        "latitude": 40.447246,
+        "accuracy": 10,
+        "heading": 332,
+        "speed": 0,
+        "longitude": 49.989253,
+        "timestamp": "2026-09-12T13:01:26.195Z"
+      },
+      {
+        "heading": 332,
+        "latitude": 40.447243,
+        "timestamp": "2026-09-12T13:01:27.184Z",
+        "accuracy": 10,
+        "speed": 0,
+        "longitude": 49.98925
+      },
+      {
+        "heading": 332,
+        "speed": 0,
+        "latitude": 40.447245,
+        "longitude": 49.989247,
+        "timestamp": "2026-09-12T13:01:28.172Z",
+        "accuracy": 10
+      },
+      {
+        "heading": 332,
+        "speed": 0,
+        "longitude": 49.989247,
+        "timestamp": "2026-09-12T13:01:28.814Z",
+        "latitude": 40.447245,
+        "accuracy": 10
+      },
+      {
+        "timestamp": "2026-09-12T13:01:29.156Z",
+        "accuracy": 10,
+        "longitude": 49.989244,
+        "heading": 332,
+        "speed": 0,
+        "latitude": 40.447246
+      },
+      {
+        "accuracy": 10,
+        "latitude": 40.447245,
+        "timestamp": "2026-09-12T13:01:30.185Z",
+        "longitude": 49.989243,
+        "speed": 0,
+        "heading": 332
+      },
+      {
+        "accuracy": 10,
+        "latitude": 40.447243,
+        "heading": 332,
+        "speed": 0,
+        "longitude": 49.989242,
+        "timestamp": "2026-09-12T13:01:31.182Z"
+      },
+      {
+        "latitude": 40.447243,
+        "accuracy": 10,
+        "longitude": 49.989242,
+        "heading": 332,
+        "timestamp": "2026-09-12T13:01:32.173Z",
+        "speed": 0
+      },
+      {
+        "accuracy": 10,
+        "speed": 0,
+        "timestamp": "2026-09-12T13:01:32.323Z",
+        "longitude": 49.989242,
+        "latitude": 40.447243,
+        "heading": 332
+      },
+      {
+        "heading": 332,
+        "speed": 0,
+        "latitude": 40.447244,
+        "longitude": 49.989242,
+        "accuracy": 10,
+        "timestamp": "2026-09-12T13:01:33.174Z"
+      },
+      {
+        "speed": 0,
+        "timestamp": "2026-09-12T13:01:34.197Z",
+        "longitude": 49.989241,
+        "heading": 332,
+        "latitude": 40.447244,
+        "accuracy": 10
+      },
+      {
+        "longitude": 49.98924,
+        "timestamp": "2026-09-12T13:01:35.173Z",
+        "heading": 332,
+        "latitude": 40.447245,
+        "accuracy": 10,
+        "speed": 0
+      },
+      {
+        "heading": 332,
+        "speed": 0,
+        "longitude": 49.98924,
+        "latitude": 40.447245,
+        "timestamp": "2026-09-12T13:01:35.849Z",
+        "accuracy": 10
+      },
+      {
+        "latitude": 40.447246,
+        "longitude": 49.989239,
+        "accuracy": 10,
+        "speed": 0,
+        "timestamp": "2026-09-12T13:01:36.198Z",
+        "heading": 332
+      },
+      {
+        "latitude": 40.447247,
+        "accuracy": 10,
+        "longitude": 49.989236,
+        "heading": 332,
+        "timestamp": "2026-09-12T13:01:37.197Z",
+        "speed": 0
+      },
+      {
+        "accuracy": 10,
+        "timestamp": "2026-09-12T13:01:38.186Z",
+        "longitude": 49.989233,
+        "latitude": 40.447245,
+        "heading": 332,
+        "speed": 0
+      },
+      {
+        "latitude": 40.447244,
+        "longitude": 49.989232,
+        "accuracy": 10,
+        "timestamp": "2026-09-12T13:01:39.204Z",
+        "heading": 332,
+        "speed": 0
+      },
+      {
+        "accuracy": 10,
+        "timestamp": "2026-09-12T13:01:39.327Z",
+        "latitude": 40.447244,
+        "longitude": 49.989232,
+        "heading": 332,
+        "speed": 0
+      },
+      {
+        "heading": 332,
+        "speed": 0,
+        "latitude": 40.447243,
+        "longitude": 49.98923,
+        "accuracy": 10,
+        "timestamp": "2026-09-12T13:01:40.172Z"
+      },
+      {
+        "longitude": 49.98923,
+        "latitude": 40.447243,
+        "timestamp": "2026-09-12T13:01:41.185Z",
+        "accuracy": 10,
+        "heading": 332,
+        "speed": 0
+      },
+      {
+        "timestamp": "2026-09-12T13:01:42.187Z",
+        "speed": 0,
+        "longitude": 49.98923,
+        "accuracy": 10,
+        "heading": 332,
+        "latitude": 40.447243
+      },
+      {
+        "heading": 332,
+        "speed": 0,
+        "latitude": 40.447243,
+        "accuracy": 10,
+        "longitude": 49.98923,
+        "timestamp": "2026-09-12T13:01:42.830Z"
+      },
+      {
+        "accuracy": 10,
+        "timestamp": "2026-09-12T13:01:43.203Z",
+        "latitude": 40.447243,
+        "longitude": 49.98923,
+        "heading": 332,
+        "speed": 0
+      },
+      {
+        "speed": 0,
+        "accuracy": 10,
+        "timestamp": "2026-09-12T13:01:44.195Z",
+        "latitude": 40.447243,
+        "longitude": 49.98923,
+        "heading": 332
+      },
+      {
+        "accuracy": 10,
+        "speed": 0,
+        "longitude": 49.98923,
+        "latitude": 40.447243,
+        "timestamp": "2026-09-12T13:01:45.205Z",
+        "heading": 332
+      },
+      {
+        "speed": 0,
+        "latitude": 40.447243,
+        "heading": 332,
+        "longitude": 49.98923,
+        "timestamp": "2026-09-12T13:01:46.184Z",
+        "accuracy": 10
+      },
+      {
+        "latitude": 40.447243,
+        "longitude": 49.98923,
+        "accuracy": 10,
+        "timestamp": "2026-09-12T13:01:46.361Z",
+        "heading": 332,
+        "speed": 0
+      },
+      {
+        "accuracy": 10,
+        "timestamp": "2026-09-12T13:01:47.193Z",
+        "longitude": 49.98923,
+        "latitude": 40.447242,
+        "heading": 332,
+        "speed": 0
+      },
+      {
+        "accuracy": 10,
+        "speed": 0,
+        "latitude": 40.447242,
+        "timestamp": "2026-09-12T13:01:48.211Z",
+        "heading": 332,
+        "longitude": 49.98923
+      },
+      {
+        "heading": 332,
+        "longitude": 49.98923,
+        "timestamp": "2026-09-12T13:01:49.180Z",
+        "latitude": 40.447242,
+        "speed": 0,
+        "accuracy": 10
+      },
+      {
+        "heading": 332,
+        "longitude": 49.98923,
+        "latitude": 40.447242,
+        "timestamp": "2026-09-12T13:01:49.859Z",
+        "speed": 0,
+        "accuracy": 10
+      },
+      {
+        "heading": 332,
+        "latitude": 40.447242,
+        "longitude": 49.98923,
+        "accuracy": 10,
+        "speed": 0,
+        "timestamp": "2026-09-12T13:01:50.205Z"
+      },
+      {
+        "latitude": 40.447242,
+        "heading": 332,
+        "accuracy": 10,
+        "speed": 0,
+        "longitude": 49.98923,
+        "timestamp": "2026-09-12T13:01:51.192Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:01:52.182Z",
+        "latitude": 40.447242,
+        "longitude": 49.98923,
+        "accuracy": 10,
+        "speed": 0,
+        "heading": 332
+      },
+      {
+        "timestamp": "2026-09-12T13:01:53.189Z",
+        "longitude": 49.98923,
+        "speed": 0,
+        "accuracy": 10,
+        "latitude": 40.447242,
+        "heading": 332
+      },
+      {
+        "heading": 332,
+        "latitude": 40.447242,
+        "longitude": 49.98923,
+        "timestamp": "2026-09-12T13:01:53.382Z",
+        "accuracy": 10,
+        "speed": 0
+      },
+      {
+        "accuracy": 10,
+        "latitude": 40.447242,
+        "timestamp": "2026-09-12T13:01:54.172Z",
+        "speed": 0,
+        "longitude": 49.98923,
+        "heading": 332
+      },
+      {
+        "speed": 0,
+        "accuracy": 9,
+        "timestamp": "2026-09-12T13:01:55.203Z",
+        "longitude": 49.98923,
+        "heading": 332,
+        "latitude": 40.447242
+      },
+      {
+        "speed": 1,
+        "accuracy": 8,
+        "timestamp": "2026-09-12T13:01:56.190Z",
+        "longitude": 49.989228,
+        "latitude": 40.447243,
+        "heading": 334
+      },
+      {
+        "latitude": 40.447243,
+        "speed": 1,
+        "heading": 334,
+        "longitude": 49.989228,
+        "accuracy": 8,
+        "timestamp": "2026-09-12T13:01:56.848Z"
+      },
+      {
+        "longitude": 49.989224,
+        "timestamp": "2026-09-12T13:01:57.179Z",
+        "heading": 334,
+        "latitude": 40.447242,
+        "speed": 0,
+        "accuracy": 6
+      },
+      {
+        "latitude": 40.447241,
+        "accuracy": 5,
+        "heading": 334,
+        "longitude": 49.989221,
+        "speed": 0,
+        "timestamp": "2026-09-12T13:01:58.192Z"
+      },
+      {
+        "latitude": 40.44724,
+        "accuracy": 4,
+        "heading": 334,
+        "speed": 0,
+        "longitude": 49.989221,
+        "timestamp": "2026-09-12T13:01:59.180Z"
+      },
+      {
+        "speed": 1,
+        "accuracy": 4,
+        "latitude": 40.447242,
+        "timestamp": "2026-09-12T13:02:00.190Z",
+        "heading": 352,
+        "longitude": 49.989221
+      },
+      {
+        "heading": 352,
+        "longitude": 49.989221,
+        "timestamp": "2026-09-12T13:02:00.348Z",
+        "latitude": 40.447242,
+        "accuracy": 4,
+        "speed": 1
+      },
+      {
+        "speed": 0,
+        "latitude": 40.447242,
+        "accuracy": 4,
+        "heading": 352,
+        "longitude": 49.989226,
+        "timestamp": "2026-09-12T13:02:01.187Z"
+      },
+      {
+        "accuracy": 4,
+        "speed": 0,
+        "latitude": 40.447242,
+        "timestamp": "2026-09-12T13:02:02.192Z",
+        "heading": 352,
+        "longitude": 49.989228
+      },
+      {
+        "latitude": 40.447242,
+        "longitude": 49.989228,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:02:03.176Z",
+        "heading": 352,
+        "speed": 0
+      },
+      {
+        "accuracy": 4,
+        "speed": 0,
+        "longitude": 49.989228,
+        "latitude": 40.447242,
+        "timestamp": "2026-09-12T13:02:03.830Z",
+        "heading": 352
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.447243,
+        "speed": 0,
+        "heading": 352,
+        "timestamp": "2026-09-12T13:02:04.177Z",
+        "longitude": 49.98923
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.447243,
+        "heading": 352,
+        "speed": 0,
+        "timestamp": "2026-09-12T13:02:05.161Z",
+        "longitude": 49.989231
+      },
+      {
+        "accuracy": 4,
+        "speed": 0,
+        "timestamp": "2026-09-12T13:02:06.199Z",
+        "latitude": 40.447244,
+        "longitude": 49.989232,
+        "heading": 352
+      },
+      {
+        "accuracy": 4,
+        "speed": 0,
+        "latitude": 40.447244,
+        "heading": 352,
+        "timestamp": "2026-09-12T13:02:07.168Z",
+        "longitude": 49.989232
+      },
+      {
+        "accuracy": 4,
+        "heading": 352,
+        "latitude": 40.447244,
+        "speed": 0,
+        "timestamp": "2026-09-12T13:02:07.345Z",
+        "longitude": 49.989232
+      },
+      {
+        "speed": 0,
+        "timestamp": "2026-09-12T13:02:08.209Z",
+        "longitude": 49.989232,
+        "heading": 352,
+        "accuracy": 4,
+        "latitude": 40.447245
+      },
+      {
+        "accuracy": 4,
+        "speed": 0,
+        "timestamp": "2026-09-12T13:02:09.170Z",
+        "latitude": 40.447244,
+        "longitude": 49.989233,
+        "heading": 352
+      },
+      {
+        "accuracy": 4,
+        "speed": 0,
+        "latitude": 40.447243,
+        "timestamp": "2026-09-12T13:02:10.230Z",
+        "heading": 352,
+        "longitude": 49.989232
+      },
+      {
+        "longitude": 49.989232,
+        "heading": 352,
+        "timestamp": "2026-09-12T13:02:10.830Z",
+        "speed": 0,
+        "latitude": 40.447243,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:02:11.187Z",
+        "longitude": 49.989231,
+        "latitude": 40.447242,
+        "heading": 352,
+        "accuracy": 4,
+        "speed": 0
+      },
+      {
+        "accuracy": 4,
+        "speed": 0,
+        "timestamp": "2026-09-12T13:02:12.167Z",
+        "latitude": 40.447242,
+        "longitude": 49.98923,
+        "heading": 352
+      },
+      {
+        "latitude": 40.447242,
+        "timestamp": "2026-09-12T13:02:13.188Z",
+        "longitude": 49.98923,
+        "accuracy": 4,
+        "speed": 0,
+        "heading": 352
+      },
+      {
+        "timestamp": "2026-09-12T13:02:14.188Z",
+        "speed": 0,
+        "longitude": 49.98923,
+        "heading": 352,
+        "accuracy": 4,
+        "latitude": 40.447242
+      },
+      {
+        "speed": 0,
+        "accuracy": 4,
+        "longitude": 49.98923,
+        "timestamp": "2026-09-12T13:02:14.329Z",
+        "latitude": 40.447242,
+        "heading": 352
+      },
+      {
+        "timestamp": "2026-09-12T13:02:15.180Z",
+        "longitude": 49.989233,
+        "accuracy": 4,
+        "latitude": 40.447234,
+        "speed": 3,
+        "heading": 166
+      },
+      {
+        "timestamp": "2026-09-12T13:02:16.194Z",
+        "longitude": 49.989236,
+        "heading": 167,
+        "speed": 4,
+        "accuracy": 4,
+        "latitude": 40.447223
+      },
+      {
+        "latitude": 40.447223,
+        "heading": 167,
+        "accuracy": 4,
+        "longitude": 49.989236,
+        "timestamp": "2026-09-12T13:02:17.832Z",
+        "speed": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:02:21.323Z",
+        "latitude": 40.447223,
+        "longitude": 49.989236,
+        "accuracy": 4,
+        "speed": 4,
+        "heading": 167
+      },
+      {
+        "latitude": 40.447223,
+        "longitude": 49.989236,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:02:24.818Z",
+        "heading": 167,
+        "speed": 4
+      },
+      {
+        "latitude": 40.447223,
+        "longitude": 49.989236,
+        "speed": 4,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:02:28.340Z",
+        "heading": 167
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.447223,
+        "speed": 4,
+        "heading": 167,
+        "timestamp": "2026-09-12T13:02:31.844Z",
+        "longitude": 49.989236
+      },
+      {
+        "accuracy": 4,
+        "heading": 167,
+        "latitude": 40.447223,
+        "speed": 4,
+        "timestamp": "2026-09-12T13:02:35.337Z",
+        "longitude": 49.989236
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.447223,
+        "heading": 167,
+        "timestamp": "2026-09-12T13:02:38.838Z",
+        "longitude": 49.989236,
+        "speed": 4
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.447223,
+        "speed": 4,
+        "timestamp": "2026-09-12T13:02:42.332Z",
+        "longitude": 49.989236,
+        "heading": 167
+      },
+      {
+        "longitude": 49.989236,
+        "heading": 167,
+        "timestamp": "2026-09-12T13:02:45.833Z",
+        "speed": 4,
+        "latitude": 40.447223,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:02:49.339Z",
+        "longitude": 49.989236,
+        "accuracy": 4,
+        "speed": 4,
+        "latitude": 40.447223,
+        "heading": 167
+      },
+      {
+        "accuracy": 4,
+        "speed": 4,
+        "latitude": 40.447223,
+        "heading": 167,
+        "timestamp": "2026-09-12T13:02:52.825Z",
+        "longitude": 49.989236
+      },
+      {
+        "latitude": 40.447223,
+        "heading": 167,
+        "accuracy": 4,
+        "speed": 4,
+        "longitude": 49.989236,
+        "timestamp": "2026-09-12T13:02:56.333Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:02:59.855Z",
+        "accuracy": 4,
+        "longitude": 49.989236,
+        "speed": 4,
+        "latitude": 40.447223,
+        "heading": 167
+      },
+      {
+        "timestamp": "2026-09-12T13:03:03.361Z",
+        "longitude": 49.989236,
+        "accuracy": 4,
+        "speed": 4,
+        "latitude": 40.447223,
+        "heading": 167
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.447223,
+        "speed": 4,
+        "timestamp": "2026-09-12T13:03:06.850Z",
+        "heading": 167,
+        "longitude": 49.989236
+      },
+      {
+        "speed": 4,
+        "timestamp": "2026-09-12T13:03:10.328Z",
+        "heading": 167,
+        "longitude": 49.989236,
+        "accuracy": 4,
+        "latitude": 40.447223
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.447223,
+        "timestamp": "2026-09-12T13:03:13.839Z",
+        "longitude": 49.989236,
+        "heading": 167,
+        "speed": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:08:12.602Z",
+        "longitude": 49.8671,
+        "accuracy": null,
+        "latitude": 40.4093,
+        "speed": 45,
+        "heading": 70
+      },
+      {
+        "heading": 70,
+        "latitude": 40.4093,
+        "accuracy": null,
+        "longitude": 49.8671,
+        "speed": 45,
+        "timestamp": "2026-09-12T13:08:31.378Z"
+      },
+      {
+        "longitude": 49.872,
+        "timestamp": "2026-09-12T13:08:34.418Z",
+        "heading": 75,
+        "latitude": 40.412,
+        "accuracy": null,
+        "speed": 55
+      },
+      {
+        "speed": 54,
+        "timestamp": "2026-09-12T13:10:32.213Z",
+        "accuracy": 9,
+        "longitude": 50.013492,
+        "heading": 140,
+        "latitude": 40.44268
+      },
+      {
+        "accuracy": 6,
+        "heading": 139,
+        "latitude": 40.442602,
+        "speed": 50,
+        "timestamp": "2026-09-12T13:10:33.219Z",
+        "longitude": 50.013581
+      },
+      {
+        "latitude": 40.442602,
+        "speed": 50,
+        "heading": 139,
+        "accuracy": 6,
+        "longitude": 50.013581,
+        "timestamp": "2026-09-12T13:10:33.743Z"
+      },
+      {
+        "latitude": 40.442517,
+        "speed": 48,
+        "accuracy": 5,
+        "longitude": 50.013672,
+        "timestamp": "2026-09-12T13:10:34.200Z",
+        "heading": 139
+      },
+      {
+        "heading": 142,
+        "latitude": 40.442428,
+        "longitude": 50.013766,
+        "timestamp": "2026-09-12T13:10:35.160Z",
+        "accuracy": 5,
+        "speed": 47
+      },
+      {
+        "accuracy": 5,
+        "speed": 48,
+        "timestamp": "2026-09-12T13:10:36.204Z",
+        "latitude": 40.442342,
+        "longitude": 50.013863,
+        "heading": 144
+      },
+      {
+        "timestamp": "2026-09-12T13:10:37.181Z",
+        "longitude": 50.013953,
+        "speed": 48,
+        "accuracy": 5,
+        "latitude": 40.442253,
+        "heading": 142
+      },
+      {
+        "speed": 48,
+        "heading": 142,
+        "longitude": 50.013953,
+        "timestamp": "2026-09-12T13:10:37.282Z",
+        "accuracy": 5,
+        "latitude": 40.442253
+      },
+      {
+        "speed": 49,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:10:38.180Z",
+        "latitude": 40.442163,
+        "longitude": 50.014062,
+        "heading": 139
+      },
+      {
+        "accuracy": 4,
+        "speed": 50,
+        "latitude": 40.442076,
+        "longitude": 50.014175,
+        "heading": 133,
+        "timestamp": "2026-09-12T13:10:39.196Z"
+      },
+      {
+        "longitude": 50.014299,
+        "heading": 126,
+        "timestamp": "2026-09-12T13:10:40.184Z",
+        "speed": 50,
+        "latitude": 40.441998,
+        "accuracy": 4
+      },
+      {
+        "speed": 50,
+        "timestamp": "2026-09-12T13:10:40.740Z",
+        "heading": 126,
+        "accuracy": 4,
+        "longitude": 50.014299,
+        "latitude": 40.441998
+      },
+      {
+        "timestamp": "2026-09-12T13:10:41.162Z",
+        "longitude": 50.014432,
+        "heading": 119,
+        "speed": 49,
+        "accuracy": 4,
+        "latitude": 40.441927
+      },
+      {
+        "heading": 116,
+        "speed": 52,
+        "latitude": 40.441874,
+        "accuracy": 4,
+        "longitude": 50.014576,
+        "timestamp": "2026-09-12T13:10:42.184Z"
+      },
+      {
+        "speed": 55,
+        "timestamp": "2026-09-12T13:10:43.177Z",
+        "longitude": 50.014732,
+        "latitude": 40.441808,
+        "accuracy": 4,
+        "heading": 119
+      },
+      {
+        "heading": 128,
+        "longitude": 50.014883,
+        "latitude": 40.441724,
+        "timestamp": "2026-09-12T13:10:44.212Z",
+        "accuracy": 4,
+        "speed": 59
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:10:44.245Z",
+        "longitude": 50.014883,
+        "latitude": 40.441724,
+        "heading": 128,
+        "speed": 59
+      },
+      {
+        "heading": 133,
+        "timestamp": "2026-09-12T13:10:45.173Z",
+        "longitude": 50.01503,
+        "accuracy": 4,
+        "speed": 63,
+        "latitude": 40.441624
+      },
+      {
+        "speed": 64,
+        "latitude": 40.441514,
+        "accuracy": 4,
+        "heading": 134,
+        "longitude": 50.015179,
+        "timestamp": "2026-09-12T13:10:46.175Z"
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:10:47.190Z",
+        "longitude": 50.015332,
+        "latitude": 40.441387,
+        "heading": 137,
+        "speed": 68
+      },
+      {
+        "latitude": 40.441387,
+        "accuracy": 4,
+        "longitude": 50.015332,
+        "heading": 137,
+        "timestamp": "2026-09-12T13:10:47.785Z",
+        "speed": 68
+      },
+      {
+        "longitude": 50.015486,
+        "heading": 140,
+        "timestamp": "2026-09-12T13:10:48.202Z",
+        "latitude": 40.441248,
+        "accuracy": 4,
+        "speed": 72
+      },
+      {
+        "longitude": 50.015631,
+        "timestamp": "2026-09-12T13:10:49.204Z",
+        "speed": 74,
+        "heading": 144,
+        "latitude": 40.4411,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:10:50.224Z",
+        "longitude": 50.015753,
+        "latitude": 40.440943,
+        "speed": 73,
+        "heading": 149
+      },
+      {
+        "speed": 70,
+        "accuracy": 4,
+        "heading": 155,
+        "timestamp": "2026-09-12T13:10:51.317Z",
+        "latitude": 40.440784,
+        "longitude": 50.01585
+      },
+      {
+        "latitude": 40.440784,
+        "speed": 70,
+        "accuracy": 4,
+        "heading": 155,
+        "longitude": 50.01585,
+        "timestamp": "2026-09-12T13:10:51.331Z"
+      },
+      {
+        "heading": 160,
+        "longitude": 50.015925,
+        "timestamp": "2026-09-12T13:10:52.176Z",
+        "speed": 68,
+        "latitude": 40.440624,
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.440459,
+        "timestamp": "2026-09-12T13:10:53.200Z",
+        "longitude": 50.01598,
+        "accuracy": 4,
+        "speed": 68,
+        "heading": 171
+      },
+      {
+        "speed": 67,
+        "accuracy": 4,
+        "latitude": 40.440292,
+        "heading": 174,
+        "timestamp": "2026-09-12T13:10:54.152Z",
+        "longitude": 50.016017
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.440292,
+        "timestamp": "2026-09-12T13:10:54.740Z",
+        "longitude": 50.016017,
+        "speed": 67,
+        "heading": 174
+      },
+      {
+        "longitude": 50.016038,
+        "timestamp": "2026-09-12T13:10:55.173Z",
+        "heading": 180,
+        "latitude": 40.440132,
+        "accuracy": 4,
+        "speed": 65
+      },
+      {
+        "speed": 66,
+        "latitude": 40.439967,
+        "heading": 184,
+        "longitude": 50.016045,
+        "timestamp": "2026-09-12T13:10:56.162Z",
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:10:57.187Z",
+        "latitude": 40.4398,
+        "longitude": 50.016051,
+        "speed": 66,
+        "heading": 183
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:10:58.240Z",
+        "longitude": 50.016053,
+        "speed": 66,
+        "latitude": 40.439635,
+        "heading": 182
+      },
+      {
+        "latitude": 40.439635,
+        "heading": 182,
+        "accuracy": 4,
+        "speed": 66,
+        "longitude": 50.016053,
+        "timestamp": "2026-09-12T13:10:58.269Z"
+      },
+      {
+        "heading": 179,
+        "longitude": 50.016055,
+        "latitude": 40.439472,
+        "timestamp": "2026-09-12T13:10:59.173Z",
+        "speed": 65,
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.016057,
+        "heading": 187,
+        "timestamp": "2026-09-12T13:11:00.220Z",
+        "speed": 63,
+        "latitude": 40.439315,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:11:01.200Z",
+        "longitude": 50.016054,
+        "speed": 60,
+        "heading": 180,
+        "accuracy": 4,
+        "latitude": 40.439163
+      },
+      {
+        "speed": 60,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:11:01.747Z",
+        "latitude": 40.439163,
+        "heading": 180,
+        "longitude": 50.016054
+      },
+      {
+        "timestamp": "2026-09-12T13:11:02.203Z",
+        "longitude": 50.016054,
+        "accuracy": 4,
+        "speed": 59,
+        "latitude": 40.439012,
+        "heading": 178
+      },
+      {
+        "speed": 60,
+        "latitude": 40.438861,
+        "accuracy": 4,
+        "heading": 179,
+        "longitude": 50.016054,
+        "timestamp": "2026-09-12T13:11:03.191Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:11:04.188Z",
+        "accuracy": 4,
+        "longitude": 50.016056,
+        "latitude": 40.438716,
+        "heading": 178,
+        "speed": 58
+      },
+      {
+        "heading": 178,
+        "latitude": 40.438571,
+        "accuracy": 4,
+        "speed": 56,
+        "longitude": 50.016059,
+        "timestamp": "2026-09-12T13:11:05.180Z"
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:11:05.231Z",
+        "latitude": 40.438571,
+        "longitude": 50.016059,
+        "heading": 178,
+        "speed": 56
+      },
+      {
+        "longitude": 50.016059,
+        "speed": 53,
+        "timestamp": "2026-09-12T13:11:06.176Z",
+        "heading": 179,
+        "latitude": 40.438438,
+        "accuracy": 4
+      },
+      {
+        "heading": 179,
+        "speed": 52,
+        "longitude": 50.016058,
+        "timestamp": "2026-09-12T13:11:07.198Z",
+        "latitude": 40.438306,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.438187,
+        "speed": 49,
+        "heading": 196,
+        "timestamp": "2026-09-12T13:11:08.159Z",
+        "longitude": 50.016045
+      },
+      {
+        "latitude": 40.438187,
+        "accuracy": 4,
+        "heading": 196,
+        "longitude": 50.016045,
+        "speed": 49,
+        "timestamp": "2026-09-12T13:11:08.740Z"
+      },
+      {
+        "heading": 212,
+        "latitude": 40.438077,
+        "accuracy": 4,
+        "speed": 44,
+        "longitude": 50.016017,
+        "timestamp": "2026-09-12T13:11:09.191Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:11:10.177Z",
+        "heading": 228,
+        "latitude": 40.43798,
+        "longitude": 50.015962,
+        "speed": 43,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:11:11.180Z",
+        "longitude": 50.01588,
+        "accuracy": 4,
+        "speed": 44,
+        "latitude": 40.43789,
+        "heading": 244
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.437811,
+        "heading": 226,
+        "speed": 44,
+        "timestamp": "2026-09-12T13:11:12.193Z",
+        "longitude": 50.015775
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.437811,
+        "timestamp": "2026-09-12T13:11:12.233Z",
+        "longitude": 50.015775,
+        "heading": 226,
+        "speed": 44
+      },
+      {
+        "longitude": 50.015644,
+        "timestamp": "2026-09-12T13:11:13.172Z",
+        "heading": 237,
+        "latitude": 40.437747,
+        "speed": 43,
+        "accuracy": 4
+      },
+      {
+        "heading": 249,
+        "latitude": 40.437707,
+        "longitude": 50.015505,
+        "speed": 43,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:11:14.170Z"
+      },
+      {
+        "latitude": 40.437692,
+        "accuracy": 4,
+        "heading": 261,
+        "speed": 44,
+        "longitude": 50.015358,
+        "timestamp": "2026-09-12T13:11:15.178Z"
+      },
+      {
+        "latitude": 40.437692,
+        "accuracy": 4,
+        "longitude": 50.015358,
+        "timestamp": "2026-09-12T13:11:15.736Z",
+        "heading": 261,
+        "speed": 44
+      },
+      {
+        "latitude": 40.437697,
+        "longitude": 50.015206,
+        "timestamp": "2026-09-12T13:11:16.164Z",
+        "heading": 273,
+        "accuracy": 4,
+        "speed": 45
+      },
+      {
+        "latitude": 40.437726,
+        "longitude": 50.015062,
+        "heading": 285,
+        "timestamp": "2026-09-12T13:11:17.152Z",
+        "accuracy": 4,
+        "speed": 45
+      },
+      {
+        "speed": 45,
+        "timestamp": "2026-09-12T13:11:18.193Z",
+        "heading": 298,
+        "accuracy": 4,
+        "longitude": 50.014926,
+        "latitude": 40.437781
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.437858,
+        "speed": 47,
+        "heading": 310,
+        "timestamp": "2026-09-12T13:11:19.181Z",
+        "longitude": 50.014807
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.437858,
+        "longitude": 50.014807,
+        "heading": 310,
+        "timestamp": "2026-09-12T13:11:19.240Z",
+        "speed": 47
+      },
+      {
+        "timestamp": "2026-09-12T13:11:20.165Z",
+        "accuracy": 4,
+        "longitude": 50.014711,
+        "latitude": 40.437957,
+        "heading": 323,
+        "speed": 48
+      },
+      {
+        "longitude": 50.014644,
+        "heading": 334,
+        "timestamp": "2026-09-12T13:11:21.187Z",
+        "latitude": 40.438073,
+        "speed": 49,
+        "accuracy": 4
+      },
+      {
+        "speed": 50,
+        "longitude": 50.014607,
+        "timestamp": "2026-09-12T13:11:22.182Z",
+        "latitude": 40.438195,
+        "heading": 348,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:11:22.802Z",
+        "heading": 348,
+        "longitude": 50.014607,
+        "accuracy": 4,
+        "speed": 50,
+        "latitude": 40.438195
+      },
+      {
+        "latitude": 40.438323,
+        "timestamp": "2026-09-12T13:11:23.205Z",
+        "longitude": 50.014604,
+        "speed": 51,
+        "heading": 359,
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.438444,
+        "accuracy": 4,
+        "heading": 20,
+        "speed": 52,
+        "longitude": 50.014655,
+        "timestamp": "2026-09-12T13:11:24.171Z"
+      },
+      {
+        "speed": 50,
+        "latitude": 40.438556,
+        "accuracy": 4,
+        "heading": 33,
+        "longitude": 50.014728,
+        "timestamp": "2026-09-12T13:11:25.178Z"
+      },
+      {
+        "longitude": 50.014832,
+        "speed": 51,
+        "timestamp": "2026-09-12T13:11:26.172Z",
+        "heading": 46,
+        "latitude": 40.438652,
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.438652,
+        "accuracy": 4,
+        "heading": 46,
+        "longitude": 50.014832,
+        "speed": 51,
+        "timestamp": "2026-09-12T13:11:26.236Z"
+      },
+      {
+        "heading": 60,
+        "speed": 49,
+        "timestamp": "2026-09-12T13:11:27.175Z",
+        "accuracy": 4,
+        "longitude": 50.014957,
+        "latitude": 40.438725
+      },
+      {
+        "longitude": 50.015087,
+        "speed": 45,
+        "latitude": 40.438771,
+        "timestamp": "2026-09-12T13:11:28.189Z",
+        "heading": 70,
+        "accuracy": 4
+      },
+      {
+        "heading": 68,
+        "longitude": 50.015215,
+        "timestamp": "2026-09-12T13:11:29.180Z",
+        "latitude": 40.438816,
+        "speed": 43,
+        "accuracy": 4
+      },
+      {
+        "speed": 43,
+        "heading": 68,
+        "longitude": 50.015215,
+        "timestamp": "2026-09-12T13:11:29.733Z",
+        "latitude": 40.438816,
+        "accuracy": 4
+      },
+      {
+        "heading": 95,
+        "latitude": 40.438805,
+        "speed": 42,
+        "accuracy": 4,
+        "longitude": 50.015354,
+        "timestamp": "2026-09-12T13:11:30.165Z"
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.438795,
+        "longitude": 50.015483,
+        "timestamp": "2026-09-12T13:11:31.174Z",
+        "speed": 37,
+        "heading": 99
+      },
+      {
+        "accuracy": 4,
+        "speed": 32,
+        "latitude": 40.438786,
+        "heading": 100,
+        "timestamp": "2026-09-12T13:11:32.189Z",
+        "longitude": 50.015599
+      },
+      {
+        "latitude": 40.438762,
+        "heading": 108,
+        "accuracy": 4,
+        "speed": 33,
+        "longitude": 50.015707,
+        "timestamp": "2026-09-12T13:11:33.180Z"
+      },
+      {
+        "heading": 108,
+        "speed": 33,
+        "timestamp": "2026-09-12T13:11:33.239Z",
+        "longitude": 50.015707,
+        "accuracy": 4,
+        "latitude": 40.438762
+      },
+      {
+        "speed": 34,
+        "timestamp": "2026-09-12T13:11:34.194Z",
+        "longitude": 50.015814,
+        "heading": 108,
+        "accuracy": 4,
+        "latitude": 40.438738
+      },
+      {
+        "timestamp": "2026-09-12T13:11:35.180Z",
+        "heading": 111,
+        "longitude": 50.015922,
+        "accuracy": 4,
+        "latitude": 40.438706,
+        "speed": 37
+      },
+      {
+        "speed": 39,
+        "timestamp": "2026-09-12T13:11:36.180Z",
+        "longitude": 50.01604,
+        "accuracy": 4,
+        "heading": 111,
+        "latitude": 40.438674
+      },
+      {
+        "heading": 111,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:11:36.738Z",
+        "speed": 39,
+        "longitude": 50.01604,
+        "latitude": 40.438674
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:11:37.189Z",
+        "longitude": 50.016174,
+        "speed": 45,
+        "latitude": 40.438623,
+        "heading": 115
+      },
+      {
+        "heading": 120,
+        "longitude": 50.016319,
+        "speed": 52,
+        "timestamp": "2026-09-12T13:11:38.202Z",
+        "latitude": 40.438562,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "speed": 60,
+        "timestamp": "2026-09-12T13:11:39.187Z",
+        "latitude": 40.438496,
+        "longitude": 50.016489,
+        "heading": 117
+      },
+      {
+        "heading": 115,
+        "speed": 63,
+        "latitude": 40.438428,
+        "longitude": 50.016667,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:11:40.181Z"
+      },
+      {
+        "heading": 115,
+        "timestamp": "2026-09-12T13:11:40.240Z",
+        "longitude": 50.016667,
+        "accuracy": 4,
+        "speed": 63,
+        "latitude": 40.438428
+      },
+      {
+        "latitude": 40.438356,
+        "accuracy": 4,
+        "speed": 62,
+        "timestamp": "2026-09-12T13:11:41.150Z",
+        "heading": 116,
+        "longitude": 50.016849
+      },
+      {
+        "latitude": 40.438286,
+        "heading": 116,
+        "accuracy": 4,
+        "speed": 64,
+        "longitude": 50.017037,
+        "timestamp": "2026-09-12T13:11:42.161Z"
+      },
+      {
+        "heading": 115,
+        "speed": 67,
+        "latitude": 40.438217,
+        "longitude": 50.017235,
+        "timestamp": "2026-09-12T13:11:43.184Z",
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:11:43.763Z",
+        "longitude": 50.017235,
+        "latitude": 40.438217,
+        "speed": 67,
+        "heading": 115
+      },
+      {
+        "timestamp": "2026-09-12T13:11:44.166Z",
+        "accuracy": 4,
+        "speed": 69,
+        "longitude": 50.017445,
+        "latitude": 40.438134,
+        "heading": 116
+      },
+      {
+        "heading": 116,
+        "speed": 70,
+        "longitude": 50.01765,
+        "timestamp": "2026-09-12T13:11:45.151Z",
+        "latitude": 40.438057,
+        "accuracy": 4
+      },
+      {
+        "heading": 116,
+        "longitude": 50.01786,
+        "timestamp": "2026-09-12T13:11:46.186Z",
+        "speed": 71,
+        "accuracy": 4,
+        "latitude": 40.437975
+      },
+      {
+        "speed": 69,
+        "accuracy": 4,
+        "latitude": 40.437897,
+        "heading": 117,
+        "timestamp": "2026-09-12T13:11:47.204Z",
+        "longitude": 50.018063
+      },
+      {
+        "timestamp": "2026-09-12T13:11:47.345Z",
+        "accuracy": 4,
+        "longitude": 50.018063,
+        "speed": 69,
+        "latitude": 40.437897,
+        "heading": 117
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.437816,
+        "speed": 68,
+        "heading": 117,
+        "timestamp": "2026-09-12T13:11:48.171Z",
+        "longitude": 50.018263
+      },
+      {
+        "latitude": 40.437739,
+        "accuracy": 4,
+        "heading": 116,
+        "longitude": 50.018464,
+        "speed": 69,
+        "timestamp": "2026-09-12T13:11:49.162Z"
+      },
+      {
+        "longitude": 50.018667,
+        "heading": 107,
+        "timestamp": "2026-09-12T13:11:50.220Z",
+        "speed": 69,
+        "latitude": 40.437658,
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.018667,
+        "timestamp": "2026-09-12T13:11:50.739Z",
+        "heading": 107,
+        "speed": 69,
+        "latitude": 40.437658,
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.437574,
+        "heading": 118,
+        "accuracy": 4,
+        "speed": 71,
+        "longitude": 50.018871,
+        "timestamp": "2026-09-12T13:11:51.191Z"
+      },
+      {
+        "heading": 117,
+        "timestamp": "2026-09-12T13:11:52.788Z",
+        "latitude": 40.437486,
+        "longitude": 50.019088,
+        "speed": 76,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "speed": 79,
+        "timestamp": "2026-09-12T13:11:53.247Z",
+        "latitude": 40.437399,
+        "longitude": 50.019315,
+        "heading": 116
+      },
+      {
+        "longitude": 50.019545,
+        "heading": 116,
+        "timestamp": "2026-09-12T13:11:54.194Z",
+        "latitude": 40.437317,
+        "speed": 81,
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.437317,
+        "speed": 81,
+        "accuracy": 4,
+        "heading": 116,
+        "longitude": 50.019545,
+        "timestamp": "2026-09-12T13:11:54.232Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:11:55.185Z",
+        "longitude": 50.019776,
+        "speed": 80,
+        "accuracy": 4,
+        "heading": 116,
+        "latitude": 40.437233
+      },
+      {
+        "longitude": 50.020012,
+        "heading": 116,
+        "timestamp": "2026-09-12T13:11:56.166Z",
+        "speed": 79,
+        "latitude": 40.437143,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:11:57.183Z",
+        "longitude": 50.020244,
+        "speed": 78,
+        "accuracy": 4,
+        "latitude": 40.437055,
+        "heading": 116
+      },
+      {
+        "longitude": 50.020244,
+        "timestamp": "2026-09-12T13:11:57.744Z",
+        "latitude": 40.437055,
+        "heading": 116,
+        "accuracy": 4,
+        "speed": 78
+      },
+      {
+        "longitude": 50.020484,
+        "speed": 80,
+        "timestamp": "2026-09-12T13:11:58.176Z",
+        "latitude": 40.436968,
+        "accuracy": 4,
+        "heading": 116
+      },
+      {
+        "timestamp": "2026-09-12T13:11:59.213Z",
+        "speed": 81,
+        "longitude": 50.020722,
+        "heading": 116,
+        "accuracy": 4,
+        "latitude": 40.436879
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.436787,
+        "speed": 81,
+        "timestamp": "2026-09-12T13:12:00.164Z",
+        "heading": 117,
+        "longitude": 50.020952
+      },
+      {
+        "heading": 117,
+        "longitude": 50.021181,
+        "speed": 81,
+        "timestamp": "2026-09-12T13:12:01.213Z",
+        "latitude": 40.4367,
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.021181,
+        "timestamp": "2026-09-12T13:12:01.303Z",
+        "heading": 117,
+        "speed": 81,
+        "latitude": 40.4367,
+        "accuracy": 4
+      },
+      {
+        "speed": 78,
+        "accuracy": 4,
+        "latitude": 40.436599,
+        "timestamp": "2026-09-12T13:12:02.196Z",
+        "longitude": 50.021413,
+        "heading": 118
+      },
+      {
+        "longitude": 50.021641,
+        "latitude": 40.436506,
+        "timestamp": "2026-09-12T13:12:03.184Z",
+        "heading": 118,
+        "accuracy": 4,
+        "speed": 78
+      },
+      {
+        "timestamp": "2026-09-12T13:12:04.165Z",
+        "longitude": 50.021874,
+        "speed": 79,
+        "accuracy": 4,
+        "heading": 116,
+        "latitude": 40.436416
+      },
+      {
+        "speed": 79,
+        "heading": 116,
+        "timestamp": "2026-09-12T13:12:04.742Z",
+        "accuracy": 4,
+        "longitude": 50.021874,
+        "latitude": 40.436416
+      },
+      {
+        "latitude": 40.436327,
+        "speed": 78,
+        "accuracy": 4,
+        "longitude": 50.022104,
+        "timestamp": "2026-09-12T13:12:05.178Z",
+        "heading": 116
+      },
+      {
+        "timestamp": "2026-09-12T13:12:06.173Z",
+        "longitude": 50.022336,
+        "accuracy": 4,
+        "speed": 77,
+        "latitude": 40.436243,
+        "heading": 115
+      },
+      {
+        "timestamp": "2026-09-12T13:12:07.166Z",
+        "speed": 76,
+        "heading": 115,
+        "longitude": 50.02256,
+        "accuracy": 4,
+        "latitude": 40.436164
+      },
+      {
+        "latitude": 40.43609,
+        "longitude": 50.022782,
+        "timestamp": "2026-09-12T13:12:08.205Z",
+        "accuracy": 4,
+        "heading": 113,
+        "speed": 74
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:12:08.260Z",
+        "longitude": 50.022782,
+        "latitude": 40.43609,
+        "heading": 113,
+        "speed": 74
+      },
+      {
+        "heading": 112,
+        "latitude": 40.436021,
+        "longitude": 50.023006,
+        "timestamp": "2026-09-12T13:12:09.189Z",
+        "speed": 74,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "speed": 75,
+        "longitude": 50.023231,
+        "latitude": 40.435955,
+        "heading": 110,
+        "timestamp": "2026-09-12T13:12:10.171Z"
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.435892,
+        "timestamp": "2026-09-12T13:12:11.146Z",
+        "longitude": 50.023467,
+        "speed": 76,
+        "heading": 109
+      },
+      {
+        "longitude": 50.023467,
+        "heading": 109,
+        "timestamp": "2026-09-12T13:12:11.792Z",
+        "latitude": 40.435892,
+        "speed": 76,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:12:12.202Z",
+        "heading": 108,
+        "longitude": 50.023706,
+        "accuracy": 4,
+        "speed": 76,
+        "latitude": 40.43583
+      },
+      {
+        "speed": 77,
+        "latitude": 40.435774,
+        "longitude": 50.02395,
+        "heading": 106,
+        "timestamp": "2026-09-12T13:12:13.172Z",
+        "accuracy": 4
+      },
+      {
+        "heading": 105,
+        "speed": 78,
+        "longitude": 50.024203,
+        "timestamp": "2026-09-12T13:12:14.194Z",
+        "latitude": 40.435724,
+        "accuracy": 4
+      },
+      {
+        "heading": 103,
+        "latitude": 40.435678,
+        "accuracy": 4,
+        "longitude": 50.024451,
+        "speed": 79,
+        "timestamp": "2026-09-12T13:12:15.283Z"
+      },
+      {
+        "longitude": 50.024451,
+        "timestamp": "2026-09-12T13:12:15.297Z",
+        "heading": 103,
+        "latitude": 40.435678,
+        "speed": 79,
+        "accuracy": 4
+      },
+      {
+        "heading": 101,
+        "speed": 79,
+        "longitude": 50.024698,
+        "latitude": 40.435635,
+        "timestamp": "2026-09-12T13:12:16.205Z",
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "heading": 98,
+        "latitude": 40.435597,
+        "timestamp": "2026-09-12T13:12:17.208Z",
+        "speed": 79,
+        "longitude": 50.024954
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:12:18.350Z",
+        "latitude": 40.435562,
+        "longitude": 50.025204,
+        "heading": 98,
+        "speed": 78
+      },
+      {
+        "latitude": 40.435562,
+        "heading": 98,
+        "longitude": 50.025204,
+        "timestamp": "2026-09-12T13:12:18.746Z",
+        "accuracy": 4,
+        "speed": 78
+      },
+      {
+        "latitude": 40.435531,
+        "longitude": 50.02545,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:12:19.163Z",
+        "heading": 98,
+        "speed": 77
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:12:20.168Z",
+        "longitude": 50.025696,
+        "latitude": 40.435501,
+        "speed": 77,
+        "heading": 97
+      },
+      {
+        "speed": 76,
+        "latitude": 40.435477,
+        "accuracy": 4,
+        "longitude": 50.025945,
+        "heading": 97,
+        "timestamp": "2026-09-12T13:12:21.162Z"
+      },
+      {
+        "latitude": 40.435463,
+        "heading": 98,
+        "accuracy": 4,
+        "speed": 75,
+        "longitude": 50.026192,
+        "timestamp": "2026-09-12T13:12:22.301Z"
+      },
+      {
+        "latitude": 40.435463,
+        "longitude": 50.026192,
+        "heading": 98,
+        "accuracy": 4,
+        "speed": 75,
+        "timestamp": "2026-09-12T13:12:22.407Z"
+      },
+      {
+        "heading": 97,
+        "latitude": 40.435453,
+        "accuracy": 4,
+        "speed": 75,
+        "longitude": 50.026437,
+        "timestamp": "2026-09-12T13:12:23.161Z"
+      },
+      {
+        "speed": 74,
+        "timestamp": "2026-09-12T13:12:24.178Z",
+        "accuracy": 4,
+        "longitude": 50.026677,
+        "heading": 95,
+        "latitude": 40.435452
+      },
+      {
+        "speed": 74,
+        "timestamp": "2026-09-12T13:12:25.187Z",
+        "longitude": 50.026917,
+        "heading": 92,
+        "latitude": 40.43545,
+        "accuracy": 4
+      },
+      {
+        "speed": 74,
+        "heading": 92,
+        "longitude": 50.026917,
+        "timestamp": "2026-09-12T13:12:25.789Z",
+        "latitude": 40.43545,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "heading": 91,
+        "latitude": 40.435451,
+        "speed": 74,
+        "timestamp": "2026-09-12T13:12:26.167Z",
+        "longitude": 50.027161
+      },
+      {
+        "speed": 73,
+        "heading": 89,
+        "timestamp": "2026-09-12T13:12:27.183Z",
+        "accuracy": 4,
+        "longitude": 50.027403,
+        "latitude": 40.435459
+      },
+      {
+        "latitude": 40.435467,
+        "accuracy": 4,
+        "heading": 87,
+        "timestamp": "2026-09-12T13:12:28.191Z",
+        "speed": 73,
+        "longitude": 50.027639
+      },
+      {
+        "heading": 84,
+        "speed": 73,
+        "longitude": 50.027868,
+        "latitude": 40.435475,
+        "timestamp": "2026-09-12T13:12:29.150Z",
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.027868,
+        "timestamp": "2026-09-12T13:12:29.258Z",
+        "heading": 84,
+        "latitude": 40.435475,
+        "speed": 73,
+        "accuracy": 4
+      },
+      {
+        "speed": 73,
+        "accuracy": 4,
+        "latitude": 40.435491,
+        "heading": 84,
+        "longitude": 50.028109,
+        "timestamp": "2026-09-12T13:12:30.229Z"
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:12:31.218Z",
+        "speed": 73,
+        "longitude": 50.028347,
+        "latitude": 40.435513,
+        "heading": 82
+      },
+      {
+        "accuracy": 4,
+        "speed": 73,
+        "timestamp": "2026-09-12T13:12:32.172Z",
+        "latitude": 40.435537,
+        "longitude": 50.028582,
+        "heading": 80
+      },
+      {
+        "speed": 73,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:12:32.769Z",
+        "longitude": 50.028582,
+        "heading": 80,
+        "latitude": 40.435537
+      },
+      {
+        "timestamp": "2026-09-12T13:12:33.158Z",
+        "longitude": 50.028826,
+        "speed": 74,
+        "heading": 79,
+        "accuracy": 4,
+        "latitude": 40.435563
+      },
+      {
+        "heading": 61,
+        "longitude": 50.029067,
+        "latitude": 40.435595,
+        "speed": 74,
+        "timestamp": "2026-09-12T13:12:34.187Z",
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "longitude": 50.029307,
+        "timestamp": "2026-09-12T13:12:35.286Z",
+        "latitude": 40.43563,
+        "speed": 74,
+        "heading": 78
+      },
+      {
+        "accuracy": 4,
+        "speed": 74,
+        "latitude": 40.435672,
+        "timestamp": "2026-09-12T13:12:36.241Z",
+        "longitude": 50.029541,
+        "heading": 76
+      },
+      {
+        "speed": 74,
+        "timestamp": "2026-09-12T13:12:36.255Z",
+        "longitude": 50.029541,
+        "heading": 76,
+        "accuracy": 4,
+        "latitude": 40.435672
+      },
+      {
+        "heading": 75,
+        "speed": 74,
+        "longitude": 50.029775,
+        "timestamp": "2026-09-12T13:12:37.157Z",
+        "latitude": 40.435718,
+        "accuracy": 4
+      },
+      {
+        "heading": 74,
+        "longitude": 50.030012,
+        "latitude": 40.43577,
+        "timestamp": "2026-09-12T13:12:38.227Z",
+        "accuracy": 4,
+        "speed": 76
+      },
+      {
+        "latitude": 40.435822,
+        "speed": 79,
+        "accuracy": 4,
+        "longitude": 50.030257,
+        "timestamp": "2026-09-12T13:12:39.274Z",
+        "heading": 73
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:12:39.757Z",
+        "latitude": 40.435822,
+        "longitude": 50.030257,
+        "speed": 79,
+        "heading": 73
+      },
+      {
+        "latitude": 40.43588,
+        "longitude": 50.030502,
+        "timestamp": "2026-09-12T13:12:40.193Z",
+        "heading": 71,
+        "accuracy": 4,
+        "speed": 79
+      },
+      {
+        "latitude": 40.435941,
+        "speed": 78,
+        "accuracy": 4,
+        "heading": 70,
+        "longitude": 50.030742,
+        "timestamp": "2026-09-12T13:12:41.165Z"
+      },
+      {
+        "heading": 70,
+        "latitude": 40.436008,
+        "speed": 77,
+        "accuracy": 4,
+        "longitude": 50.030977,
+        "timestamp": "2026-09-12T13:12:42.205Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:12:43.180Z",
+        "longitude": 50.031205,
+        "accuracy": 4,
+        "speed": 75,
+        "heading": 68,
+        "latitude": 40.436075
+      },
+      {
+        "timestamp": "2026-09-12T13:12:43.235Z",
+        "speed": 75,
+        "longitude": 50.031205,
+        "heading": 68,
+        "latitude": 40.436075,
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.031439,
+        "timestamp": "2026-09-12T13:12:44.199Z",
+        "heading": 67,
+        "latitude": 40.43615,
+        "speed": 78,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.436229,
+        "heading": 65,
+        "timestamp": "2026-09-12T13:12:45.182Z",
+        "speed": 78,
+        "longitude": 50.031667
+      },
+      {
+        "speed": 78,
+        "heading": 64,
+        "longitude": 50.031898,
+        "latitude": 40.436315,
+        "timestamp": "2026-09-12T13:12:46.207Z",
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.436315,
+        "speed": 78,
+        "heading": 64,
+        "longitude": 50.031898,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:12:46.759Z"
+      },
+      {
+        "speed": 78,
+        "heading": 63,
+        "timestamp": "2026-09-12T13:12:47.166Z",
+        "longitude": 50.032125,
+        "accuracy": 4,
+        "latitude": 40.436407
+      },
+      {
+        "heading": 61,
+        "longitude": 50.032354,
+        "latitude": 40.436501,
+        "timestamp": "2026-09-12T13:12:48.201Z",
+        "speed": 78,
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.032584,
+        "heading": 61,
+        "timestamp": "2026-09-12T13:12:49.144Z",
+        "latitude": 40.436598,
+        "speed": 80,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.436699,
+        "timestamp": "2026-09-12T13:12:50.166Z",
+        "speed": 82,
+        "longitude": 50.032819,
+        "heading": 60
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.436699,
+        "speed": 82,
+        "heading": 60,
+        "timestamp": "2026-09-12T13:12:50.238Z",
+        "longitude": 50.032819
+      },
+      {
+        "longitude": 50.033057,
+        "timestamp": "2026-09-12T13:12:51.164Z",
+        "heading": 59,
+        "speed": 83,
+        "latitude": 40.436798,
+        "accuracy": 4
+      },
+      {
+        "speed": 84,
+        "accuracy": 4,
+        "latitude": 40.436902,
+        "heading": 59,
+        "timestamp": "2026-09-12T13:12:52.180Z",
+        "longitude": 50.033296
+      },
+      {
+        "timestamp": "2026-09-12T13:12:53.182Z",
+        "accuracy": 4,
+        "speed": 85,
+        "longitude": 50.033535,
+        "latitude": 40.437011,
+        "heading": 59
+      },
+      {
+        "accuracy": 4,
+        "speed": 85,
+        "latitude": 40.437011,
+        "heading": 59,
+        "timestamp": "2026-09-12T13:12:53.752Z",
+        "longitude": 50.033535
+      },
+      {
+        "speed": 85,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:12:54.169Z",
+        "longitude": 50.033774,
+        "heading": 60,
+        "latitude": 40.437115
+      },
+      {
+        "accuracy": 4,
+        "speed": 85,
+        "latitude": 40.437219,
+        "heading": 60,
+        "timestamp": "2026-09-12T13:12:55.165Z",
+        "longitude": 50.034019
+      },
+      {
+        "speed": 88,
+        "heading": 61,
+        "latitude": 40.437325,
+        "longitude": 50.034272,
+        "timestamp": "2026-09-12T13:12:56.162Z",
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.437434,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:12:57.164Z",
+        "longitude": 50.034522,
+        "speed": 87,
+        "heading": 60
+      },
+      {
+        "latitude": 40.437434,
+        "longitude": 50.034522,
+        "heading": 60,
+        "accuracy": 4,
+        "speed": 87,
+        "timestamp": "2026-09-12T13:12:57.407Z"
+      },
+      {
+        "latitude": 40.437536,
+        "longitude": 50.034767,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:12:58.186Z",
+        "heading": 60,
+        "speed": 86
+      },
+      {
+        "timestamp": "2026-09-12T13:12:59.167Z",
+        "speed": 84,
+        "longitude": 50.035007,
+        "accuracy": 4,
+        "latitude": 40.437638,
+        "heading": 60
+      },
+      {
+        "heading": 60,
+        "latitude": 40.437738,
+        "accuracy": 4,
+        "speed": 83,
+        "longitude": 50.035248,
+        "timestamp": "2026-09-12T13:13:00.187Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:13:00.767Z",
+        "accuracy": 4,
+        "longitude": 50.035248,
+        "latitude": 40.437738,
+        "heading": 60,
+        "speed": 83
+      },
+      {
+        "timestamp": "2026-09-12T13:13:01.403Z",
+        "longitude": 50.035483,
+        "speed": 82,
+        "accuracy": 4,
+        "heading": 60,
+        "latitude": 40.43784
+      },
+      {
+        "longitude": 50.035717,
+        "latitude": 40.437942,
+        "timestamp": "2026-09-12T13:13:02.197Z",
+        "speed": 81,
+        "accuracy": 4,
+        "heading": 60
+      },
+      {
+        "heading": 60,
+        "longitude": 50.035947,
+        "timestamp": "2026-09-12T13:13:03.165Z",
+        "latitude": 40.438046,
+        "speed": 81,
+        "accuracy": 4
+      },
+      {
+        "speed": 80,
+        "heading": 60,
+        "timestamp": "2026-09-12T13:13:04.179Z",
+        "accuracy": 4,
+        "longitude": 50.036179,
+        "latitude": 40.438144
+      },
+      {
+        "timestamp": "2026-09-12T13:13:04.282Z",
+        "longitude": 50.036179,
+        "accuracy": 4,
+        "heading": 60,
+        "speed": 80,
+        "latitude": 40.438144
+      },
+      {
+        "latitude": 40.438237,
+        "longitude": 50.036403,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:05.203Z",
+        "speed": 79,
+        "heading": 60
+      },
+      {
+        "latitude": 40.438331,
+        "heading": 60,
+        "longitude": 50.036625,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:06.181Z",
+        "speed": 78
+      },
+      {
+        "speed": 78,
+        "timestamp": "2026-09-12T13:13:07.167Z",
+        "longitude": 50.036854,
+        "heading": 60,
+        "accuracy": 4,
+        "latitude": 40.438428
+      },
+      {
+        "heading": 60,
+        "longitude": 50.036854,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:07.787Z",
+        "speed": 78,
+        "latitude": 40.438428
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.438527,
+        "speed": 79,
+        "timestamp": "2026-09-12T13:13:08.168Z",
+        "longitude": 50.037075,
+        "heading": 59
+      },
+      {
+        "timestamp": "2026-09-12T13:13:09.176Z",
+        "longitude": 50.037296,
+        "speed": 78,
+        "heading": 59,
+        "accuracy": 4,
+        "latitude": 40.438628
+      },
+      {
+        "longitude": 50.037509,
+        "timestamp": "2026-09-12T13:13:10.192Z",
+        "speed": 76,
+        "latitude": 40.438726,
+        "accuracy": 4,
+        "heading": 59
+      },
+      {
+        "latitude": 40.438824,
+        "accuracy": 4,
+        "heading": 58,
+        "speed": 76,
+        "longitude": 50.037722,
+        "timestamp": "2026-09-12T13:13:11.170Z"
+      },
+      {
+        "latitude": 40.438824,
+        "speed": 76,
+        "heading": 58,
+        "longitude": 50.037722,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:11.247Z"
+      },
+      {
+        "latitude": 40.438926,
+        "accuracy": 4,
+        "heading": 58,
+        "speed": 76,
+        "longitude": 50.037931,
+        "timestamp": "2026-09-12T13:13:12.173Z"
+      },
+      {
+        "latitude": 40.439027,
+        "longitude": 50.038139,
+        "timestamp": "2026-09-12T13:13:13.180Z",
+        "accuracy": 4,
+        "speed": 76,
+        "heading": 57
+      },
+      {
+        "latitude": 40.439131,
+        "speed": 75,
+        "heading": 57,
+        "longitude": 50.038342,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:14.184Z"
+      },
+      {
+        "heading": 57,
+        "speed": 75,
+        "latitude": 40.439131,
+        "timestamp": "2026-09-12T13:13:14.747Z",
+        "accuracy": 4,
+        "longitude": 50.038342
+      },
+      {
+        "latitude": 40.439237,
+        "heading": 57,
+        "accuracy": 4,
+        "longitude": 50.038545,
+        "speed": 75,
+        "timestamp": "2026-09-12T13:13:15.174Z"
+      },
+      {
+        "speed": 76,
+        "timestamp": "2026-09-12T13:13:16.191Z",
+        "longitude": 50.038753,
+        "heading": 56,
+        "accuracy": 4,
+        "latitude": 40.439341
+      },
+      {
+        "speed": 77,
+        "heading": 56,
+        "longitude": 50.03897,
+        "timestamp": "2026-09-12T13:13:17.172Z",
+        "accuracy": 4,
+        "latitude": 40.439448
+      },
+      {
+        "speed": 78,
+        "timestamp": "2026-09-12T13:13:18.147Z",
+        "heading": 56,
+        "accuracy": 4,
+        "longitude": 50.039184,
+        "latitude": 40.439557
+      },
+      {
+        "heading": 56,
+        "latitude": 40.439557,
+        "timestamp": "2026-09-12T13:13:18.402Z",
+        "longitude": 50.039184,
+        "accuracy": 4,
+        "speed": 78
+      },
+      {
+        "longitude": 50.039394,
+        "timestamp": "2026-09-12T13:13:19.174Z",
+        "heading": 55,
+        "latitude": 40.439667,
+        "speed": 77,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.439777,
+        "speed": 77,
+        "heading": 55,
+        "timestamp": "2026-09-12T13:13:20.171Z",
+        "longitude": 50.039602
+      },
+      {
+        "heading": 55,
+        "timestamp": "2026-09-12T13:13:21.330Z",
+        "speed": 76,
+        "longitude": 50.039807,
+        "latitude": 40.439887,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "longitude": 50.039807,
+        "latitude": 40.439887,
+        "speed": 76,
+        "timestamp": "2026-09-12T13:13:21.753Z",
+        "heading": 55
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.440002,
+        "speed": 77,
+        "heading": 55,
+        "timestamp": "2026-09-12T13:13:22.161Z",
+        "longitude": 50.040016
+      },
+      {
+        "heading": 55,
+        "latitude": 40.440112,
+        "accuracy": 4,
+        "speed": 78,
+        "longitude": 50.040229,
+        "timestamp": "2026-09-12T13:13:23.198Z"
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:24.162Z",
+        "latitude": 40.440227,
+        "longitude": 50.040437,
+        "speed": 77,
+        "heading": 55
+      },
+      {
+        "speed": 76,
+        "accuracy": 4,
+        "latitude": 40.440334,
+        "heading": 55,
+        "timestamp": "2026-09-12T13:13:25.177Z",
+        "longitude": 50.040642
+      },
+      {
+        "heading": 55,
+        "speed": 76,
+        "longitude": 50.040642,
+        "latitude": 40.440334,
+        "timestamp": "2026-09-12T13:13:25.243Z",
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.440447,
+        "longitude": 50.040845,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:26.177Z",
+        "heading": 55,
+        "speed": 77
+      },
+      {
+        "speed": 77,
+        "heading": 55,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:27.165Z",
+        "latitude": 40.440558,
+        "longitude": 50.041052
+      },
+      {
+        "longitude": 50.041261,
+        "timestamp": "2026-09-12T13:13:28.167Z",
+        "heading": 54,
+        "latitude": 40.440667,
+        "speed": 77,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:28.758Z",
+        "latitude": 40.440667,
+        "longitude": 50.041261,
+        "heading": 54,
+        "speed": 77
+      },
+      {
+        "heading": 54,
+        "longitude": 50.041462,
+        "timestamp": "2026-09-12T13:13:29.167Z",
+        "latitude": 40.440776,
+        "speed": 76,
+        "accuracy": 4
+      },
+      {
+        "speed": 76,
+        "timestamp": "2026-09-12T13:13:30.188Z",
+        "heading": 55,
+        "accuracy": 4,
+        "longitude": 50.041665,
+        "latitude": 40.440886
+      },
+      {
+        "heading": 55,
+        "longitude": 50.041868,
+        "timestamp": "2026-09-12T13:13:31.195Z",
+        "latitude": 40.440996,
+        "speed": 76,
+        "accuracy": 4
+      },
+      {
+        "speed": 75,
+        "latitude": 40.441102,
+        "longitude": 50.04207,
+        "heading": 55,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:32.158Z"
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.441102,
+        "speed": 75,
+        "timestamp": "2026-09-12T13:13:32.236Z",
+        "longitude": 50.04207,
+        "heading": 55
+      },
+      {
+        "latitude": 40.441206,
+        "accuracy": 4,
+        "heading": 55,
+        "longitude": 50.042269,
+        "speed": 74,
+        "timestamp": "2026-09-12T13:13:33.193Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:13:34.177Z",
+        "longitude": 50.04247,
+        "speed": 75,
+        "heading": 54,
+        "accuracy": 4,
+        "latitude": 40.441315
+      },
+      {
+        "latitude": 40.441427,
+        "longitude": 50.042676,
+        "timestamp": "2026-09-12T13:13:35.200Z",
+        "accuracy": 4,
+        "speed": 76,
+        "heading": 55
+      },
+      {
+        "heading": 55,
+        "speed": 76,
+        "accuracy": 4,
+        "longitude": 50.042676,
+        "latitude": 40.441427,
+        "timestamp": "2026-09-12T13:13:35.760Z"
+      },
+      {
+        "speed": 77,
+        "timestamp": "2026-09-12T13:13:36.208Z",
+        "accuracy": 4,
+        "longitude": 50.042884,
+        "heading": 54,
+        "latitude": 40.441537
+      },
+      {
+        "speed": 78,
+        "heading": 54,
+        "longitude": 50.043095,
+        "latitude": 40.441646,
+        "timestamp": "2026-09-12T13:13:37.149Z",
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:13:38.199Z",
+        "speed": 78,
+        "longitude": 50.043305,
+        "heading": 55,
+        "accuracy": 4,
+        "latitude": 40.441758
+      },
+      {
+        "heading": 55,
+        "speed": 78,
+        "longitude": 50.043516,
+        "timestamp": "2026-09-12T13:13:39.169Z",
+        "latitude": 40.441868,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:13:39.239Z",
+        "longitude": 50.043516,
+        "heading": 55,
+        "accuracy": 4,
+        "speed": 78,
+        "latitude": 40.441868
+      },
+      {
+        "heading": 55,
+        "timestamp": "2026-09-12T13:13:40.138Z",
+        "longitude": 50.043725,
+        "accuracy": 4,
+        "latitude": 40.441979,
+        "speed": 78
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:41.194Z",
+        "speed": 78,
+        "latitude": 40.442091,
+        "longitude": 50.043932,
+        "heading": 55
+      },
+      {
+        "accuracy": 4,
+        "speed": 79,
+        "latitude": 40.442206,
+        "timestamp": "2026-09-12T13:13:42.221Z",
+        "longitude": 50.044144,
+        "heading": 55
+      },
+      {
+        "longitude": 50.044144,
+        "timestamp": "2026-09-12T13:13:42.759Z",
+        "speed": 79,
+        "heading": 55,
+        "latitude": 40.442206,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:13:43.206Z",
+        "longitude": 50.044357,
+        "heading": 54,
+        "accuracy": 4,
+        "latitude": 40.442322,
+        "speed": 80
+      },
+      {
+        "heading": 55,
+        "longitude": 50.044572,
+        "latitude": 40.442436,
+        "speed": 81,
+        "timestamp": "2026-09-12T13:13:44.179Z",
+        "accuracy": 4
+      },
+      {
+        "speed": 81,
+        "heading": 55,
+        "timestamp": "2026-09-12T13:13:45.185Z",
+        "longitude": 50.044791,
+        "accuracy": 4,
+        "latitude": 40.442554
+      },
+      {
+        "speed": 82,
+        "heading": 55,
+        "latitude": 40.442671,
+        "longitude": 50.045011,
+        "timestamp": "2026-09-12T13:13:46.188Z",
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:13:46.507Z",
+        "speed": 82,
+        "longitude": 50.045011,
+        "accuracy": 4,
+        "heading": 55,
+        "latitude": 40.442671
+      },
+      {
+        "longitude": 50.045235,
+        "speed": 83,
+        "timestamp": "2026-09-12T13:13:47.163Z",
+        "heading": 55,
+        "latitude": 40.442788,
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.045461,
+        "timestamp": "2026-09-12T13:13:48.172Z",
+        "heading": 55,
+        "speed": 84,
+        "latitude": 40.44291,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:13:49.210Z",
+        "accuracy": 4,
+        "speed": 85,
+        "longitude": 50.045687,
+        "latitude": 40.443035,
+        "heading": 55
+      },
+      {
+        "longitude": 50.045687,
+        "timestamp": "2026-09-12T13:13:49.804Z",
+        "heading": 55,
+        "latitude": 40.443035,
+        "speed": 85,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "heading": 56,
+        "latitude": 40.44316,
+        "speed": 86,
+        "timestamp": "2026-09-12T13:13:50.164Z",
+        "longitude": 50.04592
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.443277,
+        "speed": 87,
+        "timestamp": "2026-09-12T13:13:51.168Z",
+        "longitude": 50.04616,
+        "heading": 57
+      },
+      {
+        "timestamp": "2026-09-12T13:13:52.178Z",
+        "longitude": 50.046406,
+        "accuracy": 4,
+        "speed": 89,
+        "latitude": 40.443398,
+        "heading": 57
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.44352,
+        "heading": 57,
+        "timestamp": "2026-09-12T13:13:53.230Z",
+        "speed": 90,
+        "longitude": 50.046654
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:53.402Z",
+        "latitude": 40.44352,
+        "longitude": 50.046654,
+        "speed": 90,
+        "heading": 57
+      },
+      {
+        "speed": 91,
+        "longitude": 50.046905,
+        "heading": 57,
+        "timestamp": "2026-09-12T13:13:54.179Z",
+        "latitude": 40.443644,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.443771,
+        "heading": 57,
+        "timestamp": "2026-09-12T13:13:55.165Z",
+        "speed": 92,
+        "longitude": 50.04716
+      },
+      {
+        "timestamp": "2026-09-12T13:13:56.188Z",
+        "longitude": 50.047408,
+        "speed": 92,
+        "latitude": 40.443897,
+        "accuracy": 4,
+        "heading": 57
+      },
+      {
+        "longitude": 50.047408,
+        "timestamp": "2026-09-12T13:13:56.765Z",
+        "speed": 92,
+        "heading": 57,
+        "latitude": 40.443897,
+        "accuracy": 4
+      },
+      {
+        "speed": 91,
+        "latitude": 40.444023,
+        "heading": 57,
+        "longitude": 50.04766,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:57.202Z"
+      },
+      {
+        "latitude": 40.44415,
+        "longitude": 50.047908,
+        "heading": 57,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:58.183Z",
+        "speed": 91
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:13:59.327Z",
+        "latitude": 40.444275,
+        "longitude": 50.048159,
+        "speed": 92,
+        "heading": 57
+      },
+      {
+        "latitude": 40.444401,
+        "heading": 56,
+        "accuracy": 4,
+        "speed": 92,
+        "timestamp": "2026-09-12T13:14:00.199Z",
+        "longitude": 50.048412
+      },
+      {
+        "latitude": 40.444401,
+        "accuracy": 4,
+        "heading": 56,
+        "speed": 92,
+        "longitude": 50.048412,
+        "timestamp": "2026-09-12T13:14:00.304Z"
+      },
+      {
+        "latitude": 40.444526,
+        "longitude": 50.048656,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:14:01.196Z",
+        "speed": 90,
+        "heading": 56
+      },
+      {
+        "latitude": 40.444647,
+        "accuracy": 4,
+        "heading": 56,
+        "timestamp": "2026-09-12T13:14:02.166Z",
+        "longitude": 50.048894,
+        "speed": 88
+      },
+      {
+        "latitude": 40.444772,
+        "speed": 88,
+        "accuracy": 4,
+        "longitude": 50.049135,
+        "timestamp": "2026-09-12T13:14:03.323Z",
+        "heading": 56
+      },
+      {
+        "speed": 88,
+        "longitude": 50.049135,
+        "timestamp": "2026-09-12T13:14:03.902Z",
+        "heading": 56,
+        "latitude": 40.444772,
+        "accuracy": 4
+      },
+      {
+        "speed": 90,
+        "timestamp": "2026-09-12T13:14:04.167Z",
+        "heading": 58,
+        "accuracy": 4,
+        "longitude": 50.049389,
+        "latitude": 40.444897
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.445013,
+        "timestamp": "2026-09-12T13:14:05.162Z",
+        "speed": 91,
+        "longitude": 50.049646,
+        "heading": 61
+      },
+      {
+        "heading": 64,
+        "speed": 93,
+        "latitude": 40.445118,
+        "longitude": 50.049915,
+        "timestamp": "2026-09-12T13:14:06.171Z",
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.44521,
+        "speed": 94,
+        "accuracy": 4,
+        "longitude": 50.050195,
+        "heading": 69,
+        "timestamp": "2026-09-12T13:14:07.213Z"
+      },
+      {
+        "latitude": 40.44521,
+        "speed": 94,
+        "longitude": 50.050195,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:14:07.313Z",
+        "heading": 69
+      },
+      {
+        "heading": 73,
+        "speed": 95,
+        "longitude": 50.050486,
+        "timestamp": "2026-09-12T13:14:08.219Z",
+        "accuracy": 4,
+        "latitude": 40.445285
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.445341,
+        "speed": 95,
+        "timestamp": "2026-09-12T13:14:09.184Z",
+        "heading": 77,
+        "longitude": 50.05079
+      },
+      {
+        "heading": 82,
+        "speed": 95,
+        "longitude": 50.051096,
+        "latitude": 40.445378,
+        "timestamp": "2026-09-12T13:14:10.198Z",
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "speed": 95,
+        "latitude": 40.445378,
+        "timestamp": "2026-09-12T13:14:10.750Z",
+        "heading": 82,
+        "longitude": 50.051096
+      },
+      {
+        "longitude": 50.051402,
+        "timestamp": "2026-09-12T13:14:11.210Z",
+        "heading": 87,
+        "latitude": 40.445394,
+        "speed": 95,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.445388,
+        "timestamp": "2026-09-12T13:14:12.173Z",
+        "heading": 92,
+        "longitude": 50.05171,
+        "speed": 95
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.445362,
+        "heading": 96,
+        "timestamp": "2026-09-12T13:14:13.159Z",
+        "longitude": 50.052021,
+        "speed": 96
+      },
+      {
+        "longitude": 50.052327,
+        "speed": 96,
+        "timestamp": "2026-09-12T13:14:14.196Z",
+        "heading": 101,
+        "latitude": 40.445314,
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.445314,
+        "accuracy": 4,
+        "longitude": 50.052327,
+        "heading": 101,
+        "timestamp": "2026-09-12T13:14:14.606Z",
+        "speed": 96
+      },
+      {
+        "heading": 105,
+        "longitude": 50.052628,
+        "speed": 97,
+        "timestamp": "2026-09-12T13:14:15.174Z",
+        "latitude": 40.445251,
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.445168,
+        "speed": 97,
+        "heading": 110,
+        "accuracy": 4,
+        "longitude": 50.052925,
+        "timestamp": "2026-09-12T13:14:16.168Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:14:17.146Z",
+        "longitude": 50.053214,
+        "speed": 97,
+        "accuracy": 4,
+        "heading": 114,
+        "latitude": 40.445069
+      },
+      {
+        "speed": 97,
+        "timestamp": "2026-09-12T13:14:17.785Z",
+        "accuracy": 4,
+        "longitude": 50.053214,
+        "heading": 114,
+        "latitude": 40.445069
+      },
+      {
+        "timestamp": "2026-09-12T13:14:18.170Z",
+        "longitude": 50.053489,
+        "speed": 97,
+        "accuracy": 4,
+        "heading": 119,
+        "latitude": 40.444945
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:14:19.191Z",
+        "speed": 98,
+        "longitude": 50.053754,
+        "latitude": 40.444809,
+        "heading": 124
+      },
+      {
+        "speed": 97,
+        "heading": 129,
+        "timestamp": "2026-09-12T13:14:20.197Z",
+        "longitude": 50.053996,
+        "accuracy": 4,
+        "latitude": 40.444652
+      },
+      {
+        "latitude": 40.444482,
+        "accuracy": 4,
+        "speed": 97,
+        "timestamp": "2026-09-12T13:14:21.167Z",
+        "heading": 134,
+        "longitude": 50.054221
+      },
+      {
+        "heading": 134,
+        "speed": 97,
+        "longitude": 50.054221,
+        "latitude": 40.444482,
+        "timestamp": "2026-09-12T13:14:21.302Z",
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:14:22.190Z",
+        "accuracy": 4,
+        "longitude": 50.054426,
+        "heading": 139,
+        "speed": 97,
+        "latitude": 40.444296
+      },
+      {
+        "timestamp": "2026-09-12T13:14:23.173Z",
+        "longitude": 50.054613,
+        "speed": 98,
+        "accuracy": 4,
+        "heading": 144,
+        "latitude": 40.444096
+      },
+      {
+        "speed": 98,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:14:24.160Z",
+        "latitude": 40.443881,
+        "longitude": 50.054774,
+        "heading": 148
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:14:24.749Z",
+        "speed": 98,
+        "longitude": 50.054774,
+        "latitude": 40.443881,
+        "heading": 148
+      },
+      {
+        "timestamp": "2026-09-12T13:14:25.206Z",
+        "speed": 99,
+        "longitude": 50.054921,
+        "accuracy": 4,
+        "latitude": 40.443663,
+        "heading": 152
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.443435,
+        "speed": 100,
+        "timestamp": "2026-09-12T13:14:26.202Z",
+        "heading": 154,
+        "longitude": 50.055055
+      },
+      {
+        "heading": 155,
+        "latitude": 40.443201,
+        "accuracy": 4,
+        "speed": 101,
+        "longitude": 50.055187,
+        "timestamp": "2026-09-12T13:14:27.205Z"
+      },
+      {
+        "speed": 101,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:14:28.158Z",
+        "latitude": 40.442971,
+        "longitude": 50.055315,
+        "heading": 155
+      },
+      {
+        "speed": 101,
+        "heading": 155,
+        "latitude": 40.442971,
+        "longitude": 50.055315,
+        "timestamp": "2026-09-12T13:14:28.602Z",
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.055444,
+        "heading": 156,
+        "timestamp": "2026-09-12T13:14:29.193Z",
+        "speed": 101,
+        "latitude": 40.442737,
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.442503,
+        "accuracy": 4,
+        "heading": 157,
+        "speed": 102,
+        "longitude": 50.055573,
+        "timestamp": "2026-09-12T13:14:30.175Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:14:31.210Z",
+        "heading": 159,
+        "longitude": 50.055715,
+        "speed": 103,
+        "latitude": 40.442269,
+        "accuracy": 4
+      },
+      {
+        "heading": 159,
+        "longitude": 50.055715,
+        "timestamp": "2026-09-12T13:14:32.123Z",
+        "speed": 103,
+        "latitude": 40.442269,
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.055855,
+        "timestamp": "2026-09-12T13:14:32.312Z",
+        "heading": 155,
+        "latitude": 40.442038,
+        "speed": 102,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:14:33.183Z",
+        "heading": 155,
+        "longitude": 50.055993,
+        "accuracy": 4,
+        "speed": 100,
+        "latitude": 40.441808
+      },
+      {
+        "timestamp": "2026-09-12T13:14:34.184Z",
+        "speed": 98,
+        "longitude": 50.056129,
+        "accuracy": 4,
+        "heading": 156,
+        "latitude": 40.441577
+      },
+      {
+        "heading": 156,
+        "latitude": 40.441357,
+        "longitude": 50.056259,
+        "timestamp": "2026-09-12T13:14:35.184Z",
+        "speed": 96,
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.056259,
+        "heading": 156,
+        "timestamp": "2026-09-12T13:14:35.305Z",
+        "speed": 96,
+        "latitude": 40.441357,
+        "accuracy": 4
+      },
+      {
+        "speed": 93,
+        "heading": 156,
+        "longitude": 50.056387,
+        "latitude": 40.44114,
+        "timestamp": "2026-09-12T13:14:36.147Z",
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "heading": 156,
+        "timestamp": "2026-09-12T13:14:37.203Z",
+        "latitude": 40.440927,
+        "longitude": 50.056511,
+        "speed": 91
+      },
+      {
+        "timestamp": "2026-09-12T13:14:38.175Z",
+        "longitude": 50.056632,
+        "speed": 90,
+        "accuracy": 4,
+        "latitude": 40.440721,
+        "heading": 155
+      },
+      {
+        "speed": 90,
+        "accuracy": 4,
+        "latitude": 40.440721,
+        "longitude": 50.056632,
+        "heading": 155,
+        "timestamp": "2026-09-12T13:14:38.733Z"
+      },
+      {
+        "speed": 88,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:14:39.303Z",
+        "longitude": 50.056749,
+        "heading": 140,
+        "latitude": 40.440518
+      },
+      {
+        "timestamp": "2026-09-12T13:14:40.240Z",
+        "longitude": 50.05686,
+        "latitude": 40.440318,
+        "speed": 87,
+        "heading": 156,
+        "accuracy": 4
+      },
+      {
+        "speed": 87,
+        "heading": 157,
+        "longitude": 50.056969,
+        "timestamp": "2026-09-12T13:14:41.207Z",
+        "latitude": 40.440117,
+        "accuracy": 4
+      },
+      {
+        "speed": 87,
+        "timestamp": "2026-09-12T13:14:42.157Z",
+        "longitude": 50.057076,
+        "accuracy": 4,
+        "latitude": 40.439917,
+        "heading": 157
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.439917,
+        "heading": 157,
+        "timestamp": "2026-09-12T13:14:42.303Z",
+        "speed": 87,
+        "longitude": 50.057076
+      },
+      {
+        "latitude": 40.439717,
+        "longitude": 50.057182,
+        "heading": 157,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:14:43.159Z",
+        "speed": 87
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.439516,
+        "heading": 158,
+        "longitude": 50.057284,
+        "timestamp": "2026-09-12T13:14:44.214Z",
+        "speed": 87
+      },
+      {
+        "timestamp": "2026-09-12T13:14:45.173Z",
+        "speed": 86,
+        "accuracy": 4,
+        "longitude": 50.057373,
+        "latitude": 40.439317,
+        "heading": 159
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.439317,
+        "speed": 86,
+        "timestamp": "2026-09-12T13:14:45.747Z",
+        "heading": 159,
+        "longitude": 50.057373
+      },
+      {
+        "speed": 85,
+        "accuracy": 4,
+        "latitude": 40.439115,
+        "timestamp": "2026-09-12T13:14:46.173Z",
+        "longitude": 50.057469,
+        "heading": 159
+      },
+      {
+        "accuracy": 4,
+        "speed": 84,
+        "latitude": 40.438918,
+        "heading": 160,
+        "timestamp": "2026-09-12T13:14:47.203Z",
+        "longitude": 50.057564
+      },
+      {
+        "latitude": 40.438721,
+        "longitude": 50.057659,
+        "timestamp": "2026-09-12T13:14:48.218Z",
+        "accuracy": 4,
+        "speed": 84,
+        "heading": 161
+      },
+      {
+        "accuracy": 4,
+        "speed": 84,
+        "latitude": 40.438521,
+        "timestamp": "2026-09-12T13:14:49.221Z",
+        "heading": 162,
+        "longitude": 50.057743
+      },
+      {
+        "heading": 162,
+        "longitude": 50.057743,
+        "timestamp": "2026-09-12T13:14:49.405Z",
+        "speed": 84,
+        "accuracy": 4,
+        "latitude": 40.438521
+      },
+      {
+        "latitude": 40.438321,
+        "heading": 162,
+        "accuracy": 4,
+        "speed": 85,
+        "longitude": 50.057831,
+        "timestamp": "2026-09-12T13:14:50.206Z"
+      },
+      {
+        "timestamp": "2026-09-12T13:14:51.205Z",
+        "longitude": 50.057912,
+        "speed": 85,
+        "heading": 163,
+        "accuracy": 4,
+        "latitude": 40.438116
+      },
+      {
+        "timestamp": "2026-09-12T13:14:52.168Z",
+        "longitude": 50.057991,
+        "heading": 163,
+        "latitude": 40.437911,
+        "speed": 86,
+        "accuracy": 4
+      },
+      {
+        "heading": 163,
+        "latitude": 40.437911,
+        "longitude": 50.057991,
+        "timestamp": "2026-09-12T13:14:52.747Z",
+        "accuracy": 4,
+        "speed": 86
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:14:53.207Z",
+        "longitude": 50.058068,
+        "latitude": 40.437705,
+        "speed": 86,
+        "heading": 163
+      },
+      {
+        "latitude": 40.437496,
+        "heading": 164,
+        "longitude": 50.058147,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:14:54.168Z",
+        "speed": 86
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.437291,
+        "timestamp": "2026-09-12T13:14:55.229Z",
+        "longitude": 50.05822,
+        "speed": 86,
+        "heading": 164
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:14:56.198Z",
+        "latitude": 40.437078,
+        "longitude": 50.058297,
+        "heading": 165,
+        "speed": 85
+      },
+      {
+        "heading": 165,
+        "timestamp": "2026-09-12T13:14:56.307Z",
+        "longitude": 50.058297,
+        "speed": 85,
+        "latitude": 40.437078,
+        "accuracy": 4
+      },
+      {
+        "heading": 165,
+        "speed": 84,
+        "longitude": 50.058366,
+        "timestamp": "2026-09-12T13:14:57.184Z",
+        "latitude": 40.436874,
+        "accuracy": 4
+      },
+      {
+        "speed": 83,
+        "longitude": 50.05843,
+        "timestamp": "2026-09-12T13:14:58.180Z",
+        "heading": 166,
+        "latitude": 40.436677,
+        "accuracy": 4
+      },
+      {
+        "timestamp": "2026-09-12T13:14:59.230Z",
+        "speed": 81,
+        "longitude": 50.05849,
+        "accuracy": 4,
+        "heading": 167,
+        "latitude": 40.436478
+      },
+      {
+        "heading": 167,
+        "latitude": 40.436478,
+        "speed": 81,
+        "accuracy": 4,
+        "longitude": 50.05849,
+        "timestamp": "2026-09-12T13:14:59.746Z"
+      },
+      {
+        "heading": 168,
+        "speed": 80,
+        "longitude": 50.058551,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:15:00.205Z",
+        "latitude": 40.436283
+      },
+      {
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:15:01.171Z",
+        "longitude": 50.058599,
+        "latitude": 40.43609,
+        "speed": 78,
+        "heading": 168
+      },
+      {
+        "longitude": 50.058643,
+        "timestamp": "2026-09-12T13:15:02.171Z",
+        "heading": 169,
+        "accuracy": 4,
+        "speed": 77,
+        "latitude": 40.435901
+      },
+      {
+        "speed": 77,
+        "accuracy": 4,
+        "latitude": 40.435714,
+        "heading": 169,
+        "timestamp": "2026-09-12T13:15:03.184Z",
+        "longitude": 50.058688
+      },
+      {
+        "heading": 169,
+        "longitude": 50.058688,
+        "latitude": 40.435714,
+        "timestamp": "2026-09-12T13:15:03.302Z",
+        "speed": 77,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.435526,
+        "speed": 76,
+        "timestamp": "2026-09-12T13:15:04.201Z",
+        "heading": 169,
+        "longitude": 50.058736
+      },
+      {
+        "longitude": 50.058782,
+        "timestamp": "2026-09-12T13:15:05.173Z",
+        "heading": 169,
+        "latitude": 40.435339,
+        "accuracy": 4,
+        "speed": 75
+      },
+      {
+        "accuracy": 4,
+        "speed": 77,
+        "timestamp": "2026-09-12T13:15:06.183Z",
+        "longitude": 50.058825,
+        "heading": 170,
+        "latitude": 40.435155
+      },
+      {
+        "latitude": 40.435155,
+        "speed": 77,
+        "accuracy": 4,
+        "longitude": 50.058825,
+        "heading": 170,
+        "timestamp": "2026-09-12T13:15:06.808Z"
+      },
+      {
+        "heading": 170,
+        "latitude": 40.434965,
+        "accuracy": 4,
+        "speed": 77,
+        "longitude": 50.058867,
+        "timestamp": "2026-09-12T13:15:07.186Z"
+      },
+      {
+        "latitude": 40.434965,
+        "heading": 170,
+        "accuracy": 4,
+        "speed": 77,
+        "longitude": 50.058867,
+        "timestamp": "2026-09-12T13:15:10.262Z"
+      },
+      {
+        "latitude": 40.434965,
+        "accuracy": 4,
+        "speed": 77,
+        "heading": 170,
+        "longitude": 50.058867,
+        "timestamp": "2026-09-12T13:15:13.806Z"
+      },
+      {
+        "longitude": 50.058867,
+        "timestamp": "2026-09-12T13:15:17.276Z",
+        "heading": 170,
+        "latitude": 40.434965,
+        "accuracy": 4,
+        "speed": 77
+      },
+      {
+        "speed": 77,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:15:20.754Z",
+        "longitude": 50.058867,
+        "latitude": 40.434965,
+        "heading": 170
+      },
+      {
+        "longitude": 50.058867,
+        "speed": 77,
+        "timestamp": "2026-09-12T13:15:24.277Z",
+        "heading": 170,
+        "latitude": 40.434965,
+        "accuracy": 4
+      },
+      {
+        "heading": 170,
+        "accuracy": 4,
+        "speed": 77,
+        "latitude": 40.434965,
+        "longitude": 50.058867,
+        "timestamp": "2026-09-12T13:15:27.764Z"
+      },
+      {
+        "longitude": 50.058867,
+        "timestamp": "2026-09-12T13:15:29.969Z",
+        "heading": 170,
+        "speed": 77,
+        "latitude": 40.434965,
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.434965,
+        "speed": 77,
+        "accuracy": 4,
+        "heading": 170,
+        "longitude": 50.058867,
+        "timestamp": "2026-09-12T13:15:31.273Z"
+      },
+      {
+        "heading": 170,
+        "latitude": 40.434965,
+        "longitude": 50.058867,
+        "timestamp": "2026-09-12T13:15:34.767Z",
+        "speed": 77,
+        "accuracy": 4
+      },
+      {
+        "speed": 87,
+        "timestamp": "2026-09-12T13:15:35.972Z",
+        "heading": 171,
+        "accuracy": 4,
+        "longitude": 50.059992,
+        "latitude": 40.429254
+      },
+      {
+        "timestamp": "2026-09-12T13:15:36.159Z",
+        "longitude": 50.060067,
+        "speed": 87,
+        "heading": 171,
+        "latitude": 40.429096,
+        "accuracy": 5
+      },
+      {
+        "latitude": 40.428865,
+        "speed": 88,
+        "longitude": 50.060091,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:15:37.177Z",
+        "heading": 171
+      },
+      {
+        "latitude": 40.428649,
+        "heading": 171,
+        "longitude": 50.060121,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:15:38.169Z",
+        "speed": 89
+      },
+      {
+        "speed": 77,
+        "accuracy": 4,
+        "latitude": 40.434965,
+        "timestamp": "2026-09-12T13:15:38.306Z",
+        "heading": 170,
+        "longitude": 50.058867
+      },
+      {
+        "speed": 89,
+        "longitude": 50.060121,
+        "heading": 171,
+        "timestamp": "2026-09-12T13:15:38.910Z",
+        "accuracy": 4,
+        "latitude": 40.428649
+      },
+      {
+        "speed": 90,
+        "timestamp": "2026-09-12T13:15:39.709Z",
+        "accuracy": 4,
+        "longitude": 50.060154,
+        "heading": 171,
+        "latitude": 40.428435
+      },
+      {
+        "speed": 91,
+        "timestamp": "2026-09-12T13:15:40.188Z",
+        "longitude": 50.06019,
+        "heading": 171,
+        "accuracy": 4,
+        "latitude": 40.428213
+      },
+      {
+        "longitude": 50.060231,
+        "speed": 92,
+        "timestamp": "2026-09-12T13:15:41.180Z",
+        "heading": 171,
+        "latitude": 40.427986,
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.058867,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:15:41.739Z",
+        "latitude": 40.434965,
+        "heading": 170,
+        "speed": 77
+      },
+      {
+        "speed": 92,
+        "heading": 171,
+        "timestamp": "2026-09-12T13:15:41.907Z",
+        "longitude": 50.060231,
+        "accuracy": 4,
+        "latitude": 40.427986
+      },
+      {
+        "timestamp": "2026-09-12T13:15:42.205Z",
+        "longitude": 50.060271,
+        "heading": 171,
+        "latitude": 40.427759,
+        "speed": 93,
+        "accuracy": 4
+      },
+      {
+        "speed": 93,
+        "heading": 171,
+        "latitude": 40.427531,
+        "accuracy": 4,
+        "longitude": 50.060316,
+        "timestamp": "2026-09-12T13:15:43.175Z"
+      },
+      {
+        "heading": 171,
+        "longitude": 50.060364,
+        "timestamp": "2026-09-12T13:15:44.146Z",
+        "speed": 94,
+        "latitude": 40.427299,
+        "accuracy": 4
+      },
+      {
+        "speed": 95,
+        "heading": 171,
+        "latitude": 40.427068,
+        "longitude": 50.060412,
+        "timestamp": "2026-09-12T13:15:45.215Z",
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.058867,
+        "timestamp": "2026-09-12T13:15:45.311Z",
+        "latitude": 40.434965,
+        "speed": 77,
+        "accuracy": 4,
+        "heading": 170
+      },
+      {
+        "speed": 95,
+        "heading": 171,
+        "longitude": 50.060412,
+        "timestamp": "2026-09-12T13:15:45.802Z",
+        "latitude": 40.427068,
+        "accuracy": 4
+      },
+      {
+        "accuracy": 4,
+        "latitude": 40.426833,
+        "longitude": 50.060457,
+        "speed": 95,
+        "timestamp": "2026-09-12T13:15:46.205Z",
+        "heading": 171
+      },
+      {
+        "latitude": 40.426595,
+        "accuracy": 4,
+        "heading": 172,
+        "speed": 95,
+        "longitude": 50.060499,
+        "timestamp": "2026-09-12T13:15:47.194Z"
+      },
+      {
+        "speed": 95,
+        "latitude": 40.426359,
+        "timestamp": "2026-09-12T13:15:48.168Z",
+        "longitude": 50.060541,
+        "accuracy": 4,
+        "heading": 171
+      },
+      {
+        "latitude": 40.434965,
+        "speed": 77,
+        "heading": 170,
+        "longitude": 50.058867,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:15:48.737Z"
+      },
+      {
+        "heading": 171,
+        "latitude": 40.426359,
+        "accuracy": 4,
+        "longitude": 50.060541,
+        "speed": 95,
+        "timestamp": "2026-09-12T13:15:49.207Z"
+      },
+      {
+        "heading": 171,
+        "speed": 94,
+        "longitude": 50.060587,
+        "timestamp": "2026-09-12T13:15:49.412Z",
+        "latitude": 40.426127,
+        "accuracy": 4
+      },
+      {
+        "speed": 94,
+        "heading": 171,
+        "latitude": 40.425895,
+        "longitude": 50.060629,
+        "timestamp": "2026-09-12T13:15:50.304Z",
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.425664,
+        "longitude": 50.060677,
+        "accuracy": 4,
+        "timestamp": "2026-09-12T13:15:51.206Z",
+        "heading": 170,
+        "speed": 94
+      },
+      {
+        "heading": 171,
+        "longitude": 50.060724,
+        "timestamp": "2026-09-12T13:15:52.181Z",
+        "latitude": 40.425432,
+        "speed": 94,
+        "accuracy": 4
+      },
+      {
+        "longitude": 50.058867,
+        "timestamp": "2026-09-12T13:15:52.607Z",
+        "heading": 170,
+        "speed": 77,
+        "latitude": 40.434965,
+        "accuracy": 4
+      },
+      {
+        "latitude": 40.425432,
+        "speed": 94,
+        "heading": 171,
+        "accuracy": 4,
+        "longitude": 50.060724,
+        "timestamp": "2026-09-12T13:15:53.002Z"
+      }
+    ],
+    "createdDateStr": "12.09.2026",
+    "customerName": "Hövsan Niyammədin",
+    "deliveredAt": null,
+    "history": [
+      {
+        "actorName": "Sistem Admini",
+        "timeStr": "16:55",
+        "timestamp": "2026-09-12T12:55:52.494Z",
+        "details": "User Sistem Admini sifarişi yaratdı və sürücülərə yönləndirdi.",
+        "step": "CREATED",
+        "title": "Sifariş yaradıldı",
+        "actorRole": "ADMIN",
+        "dateStr": "12.09.2026",
+        "actorId": "usr_admin_master"
+      },
+      {
+        "actorRole": "DRIVER",
+        "timeStr": "17:00",
+        "title": "Sürücü sifarişi götürdü",
+        "timestamp": "2026-09-12T13:00:48.182Z",
+        "actorName": "Cavid",
+        "actorId": "usr_1789217849108_5xi64",
+        "details": "Sürücü Cavid sifarişi qəbul etdi.",
+        "step": "CLAIMED",
+        "dateStr": "12.09.2026"
+      }
+    ],
+    "deliveredLocation": null,
+    "driverId": "usr_1789217849108_5xi64",
+    "customerId": "cst_1789038447943_9mce8g",
+    "orderNumber": 1058,
+    "status": "assigned",
+    "ownerName": "Vüsal",
+    "createdAt": "2026-09-12T12:55:52.494Z",
+    "executorType": "DRIVER",
+    "dispatchType": "DRIVER",
+    "creatorName": "Sistem Admini",
+    "notes": "",
+    "customerLatitude": 40.361041,
+    "creatorId": "usr_admin_master",
+    "claimedAt": "2026-09-12T13:00:48.182Z",
+    "id": "ord_1789217752494_094qg",
+    "deliveredByName": null,
+    "customerPhone": "+994 77 306 94 57",
+    "customerAddress": "Hövsan",
+    "departedAt": null,
+    "updatedAt": "2026-09-12T13:15:53.002Z"
   }
 ]

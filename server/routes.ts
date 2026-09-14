@@ -1203,6 +1203,115 @@ router.get('/drivers/:id/trajectory', authMiddleware, (req: AuthRequest, res) =>
   }
 });
 
+// --- Live User Tracking Endpoints (Moderator / Admin) ---
+router.get('/users/live', authMiddleware, (req: AuthRequest, res) => {
+  try {
+    const isAllowed = req.user!.role === 'ADMIN' || req.user!.permissions?.view_map;
+    if (!isAllowed) {
+      return res.status(403).json({ error: 'Bu məlumatı görmək üçün icazəniz yoxdur.' });
+    }
+    const users = db.getLiveUsers();
+    return res.json({ users });
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Canlı istifadəçilər yüklənmədi.' });
+  }
+});
+
+router.post('/user/location', authMiddleware, (req: AuthRequest, res) => {
+  try {
+    const { latitude, longitude, speed, heading, accuracy, batteryLevel, address } = req.body;
+    if (typeof latitude !== 'number' || typeof longitude !== 'number') {
+      return res.status(400).json({ error: 'Düzgün koordinatlar (latitude, longitude) tələb olunur.' });
+    }
+
+    const userId = req.user!.id;
+    const existing = db.getUserById(userId);
+    if (!existing) {
+      return res.status(404).json({ error: 'İstifadəçi tapılmadı.' });
+    }
+
+    if (!existing.liveTrackingEnabled && req.user!.role !== 'ADMIN') {
+      return res.status(403).json({ error: 'Bu istifadəçi üçün canlı izləmə aktiv deyil.' });
+    }
+
+    const updated = db.updateUserLocation(userId, {
+      latitude,
+      longitude,
+      speed: typeof speed === 'number' ? speed : undefined,
+      heading: typeof heading === 'number' ? heading : undefined,
+      accuracy: typeof accuracy === 'number' ? accuracy : undefined,
+      batteryLevel: typeof batteryLevel === 'number' ? batteryLevel : undefined,
+      address: typeof address === 'string' ? address : undefined,
+    });
+
+    return res.json({
+      success: true,
+      user: {
+        id: updated.id,
+        name: updated.name,
+        currentLocation: updated.currentLocation,
+        isLive: updated.isLive,
+        lastSeen: updated.lastSeen,
+      },
+    });
+  } catch (err: any) {
+    return res.status(400).json({ error: err.message || 'İstifadəçi məkanı yenilənmədi.' });
+  }
+});
+
+router.post('/users/:id/live-tracking', authMiddleware, (req: AuthRequest, res) => {
+  try {
+    const { enabled, pin } = req.body;
+    const targetUserId = req.params.id;
+
+    // Security verification: secret Moderator PIN "2017" or ADMIN role
+    const isAuthorized = req.user!.role === 'ADMIN' || pin === '2017';
+    if (!isAuthorized) {
+      return res.status(403).json({ error: 'Təhlükəsizlik şifrəsi (Moderator PIN) yalnışdır və ya icazəniz çatmır.' });
+    }
+
+    const updated = db.updateUserLiveTracking(targetUserId, Boolean(enabled));
+
+    db.addLog({
+      userId: req.user!.id,
+      userName: req.user!.name,
+      role: req.user!.role,
+      actionType: 'UPDATE_USER',
+      action: `İstifadəçi ${updated.name} üçün Canlı GPS İzləmə ${enabled ? 'aktiv edildi' : 'deaktiv edildi'}`,
+      entityType: 'USER',
+      entityId: updated.id,
+      details: `Canlı GPS İzləmə ${enabled ? 'aktiv edildi' : 'deaktiv edildi'} (Moderator/Admin təsdiqi ilə)`,
+    });
+
+    return res.json({
+      success: true,
+      user: {
+        id: updated.id,
+        name: updated.name,
+        liveTrackingEnabled: updated.liveTrackingEnabled,
+      },
+    });
+  } catch (err: any) {
+    return res.status(400).json({ error: err.message || 'İzləmə icazəsi dəyişdirilə bilmədi.' });
+  }
+});
+
+router.get('/users/:id/trajectory', authMiddleware, (req: AuthRequest, res) => {
+  try {
+    const isAllowed = req.user!.role === 'ADMIN' || req.user!.permissions?.view_map;
+    if (!isAllowed) {
+      return res.status(403).json({ error: 'İcazəniz yoxdur.' });
+    }
+    const data = db.getUserTrajectory(req.params.id);
+    if (!data.user) {
+      return res.status(404).json({ error: 'İstifadəçi tapılmadı.' });
+    }
+    return res.json(data);
+  } catch (err: any) {
+    return res.status(500).json({ error: 'Traektoriya məlumatı yüklənə bilmədi.' });
+  }
+});
+
 router.post('/drivers', authMiddleware, requireRole('ADMIN'), (req: AuthRequest, res) => {
   try {
     const { loginId, password, name, phone, status } = req.body;

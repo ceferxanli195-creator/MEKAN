@@ -93,14 +93,23 @@ export const BackgroundGpsBanner: React.FC = () => {
             {isExpanded ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
           </button>
 
-          <button
-            type="button"
-            onClick={() => backgroundGps.stop()}
-            className="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors shadow-md shadow-rose-900/30"
-          >
-            <Square className="w-3 h-3 fill-current" />
-            <span className="hidden xs:inline">Dayandır</span>
-          </button>
+          {user?.liveTrackingEnabled && user?.role !== 'ADMIN' ? (
+            <span
+              className="px-2.5 py-1 bg-purple-900/60 border border-purple-700/50 text-purple-200 rounded-lg text-xs font-semibold flex items-center gap-1"
+              title="Bu izləmə Moderator (Admin) tərəfindən aktiv edilib və istifadəçi tərəfindən dayandırıla bilməz."
+            >
+              🔒 <span>Moderator İcazəsi</span>
+            </span>
+          ) : (
+            <button
+              type="button"
+              onClick={() => backgroundGps.stop()}
+              className="px-3 py-1.5 bg-rose-600 hover:bg-rose-700 text-white font-bold rounded-xl text-xs flex items-center gap-1.5 transition-colors shadow-md shadow-rose-900/30"
+            >
+              <Square className="w-3 h-3 fill-current" />
+              <span className="hidden xs:inline">Dayandır</span>
+            </button>
+          )}
         </div>
       </div>
 

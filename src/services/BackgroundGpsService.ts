@@ -51,6 +51,8 @@ class BackgroundGpsManager {
   private worker: Worker | null = null;
   private audioCtx: (AudioContext | any) = null;
   private simStep = 0;
+  private targetType: 'driver' | 'user' = 'driver';
+  private targetId?: string;
   private offlineQueue: Array<{
     lat: number;
     lng: number;
@@ -235,11 +237,15 @@ class BackgroundGpsManager {
       heading: head !== undefined && head !== null ? Math.round(head) : undefined,
       accuracy: acc !== undefined && acc !== null ? Math.round(acc) : undefined,
       batteryLevel: this.currentBattery ?? undefined,
-      driverId: driverId || undefined,
+      driverId: driverId || this.targetId || undefined,
     };
 
     try {
-      await api.updateDriverLocation(payload);
+      if (this.targetType === 'user') {
+        await api.updateUserLocation(payload);
+      } else {
+        await api.updateDriverLocation(payload);
+      }
       this.lastSentTime = new Date().toLocaleTimeString('az-AZ');
       this.sendCount += 1;
       this.error = null;
@@ -273,14 +279,25 @@ class BackgroundGpsManager {
 
     for (const item of batch) {
       try {
-        await api.updateDriverLocation({
-          latitude: item.lat,
-          longitude: item.lng,
-          speed: item.speed,
-          heading: item.heading ?? undefined,
-          accuracy: item.accuracy ?? undefined,
-          batteryLevel: item.batteryLevel ?? undefined,
-        });
+        if (this.targetType === 'user') {
+          await api.updateUserLocation({
+            latitude: item.lat,
+            longitude: item.lng,
+            speed: item.speed,
+            heading: item.heading ?? undefined,
+            accuracy: item.accuracy ?? undefined,
+            batteryLevel: item.batteryLevel ?? undefined,
+          });
+        } else {
+          await api.updateDriverLocation({
+            latitude: item.lat,
+            longitude: item.lng,
+            speed: item.speed,
+            heading: item.heading ?? undefined,
+            accuracy: item.accuracy ?? undefined,
+            batteryLevel: item.batteryLevel ?? undefined,
+          });
+        }
       } catch {
         // Stop flushing if still offline
         this.offlineQueue.unshift(item);
@@ -290,7 +307,9 @@ class BackgroundGpsManager {
   }
 
   // --- Start Real GPS Watch ---
-  public startRealGps(driverId?: string) {
+  public startRealGps(id?: string, targetType: 'driver' | 'user' = 'driver') {
+    this.targetId = id;
+    this.targetType = targetType;
     if (typeof navigator === 'undefined' || !navigator.geolocation) {
       this.error = 'Cihazınızda Geolocation API dəstəklənmir.';
       this.statusMessage = this.error;
@@ -349,7 +368,7 @@ class BackgroundGpsManager {
           calculatedSpeed,
           this.currentHeading,
           this.currentAccuracy,
-          driverId
+          id
         );
       },
       (err) => {

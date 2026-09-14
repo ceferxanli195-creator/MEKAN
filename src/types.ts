@@ -26,6 +26,11 @@ export interface User {
   lastLogin?: string;
   lastActivity?: string;
   customerCount?: number;
+  liveTrackingEnabled?: boolean;
+  currentLocation?: DriverCurrentLocation | null;
+  isLive?: boolean;
+  lastSeen?: string;
+  trajectory?: TrajectoryPoint[];
 }
 
 export interface Customer {

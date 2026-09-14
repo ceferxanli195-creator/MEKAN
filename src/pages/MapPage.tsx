@@ -22,6 +22,8 @@ import {
   X,
   Compass,
   Calendar,
+  User as UserIcon,
+  Radio,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../api';
@@ -50,6 +52,8 @@ export const MapPage: React.FC = () => {
   // Layer Visibility Toggles
   const [showCustomers, setShowCustomers] = useState(true);
   const [showDrivers, setShowDrivers] = useState(true);
+  const [showUsers, setShowUsers] = useState(true);
+  const [selectedUserId, setSelectedUserId] = useState<string | 'all'>('all');
   const [showTrajectory, setShowTrajectory] = useState(true);
 
   // Leaflet references
@@ -57,6 +61,7 @@ export const MapPage: React.FC = () => {
   const mapInstanceRef = useRef<L.Map | null>(null);
   const customerLayerRef = useRef<L.LayerGroup | null>(null);
   const driverLayerRef = useRef<L.LayerGroup | null>(null);
+  const userLayerRef = useRef<L.LayerGroup | null>(null);
   const trajectoryLayerRef = useRef<L.LayerGroup | null>(null);
   const stopsLayerRef = useRef<L.LayerGroup | null>(null);
 
@@ -125,12 +130,20 @@ export const MapPage: React.FC = () => {
     fetchCustomersAndUsers();
   }, [selectedOwnerId]);
 
-  // Periodic polling for Live Drivers every 4 seconds
+  // Periodic polling for Live Drivers & Users every 4 seconds
   useEffect(() => {
     fetchLiveDrivers();
-    const interval = setInterval(fetchLiveDrivers, 4000);
+    if (isAdmin) {
+      api.getUsers().then(res => setUsersList(res?.users || [])).catch(() => {});
+    }
+    const interval = setInterval(() => {
+      fetchLiveDrivers();
+      if (isAdmin) {
+        api.getUsers().then(res => setUsersList(res?.users || [])).catch(() => {});
+      }
+    }, 4000);
     return () => clearInterval(interval);
-  }, [inspectedDriver?.id]);
+  }, [inspectedDriver?.id, isAdmin]);
 
   // Initialize Map
   useEffect(() => {
@@ -157,6 +170,7 @@ export const MapPage: React.FC = () => {
     trajectoryLayerRef.current = L.layerGroup().addTo(map);
     stopsLayerRef.current = L.layerGroup().addTo(map);
     driverLayerRef.current = L.layerGroup().addTo(map);
+    userLayerRef.current = L.layerGroup().addTo(map);
 
     const resizeTimer = setTimeout(() => {
       map.invalidateSize();
@@ -348,6 +362,92 @@ export const MapPage: React.FC = () => {
     });
   }, [liveDrivers, selectedDriverId, showDrivers]);
 
+  // Derivation: Live Tracked Users (Admin Tracking)
+  const liveTrackedUsers = usersList.filter(
+    u => u.liveTrackingEnabled && u.currentLocation && u.currentLocation.latitude && u.currentLocation.longitude
+  );
+
+  // Update User Pins (Admin Live Tracking)
+  useEffect(() => {
+    if (!userLayerRef.current || !mapInstanceRef.current) return;
+    const layer = userLayerRef.current;
+    layer.clearLayers();
+
+    if (!showUsers || !isAdmin) return;
+
+    const filteredUsers = liveTrackedUsers.filter(
+      u => selectedUserId === 'all' || u.id === selectedUserId
+    );
+
+    filteredUsers.forEach(userItem => {
+      const loc = userItem.currentLocation!;
+      const latLng: [number, number] = [loc.latitude, loc.longitude];
+
+      const userIcon = L.divIcon({
+        className: 'user-live-marker',
+        html: `
+          <div style="position: relative; width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;">
+            <div style="position: absolute; inset: -4px; border-radius: 50%; background: rgba(147, 51, 234, 0.35); animation: ping 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;"></div>
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #7c3aed; border: 3px solid white; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.5); display: flex; align-items: center; justify-content: center; color: white; font-weight: 800; font-size: 14px;">
+              ${userItem.name.charAt(0).toUpperCase()}
+            </div>
+            <div style="position: absolute; top: -14px; background: rgba(76, 29, 149, 0.95); color: white; padding: 2px 6px; border-radius: 6px; font-size: 10px; font-weight: 700; white-space: nowrap; box-shadow: 0 2px 6px rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2);">
+              👤 ${userItem.name} • ${loc.speed || 0} km/s
+            </div>
+          </div>
+        `,
+        iconSize: [46, 46],
+        iconAnchor: [23, 23],
+        popupAnchor: [0, -25],
+      });
+
+      const lastSeenTime = loc.updatedAt
+        ? new Date(loc.updatedAt).toLocaleTimeString('az-AZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+        : 'İndi';
+
+      const popupHtml = `
+        <div style="font-family: sans-serif; min-width: 220px; padding: 2px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+            <h4 style="margin: 0; font-size: 15px; font-weight: 800; color: #581c87;">${userItem.name}</h4>
+            <span style="font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 12px; background: #f3e8ff; color: #6b21a8;">
+              🟢 Canlı İzlənir
+            </span>
+          </div>
+
+          <div style="display: flex; align-items: baseline; gap: 4px; margin-bottom: 8px;">
+            <span style="font-size: 20px; font-weight: 900; color: #7c3aed;">${loc.speed || 0}</span>
+            <span style="font-size: 12px; font-weight: 700; color: #64748b;">km/saat</span>
+          </div>
+
+          <div style="font-size: 11px; color: #475569; margin-bottom: 8px; line-height: 1.5;">
+            <div><strong>İstifadəçi ID:</strong> ${userItem.loginId}</div>
+            <div><strong>Rol:</strong> ${userItem.role}</div>
+            <div><strong>Son Yenilənmə:</strong> ${lastSeenTime}</div>
+            <div><strong>Koordinat:</strong> ${loc.latitude.toFixed(5)}, ${loc.longitude.toFixed(5)}</div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 8px;">
+            <button id="btn-focus-user-${userItem.id}" style="width: 100%; padding: 7px 10px; background: #7c3aed; color: white; border: none; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer;">
+              Mərkəzləşdir və Yaxınlaşdır
+            </button>
+          </div>
+        </div>
+      `;
+
+      const marker = L.marker(latLng, { icon: userIcon }).bindPopup(popupHtml);
+      marker.on('popupopen', () => {
+        const btn = document.getElementById(`btn-focus-user-${userItem.id}`);
+        if (btn) {
+          btn.onclick = () => {
+            mapInstanceRef.current?.setView(latLng, 16);
+          };
+        }
+      });
+
+      layer.addLayer(marker);
+    });
+  }, [liveTrackedUsers, selectedUserId, showUsers, isAdmin]);
+
   // Update Trajectory Polyline & Stops Markers
   useEffect(() => {
     if (!trajectoryLayerRef.current || !stopsLayerRef.current || !mapInstanceRef.current) return;
@@ -526,6 +626,37 @@ export const MapPage: React.FC = () => {
             </div>
           )}
 
+          {/* Tracked Users Selector for Admin */}
+          {isAdmin && liveTrackedUsers.length > 0 && (
+            <div className="flex items-center gap-1.5 bg-purple-50 dark:bg-purple-950/40 p-1.5 rounded-xl border border-purple-200 dark:border-purple-800 text-xs">
+              <Radio className="w-4 h-4 text-purple-600 dark:text-purple-400 animate-pulse" />
+              <select
+                value={selectedUserId}
+                onChange={(e) => {
+                  const val = e.target.value;
+                  setSelectedUserId(val);
+                  if (val !== 'all') {
+                    const target = liveTrackedUsers.find(u => u.id === val);
+                    if (target?.currentLocation) {
+                      mapInstanceRef.current?.setView(
+                        [target.currentLocation.latitude, target.currentLocation.longitude],
+                        16
+                      );
+                    }
+                  }
+                }}
+                className="bg-transparent font-medium text-purple-900 dark:text-purple-200 focus:outline-hidden"
+              >
+                <option value="all">İzlənən Userlər ({liveTrackedUsers.length})</option>
+                {liveTrackedUsers.map(u => (
+                  <option key={u.id} value={u.id}>
+                    👤 {u.name} ({u.currentLocation?.speed || 0} km/s)
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
           {/* Owner Filter for Admin & Driver */}
           {(isAdmin || isDriver) && (
             <div className="flex items-center gap-1.5 bg-slate-50 dark:bg-slate-800 p-1.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs">
@@ -638,6 +769,20 @@ export const MapPage: React.FC = () => {
           <MapPin className="w-3.5 h-3.5" />
           <span>Müştərilər ({gpsCount})</span>
         </button>
+
+        {isAdmin && (
+          <button
+            onClick={() => setShowUsers(!showUsers)}
+            className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
+              showUsers
+                ? 'bg-purple-600 text-white shadow-xs'
+                : 'bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400'
+            }`}
+          >
+            <UserIcon className="w-3.5 h-3.5" />
+            <span>İzlənən Userlər ({liveTrackedUsers.length})</span>
+          </button>
+        )}
 
         <button
           onClick={() => setShowTrajectory(!showTrajectory)}
